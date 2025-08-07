@@ -58,6 +58,10 @@ class AdultosFragment : Fragment() {
             // Mostrar resultados
             binding.tvImcValor.text = getString(R.string.formato_imc, imc)
             binding.tvInterpretacion.text = interpretacion
+
+            // Actualizar la barra de IMC con el valor calculado
+            binding.barraImc.setIMC(imc.toFloat())
+
             binding.cardResultado.visibility = View.VISIBLE
 
         } catch (e: Exception) {
@@ -87,6 +91,7 @@ class AdultosFragment : Fragment() {
             // Limpiar campos
             binding.etPeso.text?.clear()
             binding.etAltura.text?.clear()
+            binding.barraImc.clearIndicator()
             binding.cardResultado.visibility = View.GONE
 
         } catch (e: Exception) {

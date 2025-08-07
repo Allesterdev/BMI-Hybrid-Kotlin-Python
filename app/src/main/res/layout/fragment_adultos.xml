@@ -22,7 +22,7 @@
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="#2E7D32"
-            android:textAlignment="center"
+            android:gravity="center"
             android:layout_marginBottom="32dp" />
 
         <!-- Card para los inputs -->
@@ -117,18 +117,18 @@
                     android:textSize="20sp"
                     android:textStyle="bold"
                     android:textColor="#2E7D32"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:layout_marginBottom="16dp" />
 
                 <TextView
                     android:id="@+id/tv_imc_valor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="IMC: --"
+                    android:text="@string/imc_inicial"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="#1B5E20"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:layout_marginBottom="8dp" />
 
                 <TextView
@@ -138,7 +138,24 @@
                     android:text=""
                     android:textSize="18sp"
                     android:textColor="#2E7D32"
-                    android:textAlignment="center"
+                    android:gravity="center"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Barra de IMC -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titulo_escala_imc"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#2E7D32"
+                    android:gravity="center"
+                    android:layout_marginBottom="8dp" />
+
+                <com.example.calculadoraimc.ui.views.BarraIMC
+                    android:id="@+id/barra_imc"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
                     android:layout_marginBottom="16dp" />
 
                 <!-- Botón Guardar -->
