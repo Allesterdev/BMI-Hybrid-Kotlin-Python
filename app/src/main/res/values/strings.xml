@@ -1,0 +1,46 @@
+<resources>
+    <string name="app_name">CalculadoraIMC</string>
+    <string name="title_home">Adultos</string>
+    <string name="title_dashboard">5-19 Años</string>
+    <string name="title_notifications">Historial</string>
+
+    <!-- Strings para la calculadora de adultos -->
+    <string name="titulo_calculadora_adultos">Calculadora IMC Adultos</string>
+    <string name="hint_peso">Peso (kg)</string>
+    <string name="hint_altura">Altura (m)</string>
+    <string name="btn_calcular_imc">Calcular IMC</string>
+    <string name="titulo_resultado">Resultado</string>
+    <string name="btn_guardar_historial">Guardar en Historial</string>
+
+    <!-- Strings para la calculadora de menores -->
+    <string name="titulo_calculadora_menores">Calculadora IMC 5-19 Años</string>
+    <string name="hint_edad">Edad (años)</string>
+    <string name="label_sexo">Sexo</string>
+    <string name="radio_masculino">Masculino</string>
+    <string name="radio_femenino">Femenino</string>
+    <string name="btn_calcular_percentil">Calcular Percentil</string>
+
+    <!-- Strings para fecha de nacimiento -->
+    <string name="hint_fecha_nacimiento">Fecha de nacimiento (DD/MM/AAAA)</string>
+    <string name="btn_seleccionar_fecha">Seleccionar fecha</string>
+
+    <!-- Mensajes de error y validación -->
+    <string name="error_campos_vacios_adultos">Por favor ingresa peso y altura</string>
+    <string name="error_campos_vacios_menores">Por favor completa todos los campos</string>
+    <string name="error_valores_positivos">Los valores deben ser mayores a 0</string>
+    <string name="error_edad_rango">Valores inválidos. Edad debe estar entre 5-19 años</string>
+    <string name="error_valores_numericos">Por favor ingresa valores numéricos válidos</string>
+    <string name="error_calcular_primero_adultos">Calcula el IMC primero</string>
+    <string name="error_calcular_primero_menores">Calcula el percentil primero</string>
+    <string name="error_calculo">Error al calcular: %1$s</string>
+    <string name="error_guardar">Error al guardar: %1$s</string>
+    <string name="error_percentiles">Error: %1$s</string>
+
+    <!-- Mensajes de éxito -->
+    <string name="exito_guardado">Medición guardada en el historial</string>
+
+    <!-- Formato de resultados -->
+    <string name="formato_imc">IMC: %.1f</string>
+    <string name="formato_percentil">Percentil: %.1f</string>
+    <string name="sin_interpretacion">Sin interpretación</string>
+</resources>

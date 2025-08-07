@@ -1,0 +1,77 @@
+plugins {
+    id ("com.chaquo.python")
+    id ("com.android.application")
+    id ("org.jetbrains.kotlin.android")
+}
+
+chaquopy {
+    defaultConfig { }
+    productFlavors { }
+    sourceSets { }
+}
+
+android {
+    namespace 'com.example.calculadoraimc'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId "com.example.calculadoraimc"
+        minSdk 28
+        targetSdk 36
+        versionCode 1
+        versionName "1.0"
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+        }
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Configuración de Python en Chaquopy
+        python {
+            version "3.10"  // Compatible con pandas y scipy
+            pip {
+                install "pandas"
+
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    ndkVersion '29.0.13599879 rc2'
+    buildToolsVersion '34.0.0'
+}
+
+dependencies {
+    implementation 'androidx.core:core:1.16.0'
+    implementation libs.androidx.core.ktx.v1101
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.constraintlayout
+    implementation libs.androidx.lifecycle.livedata.ktx
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+    implementation libs.androidx.navigation.fragment.ktx
+    implementation libs.androidx.navigation.ui.ktx
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+}
