@@ -16,7 +16,9 @@ from utilidades import (
     borrar_historial_adultos,
     borrar_historial_menores,
     obtener_datos_para_grafico,
-    calcular_edad_exacta_en_meses
+    calcular_edad_exacta_en_meses,
+    obtener_historial_adultos,
+    obtener_historial_menores
 )
 
 from calculos_adultos import (
@@ -31,7 +33,11 @@ from calculos_menores import (
     normal_cdf,
     interpretar_percentil,
     calcular_imc_menor,
-    calcular_imc_menor_por_fecha
+    calcular_imc_menor_por_fecha,
+    obtener_rangos_percentiles,
+    calcular_posicion_en_barra_percentil,
+    obtener_categoria_percentil,
+    interpretar_percentil_detallado
 )
 
 # Re-exportar todas las funciones para mantener compatibilidad
@@ -61,5 +67,15 @@ __all__ = [
     'normal_cdf',
     'interpretar_percentil',
     'calcular_imc_menor',
-    'calcular_imc_menor_por_fecha'
+    'calcular_imc_menor_por_fecha',
+
+    # Funciones de la barra de percentiles para menores
+    'obtener_rangos_percentiles',
+    'calcular_posicion_en_barra_percentil',
+    'obtener_categoria_percentil',
+    'interpretar_percentil_detallado',
+
+    # Funciones de historial separado
+    'obtener_historial_adultos',
+    'obtener_historial_menores'
 ]

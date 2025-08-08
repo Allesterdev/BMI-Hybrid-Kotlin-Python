@@ -229,3 +229,101 @@ def calcular_imc_menor_por_fecha(sexo: str, fecha_nacimiento: str, peso_input, a
 
     except Exception as e:
         return {"error": f"Error inesperado en cálculo: {str(e)}"}
+
+
+def obtener_rangos_percentiles():
+    """
+    Devuelve los rangos de percentiles para la barra visual con sus respectivos datos.
+    Basado en los estándares de la OMS para menores.
+    Retorna una lista de diccionarios con la información de cada rango.
+    """
+    return [
+        {
+            "nombre": "Bajo peso",
+            "rango_texto": "<3",
+            "min_valor": 0.0,
+            "max_valor": 3.0,
+            "color": "#2196F3"  # Azul
+        },
+        {
+            "nombre": "Peso saludable",
+            "rango_texto": "3-84",
+            "min_valor": 3.0,
+            "max_valor": 85.0,
+            "color": "#4CAF50"  # Verde
+        },
+        {
+            "nombre": "Sobrepeso",
+            "rango_texto": "85-96",
+            "min_valor": 85.0,
+            "max_valor": 97.0,
+            "color": "#FF9800"  # Naranja
+        },
+        {
+            "nombre": "Obesidad",
+            "rango_texto": "≥97",
+            "min_valor": 97.0,
+            "max_valor": 100.0,  # Valor máximo para la barra
+            "color": "#D32F2F"  # Rojo
+        }
+    ]
+
+
+def calcular_posicion_en_barra_percentil(percentil):
+    """
+    Calcula la posición relativa del percentil en la barra (de 0.0 a 1.0).
+    Distribuye los rangos de manera proporcional en la barra.
+    """
+    if percentil < 3:
+        # Rango bajo peso: 0% al 15% de la barra
+        return (percentil / 3.0) * 0.15
+    elif percentil < 85:
+        # Rango peso saludable: 15% al 70% de la barra (más espacio por ser el rango más amplio)
+        return 0.15 + ((percentil - 3.0) / (85.0 - 3.0)) * 0.55
+    elif percentil < 97:
+        # Rango sobrepeso: 70% al 90% de la barra
+        return 0.70 + ((percentil - 85.0) / (97.0 - 85.0)) * 0.20
+    else:
+        # Rango obesidad: 90% al 100% de la barra
+        return 0.90 + ((percentil - 97.0) / 3.0) * 0.10
+
+
+def obtener_categoria_percentil(percentil):
+    """
+    Devuelve la categoría del percentil como un diccionario con información detallada.
+    Esta es la función central que determina la categoría basada en los percentiles de la OMS.
+    """
+    rangos = obtener_rangos_percentiles()
+
+    # Determinar categoría basada en el valor del percentil
+    if percentil < 3:
+        categoria = rangos[0]  # Bajo peso
+    elif percentil < 85:
+        categoria = rangos[1]  # Peso saludable
+    elif percentil < 97:
+        categoria = rangos[2]  # Sobrepeso
+    else:
+        categoria = rangos[3]  # Obesidad
+
+    return {
+        "categoria": categoria,
+        "posicion": calcular_posicion_en_barra_percentil(percentil),
+        "percentil_valor": round(percentil, 1)
+    }
+
+
+def interpretar_percentil_detallado(percentil):
+    """
+    Interpreta el percentil de IMC y devuelve un mensaje más detallado.
+    Incluye información específica sobre la posición en el percentil.
+    """
+    if percentil < 3:
+        return f"Bajo peso. Tu percentil es {percentil:.1f}, lo que significa que tienes un peso menor al 97% de niños de tu edad y sexo."
+    elif percentil < 50:
+        return f"Peso saludable (percentil bajo-medio). Tu percentil es {percentil:.1f}, estás en un rango saludable."
+    elif percentil < 85:
+        return f"Peso saludable (percentil medio-alto). Tu percentil es {percentil:.1f}, estás en un rango saludable."
+    elif percentil < 97:
+        return f"Sobrepeso. Tu percentil es {percentil:.1f}, tienes un peso mayor al {percentil:.0f}% de niños de tu edad y sexo."
+    else:
+        return f"Obesidad. Tu percentil es {percentil:.1f}, tienes un peso mayor al 97% de niños de tu edad y sexo."

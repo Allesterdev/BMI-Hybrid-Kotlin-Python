@@ -206,6 +206,15 @@
                     android:gravity="center"
                     android:layout_marginBottom="16dp" />
 
+                <!-- Barra de Percentiles para Menores -->
+                <com.example.calculadoraimc.ui.views.BarraPercentil
+                    android:id="@+id/barra_percentil_menores"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:visibility="gone" />
+
                 <!-- Botón Guardar -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_guardar"

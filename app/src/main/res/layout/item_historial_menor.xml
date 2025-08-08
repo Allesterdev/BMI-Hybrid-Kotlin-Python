@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/tv_item_fecha_menor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha: 01-01-2025 12:00:00"
+            android:textSize="16sp"
+            android:textColor="#388E3C"
+            android:textStyle="bold"
+            android:layout_marginBottom="4dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="2dp">
+
+            <TextView
+                android:id="@+id/tv_item_sexo"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sexo: Masculino"
+                android:textSize="14sp"
+                android:textColor="#333333" />
+
+            <TextView
+                android:id="@+id/tv_item_edad"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Edad: 60 meses"
+                android:textSize="14sp"
+                android:textColor="#333333" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_item_peso_menor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Peso: 20.0 kg"
+            android:textSize="15sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="2dp" />
+
+        <TextView
+            android:id="@+id/tv_item_altura_menor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Altura: 1.10 m"
+            android:textSize="15sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="2dp" />
+
+        <TextView
+            android:id="@+id/tv_item_imc_menor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="IMC: 16.5"
+            android:textSize="15sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="2dp" />
+
+        <TextView
+            android:id="@+id/tv_item_percentil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Percentil: 50.0"
+            android:textSize="15sp"
+            android:textColor="#2196F3"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

@@ -60,4 +60,15 @@
     <string name="formato_imc">IMC: %.1f</string>
     <string name="formato_percentil">Percentil: %.1f</string>
     <string name="sin_interpretacion">Sin interpretación</string>
+
+    <!-- Strings para el historial -->
+    <string name="titulo_historial">Historial de Mediciones</string>
+    <string name="historial_peso">Peso: %.1f kg</string>
+    <string name="historial_altura">Altura: %.2f m</string>
+    <string name="historial_imc">IMC: %.2f</string>
+    <string name="historial_fecha">Fecha: %s</string>
+    <string name="historial_sexo">Sexo: %s</string>
+    <string name="historial_edad_meses">Edad: %d meses</string>
+    <string name="historial_percentil">Percentil: %.1f</string>
+    <string name="historial_vacio">No hay mediciones guardadas</string>
 </resources>

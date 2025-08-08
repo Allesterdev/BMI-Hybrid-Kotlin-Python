@@ -85,7 +85,16 @@ def inicializar_base_de_datos():
     También se asegura de que las columnas para el cálculo de menores
     estén presentes.
     """
-    with sqlite3.connect('historial_imc.db') as conexion:
+    # Obtener la ruta correcta para la base de datos en Android
+    try:
+        from java import jclass
+        context = jclass("android.app.ActivityThread").currentApplication()
+        db_path = str(context.getDatabasePath("historial_imc.db"))
+    except:
+        # Fallback para desarrollo/testing
+        db_path = 'historial_imc.db'
+
+    with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
         cur.execute("""
             CREATE TABLE IF NOT EXISTS perfiles(
@@ -113,6 +122,19 @@ def inicializar_base_de_datos():
         conexion.commit()
 
 
+def obtener_ruta_base_datos():
+    """
+    Obtiene la ruta correcta para la base de datos en Android.
+    """
+    try:
+        from java import jclass
+        context = jclass("android.app.ActivityThread").currentApplication()
+        return str(context.getDatabasePath("historial_imc.db"))
+    except:
+        # Fallback para desarrollo/testing
+        return 'historial_imc.db'
+
+
 def guardar_medicion(peso, altura, imc, sexo=None, edad_meses=None, percentil=None):
     """
     Aquí guardamos la medición del usuario.
@@ -120,7 +142,9 @@ def guardar_medicion(peso, altura, imc, sexo=None, edad_meses=None, percentil=No
     """
     inicializar_base_de_datos()
     fecha = obtener_fecha()
-    with sqlite3.connect('historial_imc.db') as conexion:
+    db_path = obtener_ruta_base_datos()
+
+    with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
         cur.execute("""
                 INSERT INTO perfiles (peso, altura, imc, fecha, sexo, edad_meses, percentil)
@@ -139,7 +163,8 @@ def mostrar_historial(tipo_historial: str) -> list[dict]:
         tipo_historial (str): 'adultos' o 'menores'.
     """
     inicializar_base_de_datos()
-    with sqlite3.connect('historial_imc.db') as conexion:
+    db_path = obtener_ruta_base_datos()
+    with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
         if tipo_historial == 'adultos':
             cur.execute(
@@ -170,7 +195,8 @@ def borrar_historial_adultos():
     Borra todos los registros de IMC de adultos (donde sexo es NULL) de la base de datos.
     """
     inicializar_base_de_datos()
-    with sqlite3.connect('historial_imc.db') as conexion:
+    db_path = obtener_ruta_base_datos()
+    with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
         cur.execute("DELETE FROM perfiles WHERE sexo IS NULL")
         conexion.commit()
@@ -181,7 +207,8 @@ def borrar_historial_menores():
     Borra todos los registros de IMC de menores (donde sexo NO es NULL) de la base de datos.
     """
     inicializar_base_de_datos()
-    with sqlite3.connect('historial_imc.db') as conexion:
+    db_path = obtener_ruta_base_datos()
+    with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
         cur.execute("DELETE FROM perfiles WHERE sexo IS NOT NULL")
         conexion.commit()
@@ -198,7 +225,8 @@ def obtener_datos_para_grafico(tipo_historial):
         tuple: Dos listas, una de fechas (datetime) y otra de IMCs (float).
     """
     inicializar_base_de_datos()
-    with sqlite3.connect('historial_imc.db') as conexion:
+    db_path = obtener_ruta_base_datos()
+    with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
         if tipo_historial == 'adultos':
             query = "SELECT fecha, imc FROM perfiles WHERE sexo IS NULL ORDER BY fecha ASC"
@@ -279,3 +307,51 @@ def calcular_edad_exacta_en_meses(fecha_nacimiento_str):
 
     except ValueError as e:
         raise ValueError(f"Error procesando fecha de nacimiento: {str(e)}")
+
+
+def obtener_historial_adultos():
+    """
+    Devuelve el historial de mediciones de adultos (donde sexo es NULL).
+    Retorna una lista de diccionarios con los campos relevantes.
+    """
+    inicializar_base_de_datos()
+    db_path = obtener_ruta_base_datos()
+    with sqlite3.connect(db_path) as conexion:
+        cur = conexion.cursor()
+        cur.execute('SELECT peso, altura, imc, fecha FROM perfiles WHERE sexo IS NULL ORDER BY fecha DESC')
+        datos = cur.fetchall()
+    historial = []
+    for d in datos:
+        historial.append({
+            "peso": d[0],
+            "altura": d[1],
+            "imc": d[2],
+            "fecha": d[3]
+        })
+    return historial
+
+
+def obtener_historial_menores():
+    """
+    Devuelve el historial de mediciones de menores (donde sexo NO es NULL).
+    Retorna una lista de diccionarios con los campos relevantes.
+    """
+    inicializar_base_de_datos()
+    db_path = obtener_ruta_base_datos()
+    with sqlite3.connect(db_path) as conexion:
+        cur = conexion.cursor()
+        cur.execute('SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha DESC')
+        datos = cur.fetchall()
+    historial = []
+    for d in datos:
+        historial.append({
+            "peso": d[0],
+            "altura": d[1],
+            "imc": d[2],
+            "fecha": d[3],
+            "sexo": d[4],
+            "edad_meses": d[5],
+            "percentil": d[6]
+        })
+    return historial
+
