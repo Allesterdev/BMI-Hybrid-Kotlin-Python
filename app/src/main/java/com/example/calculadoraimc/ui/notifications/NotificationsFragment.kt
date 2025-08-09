@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calculadoraimc.databinding.FragmentNotificationsBinding
 import com.chaquo.python.Python
+import android.graphics.Color
+import android.graphics.Typeface
 
 class NotificationsFragment : Fragment() {
 
@@ -23,13 +25,11 @@ class NotificationsFragment : Fragment() {
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        // Ocultar el TextView original para evitar conflictos
         binding.textNotifications.visibility = View.GONE
 
         setupRecyclerView()
         setupToggleButtons()
-        
-        // Cargar historial de adultos por defecto
+
         consultarHistorialAdultos()
 
         return root
@@ -42,16 +42,62 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun setupToggleButtons() {
-        // Seleccionar adultos por defecto
-        binding.btnAdultos.isChecked = true
-        
-        binding.toggleHistorial.addOnButtonCheckedListener { _, checkedId, isChecked ->
-            if (isChecked) {
-                when (checkedId) {
-                    binding.btnAdultos.id -> consultarHistorialAdultos()
-                    binding.btnMenores.id -> consultarHistorialMenores()
-                }
-            }
+        // Configurar estado inicial
+        updateTextColors(isAdultosSelected = true)
+
+        binding.slidingPill.translationX = 0f
+
+        binding.btnAdultos.setOnClickListener {
+            selectAdultos()
+        }
+
+        binding.btnMenores.setOnClickListener {
+            selectMenores()
+        }
+    }
+
+    private fun selectAdultos() {
+        // Animar la píldora hacia la izquierda
+        binding.slidingPill.animate()
+            .translationX(0f)
+            .setDuration(300)
+            .setInterpolator(android.view.animation.DecelerateInterpolator())
+            .start()
+
+        // Actualizar colores del texto
+        updateTextColors(isAdultosSelected = true)
+
+        consultarHistorialAdultos()
+    }
+
+    private fun selectMenores() {
+        // Calcular posición de destino y animar
+        binding.btnAdultos.post {
+            val destinationX = binding.btnAdultos.width.toFloat()
+            binding.slidingPill.animate()
+                .translationX(destinationX)
+                .setDuration(300)
+                .setInterpolator(android.view.animation.DecelerateInterpolator())
+                .start()
+        }
+
+        // Actualizar colores del texto
+        updateTextColors(isAdultosSelected = false)
+
+        consultarHistorialMenores()
+    }
+
+    private fun updateTextColors(isAdultosSelected: Boolean) {
+        if (isAdultosSelected) {
+            // Adultos seleccionado: texto verde (sobre fondo blanco de la píldora)
+            // Menores no seleccionado: texto blanco (sobre fondo verde del contenedor)
+            binding.btnAdultos.setTextColor(Color.parseColor("#2E7D32"))
+            binding.btnMenores.setTextColor(Color.parseColor("#FFFFFF"))
+        } else {
+            // Adultos no seleccionado: texto blanco (sobre fondo verde del contenedor)
+            // Menores seleccionado: texto verde (sobre fondo blanco de la píldora)
+            binding.btnAdultos.setTextColor(Color.parseColor("#FFFFFF"))
+            binding.btnMenores.setTextColor(Color.parseColor("#2E7D32"))
         }
     }
 
@@ -61,7 +107,7 @@ class NotificationsFragment : Fragment() {
             val funcionesModule = python.getModule("funciones_imc_android")
             val resultado = funcionesModule.callAttr("obtener_historial_adultos")
             val lista = resultado.asList()
-            
+
             val historial = lista.map { item ->
                 val map = item.asMap()
                 HistorialAdulto(
@@ -71,19 +117,13 @@ class NotificationsFragment : Fragment() {
                     fecha = map[com.chaquo.python.PyObject.fromJava("fecha")]?.toString() ?: ""
                 )
             }
-            
+
             adapter.updateDataAdultos(historial)
             binding.tvHistorialVacio.visibility = if (historial.isEmpty()) View.VISIBLE else View.GONE
-            
+
         } catch (e: Exception) {
-            // Log del error específico para debugging
             android.util.Log.e("NotificationsFragment", "Error al consultar historial de adultos: ${e.message}", e)
-
-            // En desarrollo: mostrar el error al usuario para identificar problemas
-            // TODO: Remover este Toast en producción
             android.widget.Toast.makeText(context, "Error: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
-
-            // Mostrar lista vacía como fallback temporal
             adapter.clearData()
             binding.tvHistorialVacio.visibility = View.VISIBLE
         }
@@ -96,60 +136,37 @@ class NotificationsFragment : Fragment() {
             val resultado = funcionesModule.callAttr("obtener_historial_menores")
             val lista = resultado.asList()
 
-            // Log para debugging
-            android.util.Log.d("HistorialMenores", "Cantidad de registros encontrados: ${lista.size}")
-
-            val historial = lista.mapIndexed { index, item ->
+            val historial = lista.mapIndexed { _, item ->
                 val map = item.asMap()
 
-                // Log cada registro para debugging
-                android.util.Log.d("HistorialMenores", "Registro $index: $map")
-
-                // Función auxiliar para obtener valores de forma segura
                 fun getDoubleValue(key: String): Double {
                     val pyKey = com.chaquo.python.PyObject.fromJava(key)
                     val value = map[pyKey]
-                    val result = when {
+                    return when {
                         value == null -> 0.0
                         value.toString() == "None" -> 0.0
-                        else -> try {
-                            value.toString().toDouble()
-                        } catch (e: NumberFormatException) {
-                            android.util.Log.w("HistorialMenores", "Error convirtiendo $key: ${value.toString()}")
-                            0.0
-                        }
+                        else -> value.toString().toDoubleOrNull() ?: 0.0
                     }
-                    android.util.Log.d("HistorialMenores", "$key: ${value?.toString()} -> $result")
-                    return result
                 }
 
                 fun getIntValue(key: String): Int {
                     val pyKey = com.chaquo.python.PyObject.fromJava(key)
                     val value = map[pyKey]
-                    val result = when {
+                    return when {
                         value == null -> 0
                         value.toString() == "None" -> 0
-                        else -> try {
-                            value.toString().toInt()
-                        } catch (e: NumberFormatException) {
-                            android.util.Log.w("HistorialMenores", "Error convirtiendo $key: ${value.toString()}")
-                            0
-                        }
+                        else -> value.toString().toIntOrNull() ?: 0
                     }
-                    android.util.Log.d("HistorialMenores", "$key: ${value?.toString()} -> $result")
-                    return result
                 }
 
                 fun getStringValue(key: String): String {
                     val pyKey = com.chaquo.python.PyObject.fromJava(key)
                     val value = map[pyKey]
-                    val result = when {
+                    return when {
                         value == null -> ""
                         value.toString() == "None" -> ""
                         else -> value.toString()
                     }
-                    android.util.Log.d("HistorialMenores", "$key: ${value?.toString()} -> $result")
-                    return result
                 }
 
                 HistorialMenor(
@@ -163,20 +180,12 @@ class NotificationsFragment : Fragment() {
                 )
             }
 
-            android.util.Log.d("HistorialMenores", "Historial procesado: ${historial.size} registros")
-
             adapter.updateDataMenores(historial)
             binding.tvHistorialVacio.visibility = if (historial.isEmpty()) View.VISIBLE else View.GONE
 
         } catch (e: Exception) {
-            // Log del error específico para debugging
             android.util.Log.e("NotificationsFragment", "Error al consultar historial de menores: ${e.message}", e)
-
-            // En desarrollo: mostrar el error al usuario para identificar problemas
-            // TODO: Remover este Toast en producción
             android.widget.Toast.makeText(context, "Error: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
-
-            // Mostrar lista vacía como fallback temporal
             adapter.clearData()
             binding.tvHistorialVacio.visibility = View.VISIBLE
         }

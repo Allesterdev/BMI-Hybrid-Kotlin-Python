@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Color cuando el estado es seleccionado (píldora blanca detrás) -->
+    <item android:state_selected="true" android:color="#4CAF50" />
+    <!-- Color por defecto (fondo verde detrás) -->
+    <item android:color="#FFFFFF" />
+</selector>
