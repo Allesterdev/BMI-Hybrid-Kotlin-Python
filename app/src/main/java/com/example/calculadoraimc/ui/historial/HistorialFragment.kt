@@ -1,4 +1,4 @@
-package com.example.calculadoraimc.ui.notifications
+package com.example.calculadoraimc.ui.historial
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,14 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.calculadoraimc.databinding.FragmentNotificationsBinding
+import com.example.calculadoraimc.databinding.FragmentHistorialBinding
 import com.chaquo.python.Python
 import android.graphics.Color
-import android.graphics.Typeface
 
-class NotificationsFragment : Fragment() {
 
-    private var _binding: FragmentNotificationsBinding? = null
+class HistorialFragment : Fragment() {
+
+
+    private var _binding: FragmentHistorialBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: HistorialAdapter
 
@@ -22,10 +23,10 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
+        _binding = FragmentHistorialBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        binding.textNotifications.visibility = View.GONE
+        binding.textHistorial.visibility = View.GONE
 
         setupRecyclerView()
         setupToggleButtons()

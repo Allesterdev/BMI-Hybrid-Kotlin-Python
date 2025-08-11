@@ -1,4 +1,4 @@
-package com.example.calculadoraimc.ui.notifications
+package com.example.calculadoraimc.ui.historial
 
 import android.view.LayoutInflater
 import android.view.View

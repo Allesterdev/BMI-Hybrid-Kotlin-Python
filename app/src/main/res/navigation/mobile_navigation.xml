@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_menores" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.calculadoraimc.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_historial"
+        android:name="com.example.calculadoraimc.ui.historial.HistorialFragment"
+        android:label="@string/title_historial"
+        tools:layout="@layout/fragment_historial" />
 </navigation>

@@ -1,13 +1,13 @@
-package com.example.calculadoraimc.ui.notifications
+package com.example.calculadoraimc.ui.historial
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class NotificationsViewModel : ViewModel() {
+class HistorialViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is notifications Fragment"
+        value = "Este es el fragmento de historial"
     }
     val text: LiveData<String> = _text
 }

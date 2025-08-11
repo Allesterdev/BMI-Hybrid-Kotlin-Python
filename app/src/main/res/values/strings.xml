@@ -2,7 +2,7 @@
     <string name="app_name">CalculadoraIMC</string>
     <string name="title_home">Adultos</string>
     <string name="title_dashboard">5–19 Años</string>
-    <string name="title_notifications">Historial</string>
+    <string name="title_historial">Historial</string>
 
     <!-- Strings para la calculadora de adultos -->
     <string name="titulo_calculadora_adultos">Calculadora IMC Adultos</string>
