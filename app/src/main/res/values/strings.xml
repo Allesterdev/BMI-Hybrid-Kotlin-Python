@@ -77,4 +77,8 @@
     <string name="titulo_grafico_historial">Evolución de Mediciones</string>
     <string name="btn_volver_historial">Volver al Historial</string>
     <string name="sin_datos_grafico">Sin datos para graficar</string>
+    <string name="label_imc">IMC</string>
+    <string name="label_peso">Peso</string>
+    <string name="label_percentil">Percentil</string>
+    <string name="label_altura">Altura</string>
 </resources>
