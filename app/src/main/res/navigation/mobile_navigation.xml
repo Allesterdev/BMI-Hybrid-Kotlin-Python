@@ -8,18 +8,28 @@
     <fragment
         android:id="@+id/navigation_adultos"
         android:name="com.example.calculadoraimc.ui.adultos.AdultosFragment"
-        android:label="@string/title_home"
+        android:label="@string/title_adultos"
         tools:layout="@layout/fragment_adultos" />
 
     <fragment
         android:id="@+id/navigation_menores"
         android:name="com.example.calculadoraimc.ui.menores.MenoresFragment"
-        android:label="@string/title_dashboard"
+        android:label="@string/title_menores"
         tools:layout="@layout/fragment_menores" />
 
     <fragment
         android:id="@+id/navigation_historial"
         android:name="com.example.calculadoraimc.ui.historial.HistorialFragment"
         android:label="@string/title_historial"
-        tools:layout="@layout/fragment_historial" />
+        tools:layout="@layout/fragment_historial">
+        <action
+            android:id="@+id/action_historial_to_grafico"
+            app:destination="@id/navigation_grafico_historial" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_grafico_historial"
+        android:name="com.example.calculadoraimc.ui.historial.GraficoHistorialFragment"
+        android:label="@string/titulo_grafico_historial"
+        tools:layout="@layout/fragment_grafico_historial" />
 </navigation>

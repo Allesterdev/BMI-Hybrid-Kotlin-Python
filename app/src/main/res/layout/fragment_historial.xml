@@ -66,7 +66,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/title_home"
+                android:text="@string/title_adultos"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#2E7D32"
@@ -80,7 +80,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="@string/title_dashboard"
+                android:text="@string/title_menores"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
@@ -118,4 +118,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp" />
+
+    <!-- Botón verde en forma de píldora -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_ver_grafico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_ver_grafico"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="96dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/green_primary"
+        app:cornerRadius="24dp"
+        app:rippleColor="@color/green_primary_dark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

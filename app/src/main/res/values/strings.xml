@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">CalculadoraIMC</string>
-    <string name="title_home">Adultos</string>
-    <string name="title_dashboard">5–19 Años</string>
+    <string name="app_name">Calculadora IMC</string>
+    <string name="title_adultos">Adultos</string>
+    <string name="title_menores">5–19 Años</string>
     <string name="title_historial">Historial</string>
 
     <!-- Strings para la calculadora de adultos -->
@@ -71,4 +71,10 @@
     <string name="historial_edad_meses">Edad: %d meses</string>
     <string name="historial_percentil">Percentil: %.1f</string>
     <string name="historial_vacio">No hay mediciones guardadas</string>
+    <string name="btn_ver_grafico">Ver Gráfico</string>
+
+    <!-- Nuevas strings para gráfico -->
+    <string name="titulo_grafico_historial">Evolución de Mediciones</string>
+    <string name="btn_volver_historial">Volver al Historial</string>
+    <string name="sin_datos_grafico">Sin datos para graficar</string>
 </resources>

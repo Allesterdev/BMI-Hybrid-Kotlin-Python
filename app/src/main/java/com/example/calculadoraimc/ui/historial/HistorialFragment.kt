@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentHistorialBinding
 import com.chaquo.python.Python
 import android.graphics.Color
@@ -30,6 +32,12 @@ class HistorialFragment : Fragment() {
 
         setupRecyclerView()
         setupToggleButtons()
+
+        // Navegación al gráfico
+        binding.btnVerGrafico.setOnClickListener {
+            // Uso directo del destino para evitar ambigüedad con acciones
+            findNavController().navigate(R.id.navigation_grafico_historial)
+        }
 
         consultarHistorialAdultos()
 
