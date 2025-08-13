@@ -28,6 +28,7 @@ import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.math.abs
 import kotlin.math.ceil
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -223,7 +224,7 @@ class GraficoHistorialFragment : Fragment() {
         binding.lineChart.highlightValues(null) // Reset highlight tras recarga
 
         // Marker táctil personalizado (re-creado tras cada carga de datos)
-        binding.lineChart.marker = HistorialMarker(requireContext()) { fechasActuales }
+        binding.lineChart.marker = HistorialMarker(requireContext(), { fechasActuales }, lineData)
 
         // Formateador de fechas adaptable a la configuración regional
         val dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.getDefault())
@@ -248,7 +249,8 @@ class GraficoHistorialFragment : Fragment() {
     // Clase interna para el MarkerView personalizado
     private class HistorialMarker(
         context: Context,
-        private val fechasProvider: () -> List<Date>
+        private val fechasProvider: () -> List<Date>,
+        private val chartData: LineData
     ) : MarkerView(context, R.layout.marker_chart) {
         private val tvFecha: TextView = findViewById(R.id.tvMarkerFecha)
         private val tvValores: TextView = findViewById(R.id.tvMarkerValores)
@@ -257,47 +259,93 @@ class GraficoHistorialFragment : Fragment() {
 
         override fun refreshContent(e: Entry?, highlight: Highlight?) {
             try {
-                if (e == null) return
+                if (e == null) {
+                    tvFecha.text = ""
+                    tvValores.text = ""
+                    super.refreshContent(e, highlight)
+                    return
+                }
+
                 val fechas = fechasProvider()
-                val idxRedondeado = e.x.roundToInt()
-                val fechaTxt = fechas.getOrNull(idxRedondeado)?.let { dateTimeFormat.format(it) } ?: ""
-                val data = chartView?.data
+                val idx = e.x.roundToInt()
+                val fechaTexto = fechas.getOrNull(idx)?.let { dateTimeFormat.format(it) } ?: "Sin fecha"
+
                 val builder = StringBuilder()
-                if (data != null) {
-                    for (i in 0 until data.dataSetCount) {
-                        val ds = data.getDataSetByIndex(i)
-                        // Intentar obtener por X exacto primero
-                        var entry: Entry? = ds.getEntryForXValue(e.x, Float.NaN)
-                        if (entry == null && idxRedondeado in 0 until ds.entryCount) {
-                            // Fallback por índice
-                            entry = ds.getEntryForIndex(idxRedondeado)
-                        }
-                        if (entry == null) {
-                            // Fallback adicional: si e.x está fuera de rango por interpolación, usar último
-                            if (ds.entryCount > 0) {
-                                entry = ds.getEntryForIndex(min(ds.entryCount - 1, idxRedondeado.coerceAtLeast(0)))
-                            }
-                        }
-                        if (entry != null) {
-                            if (builder.isNotEmpty()) builder.append('\n')
-                            val etiqueta = ds.label
-                            val valor = oneDecimal.format(entry.y)
-                            val valorConUnidad = when (etiqueta.lowercase(Locale.getDefault())) {
-                                "peso" -> valor + " kg"
-                                "altura" -> valor + " m"
-                                "percentil" -> valor + "%"
-                                else -> valor // IMC u otros
-                            }
-                            builder.append(etiqueta).append(": ").append(valorConUnidad)
+
+                // Usar los datos pasados directamente en lugar de getChartView()?.data
+                val data = chartData
+
+                // Iterar por todos los datasets para mostrar todos los valores en ese punto X
+                for (i in 0 until data.dataSetCount) {
+                    val ds = data.getDataSetByIndex(i)
+                    if (ds.entryCount == 0) continue
+
+                    // Buscar el entry más cercano a la posición X
+                    var entry: Entry? = null
+                    var minDistance = Float.MAX_VALUE
+
+                    for (j in 0 until ds.entryCount) {
+                        val currentEntry = ds.getEntryForIndex(j)
+                        val distance = kotlin.math.abs(currentEntry.x - e.x)
+                        if (distance < minDistance) {
+                            minDistance = distance
+                            entry = currentEntry
                         }
                     }
+
+                    if (entry != null) {
+                        val etiqueta = ds.label ?: "Valor $i"
+                        val valor = oneDecimal.format(entry.y)
+
+                        // Determinar la unidad basándose en las etiquetas conocidas
+                        val valorConUnidad = when {
+                            etiqueta.contains("peso", ignoreCase = true) || etiqueta.contains("Peso", ignoreCase = true) -> "$valor kg"
+                            etiqueta.contains("altura", ignoreCase = true) || etiqueta.contains("Altura", ignoreCase = true) -> "$valor m"
+                            etiqueta.contains("imc", ignoreCase = true) || etiqueta.contains("IMC", ignoreCase = true) -> "$valor kg/m²"
+                            etiqueta.contains("percentil", ignoreCase = true) || etiqueta.contains("Percentil", ignoreCase = true) -> "$valor%"
+                            else -> "$valor (${etiqueta})"
+                        }
+
+                        if (builder.isNotEmpty()) builder.append('\n')
+                        builder.append("$etiqueta: $valorConUnidad")
+                    }
                 }
-                tvFecha.text = fechaTxt
-                tvValores.text = builder.toString()
-            } catch (_: Exception) { }
+
+                tvFecha.text = fechaTexto
+                tvValores.text = if (builder.isEmpty()) {
+                    "Debug: Datasets=${data.dataSetCount}, X=${e.x}, Y=${e.y}"
+                } else {
+                    builder.toString()
+                }
+
+            } catch (ex: Exception) {
+                tvFecha.text = "Error"
+                tvValores.text = "Error: ${ex.message}"
+            }
             super.refreshContent(e, highlight)
         }
 
-        override fun getOffset(): MPPointF = MPPointF(-width / 2f, -height - 20f)
+        override fun getOffset(): MPPointF = MPPointF(-width / 2f, -height - 30f)
+
+        override fun getOffsetForDrawingAtPoint(posX: Float, posY: Float): MPPointF {
+            var offsetX = -width / 2f
+            var offsetY = -height - 30f
+
+            // Ajustar posición si está muy cerca de los bordes
+            val chartView = getChartView()
+            if (chartView != null) {
+                if (posX + offsetX < 0) {
+                    offsetX = -posX + 10f
+                }
+                if (posX + offsetX + width > chartView.width) {
+                    offsetX = chartView.width - posX - width - 10f
+                }
+                if (posY + offsetY < 0) {
+                    offsetY = 20f
+                }
+            }
+
+            return MPPointF(offsetX, offsetY)
+        }
     }
 }
