@@ -15,10 +15,12 @@ import android.graphics.Color
 
 class HistorialFragment : Fragment() {
 
-
     private var _binding: FragmentHistorialBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: HistorialAdapter
+
+    // Variable para rastrear el modo actual
+    private var modoActual: String = "adultos"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,8 +37,11 @@ class HistorialFragment : Fragment() {
 
         // Navegación al gráfico
         binding.btnVerGrafico.setOnClickListener {
-            // Uso directo del destino para evitar ambigüedad con acciones
-            findNavController().navigate(R.id.navigation_grafico_historial)
+            // Pasar el modo actual como argumento al gráfico
+            val bundle = Bundle().apply {
+                putString("tipo_historial", modoActual)
+            }
+            findNavController().navigate(R.id.navigation_grafico_historial, bundle)
         }
 
         consultarHistorialAdultos()
@@ -76,6 +81,7 @@ class HistorialFragment : Fragment() {
         // Actualizar colores del texto
         updateTextColors(isAdultosSelected = true)
 
+        modoActual = "adultos" // Actualizar modo actual
         consultarHistorialAdultos()
     }
 
@@ -93,6 +99,7 @@ class HistorialFragment : Fragment() {
         // Actualizar colores del texto
         updateTextColors(isAdultosSelected = false)
 
+        modoActual = "menores" // Actualizar modo actual
         consultarHistorialMenores()
     }
 

@@ -101,6 +101,11 @@ class MenoresFragment : Fragment() {
 
             binding.cardResultado.visibility = View.VISIBLE
 
+            // Auto-scroll para mostrar los resultados y el botón de guardar
+            binding.root.post {
+                binding.root.smoothScrollTo(0, binding.cardResultado.bottom)
+            }
+
         } catch (e: Exception) {
             android.util.Log.e("MenoresFragment", "Excepción en calcularPercentil: ${e.message}", e)
             Toast.makeText(context, getString(R.string.error_calculo, e.message ?: ""), Toast.LENGTH_SHORT).show()

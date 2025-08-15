@@ -64,6 +64,11 @@ class AdultosFragment : Fragment() {
 
             binding.cardResultado.visibility = View.VISIBLE
 
+            // Auto-scroll para mostrar los resultados y el botón de guardar
+            binding.root.post {
+                binding.root.smoothScrollTo(0, binding.cardResultado.bottom)
+            }
+
         } catch (e: Exception) {
             Toast.makeText(context, getString(R.string.error_calculo, e.message ?: ""), Toast.LENGTH_SHORT).show()
         }

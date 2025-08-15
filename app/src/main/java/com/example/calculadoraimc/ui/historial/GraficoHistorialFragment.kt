@@ -50,6 +50,11 @@ class GraficoHistorialFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentGraficoHistorialBinding.inflate(inflater, container, false)
+
+        // Obtener el tipo de historial del argumento
+        val tipoHistorial = arguments?.getString("tipo_historial") ?: "adultos"
+        modoActual = if (tipoHistorial == "menores") Modo.MENORES else Modo.ADULTOS
+
         setupChart()
         setupToggle()
         setupBotonVolver()
@@ -62,9 +67,21 @@ class GraficoHistorialFragment : Fragment() {
     }
 
     private fun setupToggle() {
-        // Estado inicial adultos
-        binding.slidingPillChart.translationX = 0f
-        actualizarColoresToggle(adultosSeleccionado = true)
+        // Configurar estado inicial basado en el modo actual
+        val esAdultos = (modoActual == Modo.ADULTOS)
+
+        // Posicionar la píldora según el modo
+        if (esAdultos) {
+            binding.slidingPillChart.translationX = 0f
+        } else {
+            // Posicionar en el botón de menores
+            binding.btnChartAdultos.post {
+                val destinationX = binding.btnChartAdultos.width.toFloat()
+                binding.slidingPillChart.translationX = destinationX
+            }
+        }
+
+        actualizarColoresToggle(adultosSeleccionado = esAdultos)
 
         binding.btnChartAdultos.setOnClickListener {
             if (modoActual != Modo.ADULTOS) {

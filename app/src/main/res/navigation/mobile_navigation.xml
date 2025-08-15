@@ -31,7 +31,12 @@
         android:id="@+id/navigation_grafico_historial"
         android:name="com.example.calculadoraimc.ui.historial.GraficoHistorialFragment"
         android:label="@string/titulo_grafico_historial"
-        tools:layout="@layout/fragment_grafico_historial" />
+        tools:layout="@layout/fragment_grafico_historial">
+        <argument
+            android:name="tipo_historial"
+            app:argType="string"
+            android:defaultValue="adultos" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_opciones"
