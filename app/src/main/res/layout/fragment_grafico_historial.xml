@@ -82,7 +82,7 @@
         android:id="@+id/btn_volver_historial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="96dp"
         android:text="@string/btn_volver_historial"
         android:textColor="@android:color/white"
         app:backgroundTint="@color/green_primary"

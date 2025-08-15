@@ -3,6 +3,7 @@
     <string name="title_adultos">Adultos</string>
     <string name="title_menores">5–19 Años</string>
     <string name="title_historial">Historial</string>
+    <string name="title_opciones">Opciones</string>
 
     <!-- Strings para la calculadora de adultos -->
     <string name="titulo_calculadora_adultos">Calculadora IMC Adultos</string>
@@ -81,4 +82,22 @@
     <string name="label_peso">Peso</string>
     <string name="label_percentil">Percentil</string>
     <string name="label_altura">Altura</string>
+
+    <!-- Strings para opciones -->
+    <string name="titulo_opciones">Opciones</string>
+    <string name="disclaimer_titulo">Disclaimer</string>
+    <string name="disclaimer_texto">Esta aplicación es solo para fines informativos y educativos. Los resultados del IMC no deben sustituir el consejo médico profesional. Consulte siempre a un profesional de la salud para evaluaciones médicas completas.</string>
+    <string name="borrar_historiales_titulo">Gestión de Datos</string>
+    <string name="btn_borrar_historial_adultos">Borrar Historial Adultos</string>
+    <string name="btn_borrar_historial_menores">Borrar Historial Menores</string>
+    <string name="btn_borrar_todos_historiales">Borrar Todos los Historiales</string>
+    <string name="confirmacion_borrar_titulo">Confirmar eliminación</string>
+    <string name="confirmacion_borrar_adultos">¿Estás seguro de que quieres borrar todo el historial de adultos?</string>
+    <string name="confirmacion_borrar_menores">¿Estás seguro de que quieres borrar todo el historial de menores?</string>
+    <string name="confirmacion_borrar_todos">¿Estás seguro de que quieres borrar TODOS los historiales?</string>
+    <string name="btn_confirmar">Confirmar</string>
+    <string name="btn_cancelar">Cancelar</string>
+    <string name="exito_borrar_adultos">Historial de adultos eliminado</string>
+    <string name="exito_borrar_menores">Historial de menores eliminado</string>
+    <string name="exito_borrar_todos">Todos los historiales eliminados</string>
 </resources>

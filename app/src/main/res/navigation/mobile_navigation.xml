@@ -32,4 +32,10 @@
         android:name="com.example.calculadoraimc.ui.historial.GraficoHistorialFragment"
         android:label="@string/titulo_grafico_historial"
         tools:layout="@layout/fragment_grafico_historial" />
+
+    <fragment
+        android:id="@+id/navigation_opciones"
+        android:name="com.example.calculadoraimc.ui.opciones.OpcionesFragment"
+        android:label="@string/title_opciones"
+        tools:layout="@layout/fragment_opciones" />
 </navigation>

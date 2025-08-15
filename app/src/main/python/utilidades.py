@@ -214,6 +214,18 @@ def borrar_historial_menores():
         conexion.commit()
 
 
+def borrar_todos_historiales():
+    """
+    Borra todos los registros de la base de datos (tanto adultos como menores).
+    """
+    inicializar_base_de_datos()
+    db_path = obtener_ruta_base_datos()
+    with sqlite3.connect(db_path) as conexion:
+        cur = conexion.cursor()
+        cur.execute("DELETE FROM perfiles")
+        conexion.commit()
+
+
 def obtener_datos_para_grafico(tipo_historial):
     """
     Obtiene fechas e IMCs de la base de datos para un tipo de historial.

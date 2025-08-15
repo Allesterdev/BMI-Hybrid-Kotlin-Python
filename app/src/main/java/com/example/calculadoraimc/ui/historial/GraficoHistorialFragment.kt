@@ -328,22 +328,22 @@ class GraficoHistorialFragment : Fragment() {
         override fun getOffset(): MPPointF = MPPointF(-width / 2f, -height - 30f)
 
         override fun getOffsetForDrawingAtPoint(posX: Float, posY: Float): MPPointF {
-            var offsetX = -width / 2f
-            var offsetY = -height - 30f
+            val chartView = chartView ?: return MPPointF(-width / 2f, -height - 30f)
 
-            // Ajustar posición si está muy cerca de los bordes
-            val chartView = getChartView()
-            if (chartView != null) {
-                if (posX + offsetX < 0) {
-                    offsetX = -posX + 10f
-                }
-                if (posX + offsetX + width > chartView.width) {
-                    offsetX = chartView.width - posX - width - 10f
-                }
-                if (posY + offsetY < 0) {
-                    offsetY = 20f
-                }
-            }
+            // Re-medir siempre tras refreshContent para reflejar cambios de texto
+            measure(
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+            )
+            layout(0, 0, measuredWidth, measuredHeight)
+
+            // Posición fija en esquina superior derecha del área del gráfico
+            val contentRect = chartView.viewPortHandler.contentRect
+            val margin = 16f
+
+            // Calcular offset para posicionar en esquina superior derecha
+            val offsetX = contentRect.right - measuredWidth - margin - posX
+            val offsetY = contentRect.top + margin - posY
 
             return MPPointF(offsetX, offsetY)
         }
