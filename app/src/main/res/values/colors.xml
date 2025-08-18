@@ -7,20 +7,29 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Green palette unificado -->
     <color name="green_primary">#4CAF50</color>
-    <color name="green_primary_dark">#1B5E20</color>
+    <color name="green_primary_dark">#2E7D32</color>
+    <color name="green_primary_light">#66BB6A</color>
+
+    <!-- Colores para gráficos -->
     <color name="line_imc">#4CAF50</color>
     <color name="line_peso">#1976D2</color>
     <color name="line_percentil">#009688</color>
     <color name="line_altura">#7B1FA2</color>
 
-    <!-- Colores para el tema general -->
-    <color name="background_color">#F5F5F5</color>
+    <!-- Backgrounds estandarizados -->
+    <color name="app_background">#FFFFFF</color>
     <color name="card_background">#FFFFFF</color>
+    <color name="input_background">#F1F8E9</color>
+    <color name="options_background">#F5F5F5</color>
+
+    <!-- Text colors -->
     <color name="text_primary">#212121</color>
     <color name="text_secondary">#757575</color>
 
     <!-- Colores para opciones de borrado -->
-    <color name="red_warning">#FF9800</color>
-    <color name="red_danger">#F44336</color>
+    <color name="warning_orange">#FF9800</color>
+    <color name="danger_red">#F44336</color>
 </resources>

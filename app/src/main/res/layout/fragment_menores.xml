@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:paddingBottom="80dp"
+    android:background="@color/app_background"
+    android:paddingBottom="@dimen/bottom_nav_padding_scroll"
     android:clipToPadding="false"
     tools:context=".ui.menores.MenoresFragment">
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="@dimen/padding_standard">
 
         <!-- Título -->
         <TextView
@@ -23,24 +23,25 @@
             android:text="@string/titulo_calculadora_menores"
             android:textSize="28sp"
             android:textStyle="bold"
-            android:textColor="#2E7D32"
+            android:textColor="@color/green_primary_dark"
             android:gravity="center"
             android:layout_marginBottom="32dp" />
 
         <!-- Card para los inputs -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="8dp"
-            app:cardBackgroundColor="#F1F8E9">
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation_standard"
+            app:cardBackgroundColor="@color/input_background"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="@dimen/padding_standard">
 
                 <!-- Campo Peso -->
                 <com.google.android.material.textfield.TextInputLayout
@@ -48,8 +49,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:boxStrokeColor="#4CAF50"
-                    app:hintTextColor="#2E7D32"
+                    app:boxStrokeColor="@color/green_primary"
+                    app:hintTextColor="@color/green_primary_dark"
                     android:hint="@string/hint_peso">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -57,7 +58,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,8 +68,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:boxStrokeColor="#4CAF50"
-                    app:hintTextColor="#2E7D32"
+                    app:boxStrokeColor="@color/green_primary"
+                    app:hintTextColor="@color/green_primary_dark"
                     android:hint="@string/hint_altura">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -76,7 +77,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:textColor="#000000"
+                        android:textColor="@color/text_primary"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,8 +87,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    app:boxStrokeColor="#4CAF50"
-                    app:hintTextColor="#2E7D32"
+                    app:boxStrokeColor="@color/green_primary"
+                    app:hintTextColor="@color/green_primary_dark"
                     android:hint="@string/hint_fecha_nacimiento">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -95,7 +96,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="date"
-                        android:textColor="#2E7D32"
+                        android:textColor="@color/green_primary_dark"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -105,7 +106,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/label_sexo"
                     android:textSize="16sp"
-                    android:textColor="#2E7D32"
+                    android:textColor="@color/green_primary_dark"
                     android:layout_marginBottom="8dp" />
 
                 <RadioGroup
@@ -121,8 +122,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/radio_masculino"
-                        android:textColor="#2E7D32"
-                        app:buttonTint="#4CAF50"
+                        android:textColor="@color/green_primary_dark"
+                        app:buttonTint="@color/green_primary"
                         android:checked="true" />
 
                     <RadioButton
@@ -131,8 +132,8 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="@string/radio_femenino"
-                        android:textColor="#2E7D32"
-                        app:buttonTint="#4CAF50" />
+                        android:textColor="@color/green_primary_dark"
+                        app:buttonTint="@color/green_primary" />
                 </RadioGroup>
 
                 <!-- Botón Calcular -->
@@ -143,28 +144,29 @@
                     android:text="@string/btn_calcular_percentil"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:backgroundTint="#2E7D32"
+                    app:backgroundTint="@color/green_primary_dark"
                     app:cornerRadius="28dp"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/white" />
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
 
         <!-- Card para los resultados -->
-        <androidx.cardview.widget.CardView
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_resultado"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:visibility="gone"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="8dp"
-            app:cardBackgroundColor="#E8F5E8">
+            app:cardCornerRadius="@dimen/card_corner_radius"
+            app:cardElevation="@dimen/card_elevation_standard"
+            app:cardBackgroundColor="@color/input_background"
+            app:cardUseCompatPadding="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp">
+                android:padding="@dimen/padding_standard">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -172,7 +174,7 @@
                     android:text="@string/titulo_resultado"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#2E7D32"
+                    android:textColor="@color/green_primary_dark"
                     android:gravity="center"
                     android:layout_marginBottom="16dp" />
 
@@ -183,7 +185,7 @@
                     android:text="@string/imc_inicial"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    android:textColor="#1B5E20"
+                    android:textColor="@color/green_primary_dark"
                     android:gravity="center"
                     android:layout_marginBottom="8dp" />
 
@@ -194,7 +196,7 @@
                     android:text="@string/percentil_inicial"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textColor="#1B5E20"
+                    android:textColor="@color/green_primary_dark"
                     android:gravity="center"
                     android:layout_marginBottom="8dp" />
 
@@ -204,7 +206,7 @@
                     android:layout_height="wrap_content"
                     android:text=""
                     android:textSize="18sp"
-                    android:textColor="#2E7D32"
+                    android:textColor="@color/green_primary_dark"
                     android:gravity="center"
                     android:layout_marginBottom="16dp" />
 
@@ -224,11 +226,11 @@
                     android:layout_height="48dp"
                     android:text="@string/btn_guardar_historial"
                     android:textSize="16sp"
-                    app:backgroundTint="#2E7D32"
+                    app:backgroundTint="@color/green_primary_dark"
                     app:cornerRadius="24dp"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 </ScrollView>

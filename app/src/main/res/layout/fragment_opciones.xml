@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5"
+    android:background="@color/options_background"
     tools:context=".ui.opciones.OpcionesFragment">
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/bottom_nav_padding"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="24dp">
+            android:padding="@dimen/padding_standard">
 
             <!-- Título -->
             <TextView
@@ -29,59 +31,25 @@
                 android:text="@string/titulo_opciones"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:textColor="@color/black"
+                android:textColor="@color/text_primary"
                 android:gravity="center"
                 android:layout_marginBottom="32dp" />
 
-            <!-- Sección Disclaimer -->
+            <!-- Sección Gestión de Datos (Ahora primero) -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="24dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation_standard"
+                app:cardBackgroundColor="@color/card_background"
+                app:cardUseCompatPadding="true">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:padding="20dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/disclaimer_titulo"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/black"
-                        android:layout_marginBottom="12dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/disclaimer_texto"
-                        android:textSize="16sp"
-                        android:textColor="#757575"
-                        android:lineSpacingExtra="4dp" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Sección Gestión de Datos -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="4dp"
-                app:cardBackgroundColor="@color/white">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="@dimen/padding_card">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -89,7 +57,7 @@
                         android:text="@string/borrar_historiales_titulo"
                         android:textSize="20sp"
                         android:textStyle="bold"
-                        android:textColor="@color/black"
+                        android:textColor="@color/text_primary"
                         android:layout_marginBottom="16dp" />
 
                     <com.google.android.material.button.MaterialButton
@@ -99,8 +67,8 @@
                         android:layout_marginBottom="12dp"
                         android:text="@string/btn_borrar_historial_adultos"
                         android:textColor="@android:color/white"
-                        app:backgroundTint="#FF9800"
-                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/warning_orange"
+                        app:cornerRadius="@dimen/button_corner_radius"
                         app:icon="@drawable/outline_person_24"
                         app:iconGravity="start" />
 
@@ -111,8 +79,8 @@
                         android:layout_marginBottom="12dp"
                         android:text="@string/btn_borrar_historial_menores"
                         android:textColor="@android:color/white"
-                        app:backgroundTint="#FF9800"
-                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/warning_orange"
+                        app:cornerRadius="@dimen/button_corner_radius"
                         app:icon="@drawable/outline_supervisor_account_24"
                         app:iconGravity="start" />
 
@@ -122,10 +90,46 @@
                         android:layout_height="wrap_content"
                         android:text="@string/btn_borrar_todos_historiales"
                         android:textColor="@android:color/white"
-                        app:backgroundTint="#F44336"
-                        app:cornerRadius="12dp"
+                        app:backgroundTint="@color/danger_red"
+                        app:cornerRadius="@dimen/button_corner_radius"
                         app:strokeWidth="2dp"
-                        app:strokeColor="#F44336" />
+                        app:strokeColor="@color/danger_red" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sección Disclaimer (Ahora segundo) -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation_standard"
+                app:cardBackgroundColor="@color/card_background"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_card">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/disclaimer_titulo"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="12dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/disclaimer_texto"
+                        android:textSize="16sp"
+                        android:textColor="@color/text_secondary"
+                        android:lineSpacingExtra="4dp" />
 
                 </LinearLayout>
 

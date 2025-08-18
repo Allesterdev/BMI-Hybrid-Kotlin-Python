@@ -14,7 +14,7 @@
         android:text="@string/titulo_grafico_historial"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#2E7D32"
+        android:textColor="@color/green_primary_dark"
         android:gravity="center"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,17 +78,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/btn_volver_historial" />
 
+    <!-- Botón Volver -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_volver_historial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="96dp"
         android:text="@string/btn_volver_historial"
-        android:textColor="@android:color/white"
-        app:backgroundTint="@color/green_primary"
-        app:cornerRadius="24dp"
+        android:textColor="@color/white"
+        android:layout_marginBottom="@dimen/bottom_nav_padding_scroll"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:backgroundTint="@color/green_primary"
+        app:cornerRadius="24dp"
+        app:rippleColor="@color/green_primary_dark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

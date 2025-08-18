@@ -85,8 +85,8 @@
 
     <!-- Strings para opciones -->
     <string name="titulo_opciones">Opciones</string>
-    <string name="disclaimer_titulo">Disclaimer</string>
-    <string name="disclaimer_texto">Esta aplicación es solo para fines informativos y educativos. Los resultados del IMC no deben sustituir el consejo médico profesional. Consulte siempre a un profesional de la salud para evaluaciones médicas completas.</string>
+    <string name="disclaimer_titulo">Aviso Legal</string>
+    <string name="disclaimer_texto">\nEsta aplicación ha sido desarrollada con fines educativos e informativos, y está pensada como una herramienta orientativa para el cálculo del Índice de Masa Corporal (IMC) tanto en adultos como en menores de edad.\n\nUSO MÉDICO Y PROFESIONAL\n• No sustituye la opinión de un profesional sanitario.\n• Los valores calculados y las interpretaciones ofrecidas son aproximados y no deben considerarse diagnósticos médicos.\n• En caso de dudas sobre su salud, consulte siempre con un médico o pediatra.\n\nSOBRE MENORES DE EDAD\n• El cálculo del IMC en menores se basa en referencias de la OMS.\n• El IMC infantil no se interpreta igual que en adultos. Esta aplicación no está diseñada para evaluar el desarrollo de menores de 5 años.\n\nPRIVACIDAD Y SEGURIDAD\n• Esta aplicación no recopila ni transmite datos personales a servidores externos.\n• Toda la información se guarda de forma local en el dispositivo, sin cifrado. Se recomienda no introducir datos personales sensibles.\n\nRESPONSABILIDAD DEL USUARIO\n• El usuario es el único responsable del uso que haga de la aplicación.</string>
     <string name="borrar_historiales_titulo">Gestión de Datos</string>
     <string name="btn_borrar_historial_adultos">Borrar Historial Adultos</string>
     <string name="btn_borrar_historial_menores">Borrar Historial Menores</string>
@@ -100,4 +100,6 @@
     <string name="exito_borrar_adultos">Historial de adultos eliminado</string>
     <string name="exito_borrar_menores">Historial de menores eliminado</string>
     <string name="exito_borrar_todos">Todos los historiales eliminados</string>
+    <string name="btn_salir">Salir</string>
+    <string name="mensaje_debe_aceptar">Debe aceptar los términos para usar esta aplicación</string>
 </resources>
