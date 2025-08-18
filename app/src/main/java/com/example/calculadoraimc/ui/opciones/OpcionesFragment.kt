@@ -93,7 +93,7 @@ class OpcionesFragment : Fragment() {
         } catch (e: Exception) {
             Toast.makeText(
                 requireContext(),
-                "Error al borrar historial: ${e.message}",
+                getString(R.string.error_borrar_historial, e.message ?: ""),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -119,7 +119,7 @@ class OpcionesFragment : Fragment() {
         } catch (e: Exception) {
             Toast.makeText(
                 requireContext(),
-                "Error al borrar historial: ${e.message}",
+                getString(R.string.error_borrar_historial, e.message ?: ""),
                 Toast.LENGTH_LONG
             ).show()
         }
@@ -145,7 +145,7 @@ class OpcionesFragment : Fragment() {
         } catch (e: Exception) {
             Toast.makeText(
                 requireContext(),
-                "Error al borrar historiales: ${e.message}",
+                getString(R.string.error_borrar_historiales, e.message ?: ""),
                 Toast.LENGTH_LONG
             ).show()
         }

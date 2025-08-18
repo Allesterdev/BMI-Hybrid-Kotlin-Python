@@ -115,11 +115,11 @@ class GraficoHistorialFragment : Fragment() {
 
     private fun actualizarColoresToggle(adultosSeleccionado: Boolean) {
         if (adultosSeleccionado) {
-            binding.btnChartAdultos.setTextColor(Color.parseColor("#2E7D32"))
-            binding.btnChartMenores.setTextColor(Color.WHITE)
+            binding.btnChartAdultos.setTextColor(resources.getColor(R.color.green_primary_dark, null))
+            binding.btnChartMenores.setTextColor(resources.getColor(R.color.white, null))
         } else {
-            binding.btnChartAdultos.setTextColor(Color.WHITE)
-            binding.btnChartMenores.setTextColor(Color.parseColor("#2E7D32"))
+            binding.btnChartAdultos.setTextColor(resources.getColor(R.color.white, null))
+            binding.btnChartMenores.setTextColor(resources.getColor(R.color.green_primary_dark, null))
         }
     }
 

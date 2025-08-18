@@ -23,7 +23,6 @@
     <color name="app_background">#FFFFFF</color>
     <color name="card_background">#FFFFFF</color>
     <color name="input_background">#F1F8E9</color>
-    <color name="options_background">#F5F5F5</color>
 
     <!-- Text colors -->
     <color name="text_primary">#212121</color>

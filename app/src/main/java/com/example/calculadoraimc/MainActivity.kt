@@ -42,13 +42,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mostrarDisclaimer() {
-        val disclaimerTexto = getString(R.string.disclaimer_texto)
-            .replace("[b]", "")
-            .replace("[/b]", "")
-
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.disclaimer_titulo))
-            .setMessage(disclaimerTexto)
+            .setMessage(getString(R.string.disclaimer_texto_limpio))
             .setPositiveButton("Aceptar") { _, _ ->
                 // Guardar que el disclaimer fue aceptado
                 sharedPreferences.edit().putBoolean("disclaimer_accepted", true).apply()

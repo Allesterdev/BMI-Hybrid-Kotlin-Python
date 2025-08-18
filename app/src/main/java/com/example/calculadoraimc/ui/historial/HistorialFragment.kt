@@ -107,13 +107,13 @@ class HistorialFragment : Fragment() {
         if (isAdultosSelected) {
             // Adultos seleccionado: texto verde (sobre fondo blanco de la píldora)
             // Menores no seleccionado: texto blanco (sobre fondo verde del contenedor)
-            binding.btnAdultos.setTextColor(Color.parseColor("#2E7D32"))
-            binding.btnMenores.setTextColor(Color.parseColor("#FFFFFF"))
+            binding.btnAdultos.setTextColor(resources.getColor(R.color.green_primary_dark, null))
+            binding.btnMenores.setTextColor(resources.getColor(R.color.white, null))
         } else {
             // Adultos no seleccionado: texto blanco (sobre fondo verde del contenedor)
             // Menores seleccionado: texto verde (sobre fondo blanco de la píldora)
-            binding.btnAdultos.setTextColor(Color.parseColor("#FFFFFF"))
-            binding.btnMenores.setTextColor(Color.parseColor("#2E7D32"))
+            binding.btnAdultos.setTextColor(resources.getColor(R.color.white, null))
+            binding.btnMenores.setTextColor(resources.getColor(R.color.green_primary_dark, null))
         }
     }
 
@@ -138,8 +138,8 @@ class HistorialFragment : Fragment() {
             binding.tvHistorialVacio.visibility = if (historial.isEmpty()) View.VISIBLE else View.GONE
 
         } catch (e: Exception) {
-            android.util.Log.e("NotificationsFragment", "Error al consultar historial de adultos: ${e.message}", e)
-            android.widget.Toast.makeText(context, "Error: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+            android.util.Log.e("HistorialFragment", "Error al consultar historial de adultos: ${e.message}", e)
+            android.widget.Toast.makeText(context, getString(R.string.error_generico, e.message ?: ""), android.widget.Toast.LENGTH_LONG).show()
             adapter.clearData()
             binding.tvHistorialVacio.visibility = View.VISIBLE
         }
@@ -200,8 +200,8 @@ class HistorialFragment : Fragment() {
             binding.tvHistorialVacio.visibility = if (historial.isEmpty()) View.VISIBLE else View.GONE
 
         } catch (e: Exception) {
-            android.util.Log.e("NotificationsFragment", "Error al consultar historial de menores: ${e.message}", e)
-            android.widget.Toast.makeText(context, "Error: ${e.message}", android.widget.Toast.LENGTH_LONG).show()
+            android.util.Log.e("HistorialFragment", "Error al consultar historial de menores: ${e.message}", e)
+            android.widget.Toast.makeText(context, getString(R.string.error_generico, e.message ?: ""), android.widget.Toast.LENGTH_LONG).show()
             adapter.clearData()
             binding.tvHistorialVacio.visibility = View.VISIBLE
         }

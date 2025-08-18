@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentMenoresBinding
-import com.example.calculadoraimc.ui.views.BarraPercentil
 import com.chaquo.python.Python
 
 class MenoresFragment : Fragment() {
@@ -81,19 +80,19 @@ class MenoresFragment : Fragment() {
             val imc = resultado.callAttr("get", "imc")?.toDouble() ?: 0.0
             val percentil = resultado.callAttr("get", "percentil")?.toDouble() ?: 0.0
             val interpretacion = resultado.callAttr("get", "interpretacion")?.toString() ?: getString(R.string.sin_interpretacion)
-            val edadAños = resultado.callAttr("get", "edad_años")?.toDouble() ?: 0.0
+            val edadAnios = resultado.callAttr("get", "edad_años")?.toDouble() ?: 0.0
 
             // Debug: Mostrar valores extraídos
             android.util.Log.d("MenoresFragment", "Valores extraídos:")
             android.util.Log.d("MenoresFragment", "  IMC: $imc")
             android.util.Log.d("MenoresFragment", "  Percentil: $percentil")
             android.util.Log.d("MenoresFragment", "  Interpretación: '$interpretacion'")
-            android.util.Log.d("MenoresFragment", "  Edad años: $edadAños")
+            android.util.Log.d("MenoresFragment", "  Edad años: $edadAnios")
 
             // Mostrar resultados (incluyendo edad calculada)
             binding.tvImcValor.text = getString(R.string.formato_imc, imc)
             binding.tvPercentil.text = getString(R.string.formato_percentil, percentil)
-            binding.tvInterpretacion.text = "$interpretacion (${edadAños} años)"
+            binding.tvInterpretacion.text = getString(R.string.interpretacion_con_edad, interpretacion, edadAnios)
 
             // Mostrar y actualizar la barra de percentiles
             binding.barraPercentilMenores.setPercentil(percentil)

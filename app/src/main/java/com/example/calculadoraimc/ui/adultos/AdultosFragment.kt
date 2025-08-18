@@ -57,7 +57,7 @@ class AdultosFragment : Fragment() {
                 funcionesModule.callAttr("calcular_imc", pesoText, alturaText).toDouble()
             } catch (e: Exception) {
                 // Si hay error en el cálculo, mostrar mensaje específico
-                Toast.makeText(context, "Error en los datos: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.error_datos_invalidos, e.message ?: ""), Toast.LENGTH_LONG).show()
                 return
             }
 
@@ -101,7 +101,7 @@ class AdultosFragment : Fragment() {
                 funcionesModule.callAttr("calcular_imc", pesoText, alturaText).toDouble()
             } catch (e: Exception) {
                 // Si hay error en el cálculo, mostrar mensaje específico
-                Toast.makeText(context, "Error al calcular IMC para guardar: ${e.message}", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, getString(R.string.error_calculo_guardar, e.message ?: ""), Toast.LENGTH_LONG).show()
                 return
             }
 
