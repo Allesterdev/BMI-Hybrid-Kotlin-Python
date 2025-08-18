@@ -31,7 +31,7 @@
                 android:text="@string/titulo_opciones"
                 android:textSize="28sp"
                 android:textStyle="bold"
-                android:textColor="@color/text_primary"
+                android:textColor="@color/green_primary_dark"
                 android:gravity="center"
                 android:layout_marginBottom="32dp" />
 
@@ -42,7 +42,7 @@
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 app:cardElevation="@dimen/card_elevation_standard"
-                app:cardBackgroundColor="@color/card_background"
+                app:cardBackgroundColor="@color/input_background"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout
@@ -105,7 +105,7 @@
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="@dimen/card_corner_radius"
                 app:cardElevation="@dimen/card_elevation_standard"
-                app:cardBackgroundColor="@color/card_background"
+                app:cardBackgroundColor="@color/input_background"
                 app:cardUseCompatPadding="true">
 
                 <LinearLayout

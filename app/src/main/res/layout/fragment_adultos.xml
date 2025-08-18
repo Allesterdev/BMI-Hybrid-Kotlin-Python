@@ -169,7 +169,7 @@
                     android:layout_height="48dp"
                     android:text="@string/btn_guardar_historial"
                     android:textSize="16sp"
-                    app:backgroundTint="@color/green_primary_light"
+                    app:backgroundTint="@color/green_primary"
                     app:cornerRadius="24dp"
                     android:textColor="@color/white" />
 

@@ -52,7 +52,15 @@ class AdultosFragment : Fragment() {
             val python = Python.getInstance()
             val funcionesModule = python.getModule("funciones_imc_android")
 
-            val imc = funcionesModule.callAttr("calcular_imc", pesoText, alturaText).toDouble()
+            // Usar try-catch interno para manejar errores específicos de Python
+            val imc = try {
+                funcionesModule.callAttr("calcular_imc", pesoText, alturaText).toDouble()
+            } catch (e: Exception) {
+                // Si hay error en el cálculo, mostrar mensaje específico
+                Toast.makeText(context, "Error en los datos: ${e.message}", Toast.LENGTH_LONG).show()
+                return
+            }
+
             val interpretacion = funcionesModule.callAttr("interpretar_imc", imc).toString()
 
             // Mostrar resultados
@@ -88,7 +96,15 @@ class AdultosFragment : Fragment() {
             val python = Python.getInstance()
             val funcionesModule = python.getModule("funciones_imc_android")
 
-            val imc = funcionesModule.callAttr("calcular_imc", pesoText, alturaText).toDouble()
+            // Usar try-catch interno para manejar errores específicos de Python
+            val imc = try {
+                funcionesModule.callAttr("calcular_imc", pesoText, alturaText).toDouble()
+            } catch (e: Exception) {
+                // Si hay error en el cálculo, mostrar mensaje específico
+                Toast.makeText(context, "Error al calcular IMC para guardar: ${e.message}", Toast.LENGTH_LONG).show()
+                return
+            }
+
             funcionesModule.callAttr("guardar_medicion", pesoText, alturaText, imc)
 
             Toast.makeText(context, getString(R.string.exito_guardado), Toast.LENGTH_SHORT).show()
