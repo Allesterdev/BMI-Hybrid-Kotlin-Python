@@ -19,6 +19,9 @@
     <color name="line_percentil">#009688</color>
     <color name="line_altura">#7B1FA2</color>
 
+    <!-- Colores para Splash Screen -->
+    <color name="splash_background">#FFFFFF</color>
+
     <!-- Backgrounds estandarizados -->
     <color name="app_background">#FFFFFF</color>
     <color name="card_background">#FFFFFF</color>

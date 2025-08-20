@@ -14,4 +14,14 @@
         <!-- Force light mode -->
         <item name="android:windowLightStatusBar">false</item>
     </style>
+
+    <!-- Tema Splash API moderna -->
+    <style name="Theme.CalculadoraIMC.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@drawable/splash_background</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_transparent</item>
+        <item name="postSplashScreenTheme">@style/Theme.CalculadoraIMC</item>
+        <!-- Opcional: eliminar animación inicial -->
+        <item name="windowSplashScreenAnimationDuration">0</item>
+    </style>
+
 </resources>

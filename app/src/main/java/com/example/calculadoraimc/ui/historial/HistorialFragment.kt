@@ -32,6 +32,10 @@ class HistorialFragment : Fragment() {
 
         binding.textHistorial.visibility = View.GONE
 
+        // Obtener el tipo de historial del argumento (si viene del gráfico)
+        val tipoHistorial = arguments?.getString("tipo_historial") ?: "adultos"
+        modoActual = tipoHistorial
+
         setupRecyclerView()
         setupToggleButtons()
 
@@ -44,7 +48,12 @@ class HistorialFragment : Fragment() {
             findNavController().navigate(R.id.navigation_grafico_historial, bundle)
         }
 
-        consultarHistorialAdultos()
+        // Cargar el historial según el modo recibido
+        if (modoActual == "menores") {
+            selectMenores()
+        } else {
+            consultarHistorialAdultos()
+        }
 
         return root
     }
@@ -56,10 +65,26 @@ class HistorialFragment : Fragment() {
     }
 
     private fun setupToggleButtons() {
-        // Configurar estado inicial
-        updateTextColors(isAdultosSelected = true)
+        // Configurar estado inicial basado en el modo actual
+        val esAdultos = (modoActual == "adultos")
 
-        binding.slidingPill.translationX = 0f
+        updateTextColors(isAdultosSelected = esAdultos)
+
+        // Posicionar la píldora inmediatamente según el modo actual usando ViewTreeObserver
+        binding.slidingPill.viewTreeObserver.addOnGlobalLayoutListener(object : android.view.ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                binding.slidingPill.viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                if (!esAdultos) {
+                    // Si es menores, posicionar en la mitad derecha
+                    val destinationX = binding.btnAdultos.width.toFloat()
+                    binding.slidingPill.translationX = destinationX
+                } else {
+                    // Si es adultos, posicionar en 0
+                    binding.slidingPill.translationX = 0f
+                }
+            }
+        })
 
         binding.btnAdultos.setOnClickListener {
             selectAdultos()

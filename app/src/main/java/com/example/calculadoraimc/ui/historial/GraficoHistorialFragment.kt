@@ -63,25 +63,38 @@ class GraficoHistorialFragment : Fragment() {
     }
 
     private fun setupBotonVolver() {
-        binding.btnVolverHistorial.setOnClickListener { findNavController().popBackStack() }
+        binding.btnVolverHistorial.setOnClickListener {
+            // Pasar el modo actual como argumento al volver al historial
+            val bundle = Bundle().apply {
+                putString("tipo_historial", if (modoActual == Modo.MENORES) "menores" else "adultos")
+            }
+            findNavController().navigate(R.id.navigation_historial, bundle)
+        }
     }
 
     private fun setupToggle() {
         // Configurar estado inicial basado en el modo actual
         val esAdultos = (modoActual == Modo.ADULTOS)
 
-        // Posicionar la píldora según el modo
-        if (esAdultos) {
-            binding.slidingPillChart.translationX = 0f
-        } else {
-            // Posicionar en el botón de menores
-            binding.btnChartAdultos.post {
-                val destinationX = binding.btnChartAdultos.width.toFloat()
-                binding.slidingPillChart.translationX = destinationX
-            }
-        }
-
         actualizarColoresToggle(adultosSeleccionado = esAdultos)
+
+        // Posicionar la píldora inmediatamente según el modo actual
+        // Usar ViewTreeObserver para hacer el posicionamiento cuando la vista esté lista
+        binding.slidingPillChart.viewTreeObserver.addOnGlobalLayoutListener(object : android.view.ViewTreeObserver.OnGlobalLayoutListener {
+            override fun onGlobalLayout() {
+                binding.slidingPillChart.viewTreeObserver.removeOnGlobalLayoutListener(this)
+
+                if (!esAdultos) {
+                    // Si es menores, posicionar en la mitad derecha
+                    val containerWidth = binding.btnChartAdultos.width + binding.btnChartMenores.width
+                    val destinationX = containerWidth / 2f
+                    binding.slidingPillChart.translationX = destinationX
+                } else {
+                    // Si es adultos, posicionar en 0
+                    binding.slidingPillChart.translationX = 0f
+                }
+            }
+        })
 
         binding.btnChartAdultos.setOnClickListener {
             if (modoActual != Modo.ADULTOS) {
