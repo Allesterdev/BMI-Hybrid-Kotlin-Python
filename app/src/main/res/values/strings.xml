@@ -102,6 +102,8 @@
     <string name="exito_borrar_todos">Todos los historiales eliminados</string>
     <string name="btn_salir">Salir</string>
     <string name="mensaje_debe_aceptar">Debe aceptar los términos para usar esta aplicación</string>
+    <string name="btn_aceptar">Aceptar</string>
+    <string name="msg_debe_aceptar_disclaimer">Debe aceptar el disclaimer para continuar</string>
 
     <!-- Strings para errores específicos faltantes -->
     <string name="error_datos_invalidos">Error en los datos: %1$s</string>

@@ -16,9 +16,17 @@ import android.view.ViewGroup
 
 class MainActivity : AppCompatActivity() {
 
+    companion object {
+        private const val SPLASH_API_MIN_MS = 120L
+        private const val OVERLAY_VISIBLE_MS = 1550L
+        private const val OVERLAY_FADE_MS = 350L
+        private const val DISCLAIMER_EXIT_DELAY_MS = 1500L
+    }
+
     private lateinit var binding: ActivityMainBinding
     private lateinit var sharedPreferences: SharedPreferences
     private var splashStartTime: Long = 0
+    private var disclaimerPending = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Instalar SplashScreen API antes de super
@@ -26,7 +34,7 @@ class MainActivity : AppCompatActivity() {
         splashStartTime = System.currentTimeMillis()
         splashScreen.setKeepOnScreenCondition {
             // Garantiza un mínimo de 120 ms para evitar parpadeo (ajustable)
-            System.currentTimeMillis() - splashStartTime < 120
+            System.currentTimeMillis() - splashStartTime < SPLASH_API_MIN_MS
         }
 
         super.onCreate(savedInstanceState)
@@ -48,38 +56,42 @@ class MainActivity : AppCompatActivity() {
 
         sharedPreferences = getSharedPreferences("app_preferences", MODE_PRIVATE)
         val disclaimerAccepted = sharedPreferences.getBoolean("disclaimer_accepted", false)
-        if (!disclaimerAccepted) {
-            // Retrasa un poco el diálogo para que no aparezca sobre el splash en fade
-            binding.root.postDelayed({ mostrarDisclaimer() }, 400)
-        }
+        disclaimerPending = !disclaimerAccepted
+        // No delay: si ya aceptado no hacemos nada; si no, se mostrará tras el fade.
     }
 
     private fun addSplashOverlay() {
         val root = findViewById<ViewGroup>(android.R.id.content)
+        if (root.findViewById<ViewGroup?>(R.id.splash_overlay_root) != null) return // ya agregado
         val overlay = layoutInflater.inflate(R.layout.view_splash_overlay, root, false)
         root.addView(overlay)
         // Fade out tras breve retardo (ajusta tiempos a gusto)
-        val MIN_VISIBLE = 1550L // ms que el usuario ve la imagen full-screen
-        val fadeDuration = 350L
+        val fadeDuration = OVERLAY_FADE_MS
         overlay.postDelayed({
             overlay.animate()
                 .alpha(0f)
                 .setDuration(fadeDuration)
-                .withEndAction { root.removeView(overlay) }
+                .withEndAction {
+                    root.removeView(overlay)
+                    if (disclaimerPending) {
+                        mostrarDisclaimer()
+                        disclaimerPending = false
+                    }
+                }
                 .start()
-        }, MIN_VISIBLE)
+        }, OVERLAY_VISIBLE_MS)
     }
 
     private fun mostrarDisclaimer() {
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.disclaimer_titulo))
             .setMessage(getString(R.string.disclaimer_texto_limpio))
-            .setPositiveButton("Aceptar") { _, _ ->
+            .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->
                 sharedPreferences.edit().putBoolean("disclaimer_accepted", true).apply()
             }
-            .setNegativeButton("Cancelar") { _, _ ->
-                Toast.makeText(this, "Debe aceptar el disclaimer para continuar", Toast.LENGTH_LONG).show()
-                binding.root.postDelayed({ finish() }, 1500)
+            .setNegativeButton(getString(R.string.btn_salir)) { _, _ ->
+                Toast.makeText(this, getString(R.string.msg_debe_aceptar_disclaimer), Toast.LENGTH_LONG).show()
+                binding.root.postDelayed({ finish() }, DISCLAIMER_EXIT_DELAY_MS)
             }
             .setCancelable(false)
             .show()
