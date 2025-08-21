@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentAdultosBinding
 import com.chaquo.python.Python
+import android.view.inputmethod.InputMethodManager
+import android.content.Context
 
 class AdultosFragment : Fragment() {
 
@@ -39,6 +41,9 @@ class AdultosFragment : Fragment() {
     }
 
     private fun calcularIMC() {
+        // Esconder el teclado al presionar calcular
+        hideKeyboard()
+
         val pesoText = binding.etPeso.text.toString()
         val alturaText = binding.etAltura.text.toString()
 
@@ -117,6 +122,14 @@ class AdultosFragment : Fragment() {
 
         } catch (e: Exception) {
             Toast.makeText(context, getString(R.string.error_guardar, e.message ?: ""), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        val currentFocusedView = requireActivity().currentFocus
+        currentFocusedView?.let { view ->
+            inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 

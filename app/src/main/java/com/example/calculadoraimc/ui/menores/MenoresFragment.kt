@@ -1,9 +1,13 @@
 package com.example.calculadoraimc.ui.menores
 
+import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.calculadoraimc.R
@@ -24,6 +28,7 @@ class MenoresFragment : Fragment() {
         val root: View = binding.root
 
         setupClickListeners()
+        setupTextWatchers()
 
         return root
     }
@@ -36,6 +41,60 @@ class MenoresFragment : Fragment() {
         binding.btnGuardar.setOnClickListener {
             guardarMedicion()
         }
+    }
+
+    private fun setupTextWatchers() {
+        binding.etFechaNacimiento.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+
+            override fun afterTextChanged(s: Editable?) {
+                val text = s?.toString() ?: ""
+
+                // Ocultar el teclado cuando se detecte una fecha potencialmente completa
+                if (shouldHideKeyboard(text)) {
+                    hideKeyboard(binding.etFechaNacimiento)
+                }
+            }
+        })
+    }
+
+    private fun hideKeyboard(view: View) {
+        val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    private fun shouldHideKeyboard(dateText: String): Boolean {
+        // Remover espacios y caracteres especiales para el análisis
+        val cleanText = dateText.replace(Regex("[^0-9]"), "")
+
+        // Si tiene 8 dígitos (formato DDMMAAAA), es una fecha completa
+        if (cleanText.length == 8) {
+            return true
+        }
+
+        // Si el texto contiene formato de fecha con separadores (dd/mm/yyyy, dd-mm-yyyy, etc.)
+        val datePatterns = listOf(
+            Regex("\\d{1,2}[/\\-.]\\d{1,2}[/\\-.]\\d{4}"), // dd/mm/yyyy o dd-mm-yyyy
+            Regex("\\d{4}[/\\-.]\\d{1,2}[/\\-.]\\d{1,2}"), // yyyy/mm/dd o yyyy-mm-dd
+            Regex("\\d{1,2}/\\d{1,2}/\\d{4}"),              // dd/mm/yyyy específicamente
+            Regex("\\d{1,2}-\\d{1,2}-\\d{4}")               // dd-mm-yyyy específicamente
+        )
+
+        for (pattern in datePatterns) {
+            if (pattern.matches(dateText)) {
+                return true
+            }
+        }
+
+        // Si se han escrito al menos 4 dígitos consecutivos al final (año completo)
+        val yearMatch = Regex(".*\\d{4}$").matches(dateText)
+        if (yearMatch) {
+            return true
+        }
+
+        return false
     }
 
     private fun calcularPercentil() {

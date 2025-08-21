@@ -4,7 +4,7 @@ import android.app.Application
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 
-class CalculadoraIMCApplication : Application() {
+class ChaquopyApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()

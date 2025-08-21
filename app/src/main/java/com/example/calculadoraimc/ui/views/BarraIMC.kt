@@ -129,15 +129,9 @@ class BarraIMC @JvmOverloads constructor(
     }
 
     private fun calculatePositionFromPython(imc: Float): Float {
-        return try {
-            val python = Python.getInstance()
-            val funcionesModule = python.getModule("funciones_imc_android")
-            funcionesModule.callAttr("calcular_posicion_en_barra", imc).toFloat()
-        } catch (_: Exception) {
-            // Si falla Python, mostrar en posición por defecto (centro de la barra)
-            // En lugar de duplicar lógica de cálculo
-            0.5f // Posición central como fallback seguro
-        }
+        val python = Python.getInstance()
+        val funcionesModule = python.getModule("funciones_imc_android")
+        return funcionesModule.callAttr("calcular_posicion_en_barra", imc).toFloat()
     }
 
     fun setIMC(imc: Float) {
