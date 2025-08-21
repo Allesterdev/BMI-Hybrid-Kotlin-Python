@@ -11,8 +11,12 @@
         <item name="colorOnSecondary">@color/white</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/green_primary_dark</item>
+        <!-- Navigation bar color - Forzar color verde oscuro -->
+        <item name="android:navigationBarColor">@color/green_primary_dark</item>
         <!-- Force light mode -->
         <item name="android:windowLightStatusBar">false</item>
+        <!-- Forzar color de la barra de navegación en modo claro -->
+        <item name="android:windowLightNavigationBar">false</item>
     </style>
 
     <!-- Tema Splash API moderna -->
@@ -22,6 +26,22 @@
         <item name="postSplashScreenTheme">@style/Theme.CalculadoraIMC</item>
         <!-- Opcional: eliminar animación inicial -->
         <item name="windowSplashScreenAnimationDuration">0</item>
+    </style>
+
+    <!-- Estilo personalizado para AlertDialog que fuerza colores de la app -->
+    <style name="AppAlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorAccent">@color/green_primary</item>
+        <item name="android:textColorPrimary">@color/green_primary_dark</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorBackground">@color/white</item>
+        <item name="buttonBarButtonStyle">@style/AppDialogButtonStyle</item>
+    </style>
+
+    <!-- Estilo para los botones del dialog -->
+    <style name="AppDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/green_primary</item>
+        <item name="rippleColor">@color/green_primary_light</item>
     </style>
 
 </resources>

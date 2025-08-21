@@ -64,11 +64,9 @@ class GraficoHistorialFragment : Fragment() {
 
     private fun setupBotonVolver() {
         binding.btnVolverHistorial.setOnClickListener {
-            // Pasar el modo actual como argumento al volver al historial
-            val bundle = Bundle().apply {
-                putString("tipo_historial", if (modoActual == Modo.MENORES) "menores" else "adultos")
-            }
-            findNavController().navigate(R.id.navigation_historial, bundle)
+            // Usar popBackStack para volver al fragmento anterior (historial)
+            // Esto mantiene la sincronización correcta con la barra de navegación
+            findNavController().popBackStack()
         }
     }
 

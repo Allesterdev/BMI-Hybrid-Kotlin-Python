@@ -7,8 +7,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.example.calculadoraimc.databinding.ActivityMainBinding
-import com.chaquo.python.Python
-import com.chaquo.python.android.AndroidPlatform
 import androidx.navigation.ui.setupWithNavController
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
@@ -45,10 +43,7 @@ class MainActivity : AppCompatActivity() {
         // Overlay visual propio (rellena pantalla con la imagen) también sirve en APIs < 31
         addSplashOverlay()
 
-        // Inicializa Chaquopy si no está iniciado (potencialmente costoso, después del overlay)
-        if (!Python.isStarted()) {
-            Python.start(AndroidPlatform(this))
-        }
+        // Python ya está inicializado en CalculadoraIMCApplication
 
         val navView: BottomNavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
@@ -83,7 +78,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun mostrarDisclaimer() {
-        AlertDialog.Builder(this)
+        AlertDialog.Builder(this, R.style.AppAlertDialogTheme)
             .setTitle(getString(R.string.disclaimer_titulo))
             .setMessage(getString(R.string.disclaimer_texto_limpio))
             .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->

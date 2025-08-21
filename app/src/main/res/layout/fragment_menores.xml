@@ -51,14 +51,17 @@
                     android:layout_marginBottom="16dp"
                     app:boxStrokeColor="@color/green_primary"
                     app:hintTextColor="@color/green_primary_dark"
-                    android:hint="@string/hint_peso">
+                    app:boxBackgroundColor="@color/green_primary_light"
+                    app:boxBackgroundMode="filled">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_peso"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/white"
+                        android:hint="@string/hint_peso"
+                        android:textColorHint="@color/text_secondary"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,14 +73,17 @@
                     android:layout_marginBottom="16dp"
                     app:boxStrokeColor="@color/green_primary"
                     app:hintTextColor="@color/green_primary_dark"
-                    android:hint="@string/hint_altura">
+                    app:boxBackgroundColor="@color/green_primary_light"
+                    app:boxBackgroundMode="filled">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_altura"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="numberDecimal"
-                        android:textColor="@color/text_primary"
+                        android:textColor="@color/white"
+                        android:hint="@string/hint_altura"
+                        android:textColorHint="@color/text_secondary"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -89,14 +95,17 @@
                     android:layout_marginBottom="16dp"
                     app:boxStrokeColor="@color/green_primary"
                     app:hintTextColor="@color/green_primary_dark"
-                    android:hint="@string/hint_fecha_nacimiento">
+                    app:boxBackgroundColor="@color/green_primary_light"
+                    app:boxBackgroundMode="filled">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_fecha_nacimiento"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="date"
-                        android:textColor="@color/green_primary_dark"
+                        android:textColor="@color/white"
+                        android:hint="@string/hint_fecha_nacimiento"
+                        android:textColorHint="@color/text_secondary"
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 

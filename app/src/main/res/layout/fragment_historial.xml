@@ -4,6 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/app_background"
+    android:paddingBottom="80dp"
+    android:clipToPadding="false"
     tools:context=".ui.historial.HistorialFragment">
 
     <TextView
@@ -128,13 +131,14 @@
         android:id="@+id/btn_ver_grafico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="@string/btn_ver_grafico"
         android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/bottom_nav_padding_scroll"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:backgroundTint="@color/green_primary"
         app:cornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/green_primary_dark" />
 </androidx.constraintlayout.widget.ConstraintLayout>

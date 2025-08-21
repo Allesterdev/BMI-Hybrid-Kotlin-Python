@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Color cuando el icono está seleccionado -->
+    <item android:color="@color/green_primary" android:state_checked="true" />
+    <!-- Color cuando el icono NO está seleccionado -->
+    <item android:color="@color/text_secondary" android:state_checked="false" />
+    <!-- Color por defecto -->
+    <item android:color="@color/text_secondary" />
+</selector>

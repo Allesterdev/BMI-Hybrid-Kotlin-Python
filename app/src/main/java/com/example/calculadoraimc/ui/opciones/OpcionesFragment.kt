@@ -63,7 +63,7 @@ class OpcionesFragment : Fragment() {
         message: String,
         onConfirm: () -> Unit
     ) {
-        AlertDialog.Builder(requireContext())
+        AlertDialog.Builder(requireContext(), R.style.AppAlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(getString(R.string.btn_confirmar)) { _, _ ->

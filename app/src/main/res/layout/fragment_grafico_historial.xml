@@ -4,28 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
+    android:background="@color/app_background"
+    android:paddingBottom="80dp"
+    android:clipToPadding="false"
     tools:context=".ui.historial.GraficoHistorialFragment">
 
+    <!-- Contenedor toggle (reutiliza estilo tipo pill) -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/tv_titulo_grafico"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
         android:text="@string/titulo_grafico_historial"
+        android:textColor="@color/green_primary_dark"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:textColor="@color/green_primary_dark"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Contenedor toggle (reutiliza estilo tipo pill) -->
     <FrameLayout
         android:id="@+id/toggle_container_chart"
         android:layout_width="248dp"
         android:layout_height="52dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/pill_container_background"
         android:padding="4dp"
         app:layout_constraintTop_toBottomOf="@id/tv_titulo_grafico"
@@ -83,14 +87,15 @@
         android:id="@+id/btn_volver_historial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:text="@string/btn_volver_historial"
         android:textColor="@color/white"
-        android:layout_marginBottom="@dimen/bottom_nav_padding_scroll"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:backgroundTint="@color/green_primary"
         app:cornerRadius="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
         app:rippleColor="@color/green_primary_dark" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

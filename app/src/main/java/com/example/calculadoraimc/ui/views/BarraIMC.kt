@@ -46,7 +46,6 @@ class BarraIMC @JvmOverloads constructor(
             val pyRanges = funcionesModule.callAttr("obtener_rangos_imc")
 
             ranges = pyRanges.asList().map { pyRange ->
-                // Usar callAttr("get", key) en lugar de acceso directo al mapa
                 IMCRange(
                     name = pyRange.callAttr("get", "nombre")?.toString() ?: "",
                     displayRange = pyRange.callAttr("get", "rango_texto")?.toString() ?: "",
@@ -55,8 +54,8 @@ class BarraIMC @JvmOverloads constructor(
                     color = pyRange.callAttr("get", "color")?.toString()?.toColorInt() ?: Color.BLACK
                 )
             }
-        } catch (_: Exception) {
-            // Si falla Python, mostrar mensaje de error en lugar de datos duplicados
+        } catch (e: Exception) {
+            android.util.Log.e("BarraIMC", "Error al cargar rangos: ${e.message}")
             ranges = emptyList()
         }
     }
@@ -67,8 +66,6 @@ class BarraIMC @JvmOverloads constructor(
     }
 
     private fun drawBarraIMC(canvas: Canvas) {
-        if (ranges.isEmpty()) return
-
         val barHeight = height * 0.3f
         val barTop = height * 0.35f
         val barBottom = barTop + barHeight

@@ -1,16 +1,23 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.CalculadoraIMC" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_200</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/black</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_200</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize tu tema aquí. -->
+        <!-- Primary brand color - Usar los colores verdes de la app -->
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorPrimaryVariant">@color/green_primary_dark</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color - Usar los colores verdes de la app -->
+        <item name="colorSecondary">@color/green_primary</item>
+        <item name="colorSecondaryVariant">@color/green_primary_dark</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color - Forzar color verde oscuro -->
+        <item name="android:statusBarColor">@color/green_primary_dark</item>
+        <!-- Navigation bar color - Forzar color verde oscuro -->
+        <item name="android:navigationBarColor">@color/green_primary_dark</item>
+        <!-- Force consistent background colors -->
+        <item name="android:windowBackground">@color/app_background</item>
+        <item name="android:colorBackground">@color/app_background</item>
+        <!-- Text colors consistentes -->
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:textColorSecondary">@color/text_secondary</item>
     </style>
 </resources>

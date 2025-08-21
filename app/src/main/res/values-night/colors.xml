@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Mantener los colores verdes principales idénticos en modo oscuro -->
+    <color name="green_primary">#4CAF50</color>
+    <color name="green_primary_dark">#2E7D32</color>
+    <color name="green_primary_light">#66BB6A</color>
+
+    <!-- Colores para gráficos - mantener idénticos para consistencia -->
+    <color name="line_imc">#4CAF50</color>
+    <color name="line_peso">#1976D2</color>
+    <color name="line_percentil">#009688</color>
+    <color name="line_altura">#7B1FA2</color>
+
+    <!-- Backgrounds para modo oscuro - usar fondo claro para mantener consistencia -->
+    <color name="app_background">#FFFFFF</color>
+    <color name="card_background">#FFFFFF</color>
+    <color name="input_background">#F1F8E9</color>
+
+    <!-- Text colors - forzar colores oscuros para contraste con fondo blanco -->
+    <color name="text_primary">#212121</color>
+    <color name="text_secondary">#757575</color>
+
+    <!-- Splash Screen - mantener consistente -->
+    <color name="splash_background">#FFFFFF</color>
+
+    <!-- Colores para opciones de borrado - mantener idénticos -->
+    <color name="warning_orange">#FF9800</color>
+    <color name="danger_red">#F44336</color>
+</resources>
