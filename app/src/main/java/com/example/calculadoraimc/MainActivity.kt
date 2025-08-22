@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         splashStartTime = System.currentTimeMillis()
         splashScreen.setKeepOnScreenCondition {
-            // Garantiza un mínimo de 120 ms para evitar parpadeo (ajustable)
+            // Garantiza un mínimo de 120 ms para evitar parpadeo
             System.currentTimeMillis() - splashStartTime < SPLASH_API_MIN_MS
         }
 

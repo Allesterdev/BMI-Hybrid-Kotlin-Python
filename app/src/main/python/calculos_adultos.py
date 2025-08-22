@@ -51,21 +51,21 @@ def obtener_rangos_imc():
             "color": "#FF9800"  # Naranja
         },
         {
-            "nombre": "Obesidad I",
+            "nombre": "Obes. I",
             "rango_texto": "30-34.9",
             "min_valor": 30.0,
             "max_valor": 34.9,
             "color": "#FF5722"  # Rojo naranja
         },
         {
-            "nombre": "Obesidad II",
+            "nombre": "Obes. II",
             "rango_texto": "35-39.9",
             "min_valor": 35.0,
             "max_valor": 39.9,
             "color": "#D32F2F"  # Rojo
         },
         {
-            "nombre": "Obesidad III",
+            "nombre": "Obes. III",
             "rango_texto": "≥40",
             "min_valor": 40.0,
             "max_valor": 50.0,  # Valor máximo para la barra

@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentHistorialBinding
 import com.chaquo.python.Python
-import android.graphics.Color
 
 
 class HistorialFragment : Fragment() {

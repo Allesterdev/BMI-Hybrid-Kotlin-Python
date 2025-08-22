@@ -41,6 +41,28 @@ class MenoresFragment : Fragment() {
         binding.btnGuardar.setOnClickListener {
             guardarMedicion()
         }
+
+        // Botón para mostrar/ocultar información sobre percentiles
+        binding.btnToggleInfo.setOnClickListener {
+            toggleInfoPercentiles()
+        }
+    }
+
+    private fun toggleInfoPercentiles() {
+        val infoTextView = binding.tvInfoPercentiles
+        val toggleButton = binding.btnToggleInfo
+
+        if (infoTextView.visibility == View.GONE) {
+            // Mostrar información
+            infoTextView.visibility = View.VISIBLE
+            toggleButton.text = getString(R.string.btn_ocultar_info)
+            toggleButton.setIconResource(android.R.drawable.ic_menu_close_clear_cancel)
+        } else {
+            // Ocultar información
+            infoTextView.visibility = View.GONE
+            toggleButton.text = getString(R.string.btn_mostrar_info)
+            toggleButton.setIconResource(android.R.drawable.ic_dialog_info)
+        }
     }
 
     private fun setupTextWatchers() {

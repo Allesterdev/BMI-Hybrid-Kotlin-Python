@@ -1,0 +1,125 @@
+<resources>
+    <string name="app_name">BMI Calculator</string>
+    <string name="title_adultos">Adults</string>
+    <string name="title_menores">5–19 Years</string>
+    <string name="title_historial">History</string>
+    <string name="title_opciones">Options</string>
+
+    <!-- Strings for adult calculator -->
+    <string name="titulo_calculadora_adultos">Adult BMI Calculator</string>
+    <string name="hint_peso">Weight (kg)</string>
+    <string name="hint_altura">Height (m or cm)</string>
+    <string name="btn_calcular_imc">Calculate BMI</string>
+    <string name="titulo_resultado">Result</string>
+    <string name="btn_guardar_historial">Save to History</string>
+
+    <!-- Strings for children calculator -->
+    <string name="titulo_calculadora_menores">BMI Calculator 5–19 Years</string>
+    <string name="hint_edad">Age (years)</string>
+    <string name="label_sexo">Sex</string>
+    <string name="radio_masculino">Male</string>
+    <string name="radio_femenino">Female</string>
+    <string name="btn_calcular_percentil">Calculate Percentile</string>
+
+    <!-- Strings for birth date -->
+    <string name="hint_fecha_nacimiento">Birth date (DD/MM/YYYY)</string>
+    <string name="btn_seleccionar_fecha">Select date</string>
+
+    <!-- Strings for BMI bar -->
+    <string name="titulo_escala_imc">BMI Scale</string>
+    <string name="bajo_peso">Underweight</string>
+    <string name="peso_normal">Normal</string>
+    <string name="sobrepeso">Overweight</string>
+    <string name="obesidad_1">Obesity I</string>
+    <string name="obesidad_2">Obesity II</string>
+    <string name="obesidad_3">Obesity III</string>
+    <string name="rango_bajo_peso">&lt;18.5</string>
+    <string name="rango_normal">18.5–24.9</string>
+    <string name="rango_sobrepeso">25–29.9</string>
+    <string name="rango_obesidad_1">30–34.9</string>
+    <string name="rango_obesidad_2">35–39.9</string>
+    <string name="rango_obesidad_3">≥40</string>
+    <string name="imc_inicial">BMI: —</string>
+    <string name="percentil_inicial">Percentile: —</string>
+
+    <!-- Error and validation messages -->
+    <string name="error_campos_vacios_adultos">Please enter weight and height</string>
+    <string name="error_campos_vacios_menores">Please complete all fields</string>
+    <string name="error_valores_positivos">Values must be greater than 0</string>
+    <string name="error_edad_rango">Invalid values. Age must be between 5–19 years</string>
+    <string name="error_valores_numericos">Please enter valid numeric values</string>
+    <string name="error_calcular_primero_adultos">Calculate BMI first</string>
+    <string name="error_calcular_primero_menores">Calculate percentile first</string>
+    <string name="error_calculo">Calculation error: %1$s</string>
+    <string name="error_guardar">Save error: %1$s</string>
+    <string name="error_percentiles">Error: %1$s</string>
+
+    <!-- Success messages -->
+    <string name="exito_guardado">Measurement saved to history</string>
+
+    <!-- Result formats -->
+    <string name="formato_imc">BMI: %.1f</string>
+    <string name="formato_percentil">Percentile: %.1f</string>
+    <string name="sin_interpretacion">No interpretation</string>
+
+    <!-- Strings for history -->
+    <string name="titulo_historial">Measurement History</string>
+    <string name="historial_peso">Weight: %.1f kg</string>
+    <string name="historial_altura">Height: %.2f m</string>
+    <string name="historial_imc">BMI: %.2f</string>
+    <string name="historial_fecha">Date: %s</string>
+    <string name="historial_sexo">Sex: %s</string>
+    <string name="historial_edad_meses">Age: %d months</string>
+    <string name="historial_percentil">Percentile: %.1f</string>
+    <string name="historial_vacio">No saved measurements</string>
+    <string name="btn_ver_grafico">View Chart</string>
+
+    <!-- New strings for chart -->
+    <string name="titulo_grafico_historial">Measurement Evolution</string>
+    <string name="btn_volver_historial">Back to History</string>
+    <string name="sin_datos_grafico">No data to chart</string>
+    <string name="label_imc">BMI</string>
+    <string name="label_peso">Weight</string>
+    <string name="label_percentil">Percentile</string>
+    <string name="label_altura">Height</string>
+
+    <!-- Strings for options -->
+    <string name="titulo_opciones">Options</string>
+    <string name="disclaimer_titulo">Legal Notice</string>
+    <string name="disclaimer_texto">\nThis application has been developed for educational and informational purposes, and is intended as a guiding tool for calculating Body Mass Index (BMI) in both adults and minors.\n\nMEDICAL AND PROFESSIONAL USE\n• Does not replace the opinion of a healthcare professional.\n• Calculated values and interpretations provided are approximate and should not be considered medical diagnoses.\n• In case of health concerns, always consult with a doctor or pediatrician.\n\nABOUT MINORS\n• BMI calculation in minors is based on WHO references.\n• Childhood BMI is not interpreted the same as in adults. This application is not designed to evaluate development in children under 5 years.\n\nPRIVACY AND SECURITY\n• This application does not collect or transmit personal data to external servers.\n• All information is stored locally on the device, without encryption. It is recommended not to enter sensitive personal data.\n\nUSER RESPONSIBILITY\n• The user is solely responsible for the use of this application.</string>
+    <string name="borrar_historiales_titulo">Data Management</string>
+    <string name="btn_borrar_historial_adultos">Delete Adult History</string>
+    <string name="btn_borrar_historial_menores">Delete Children History</string>
+    <string name="btn_borrar_todos_historiales">Delete All Histories</string>
+    <string name="confirmacion_borrar_titulo">Confirm deletion</string>
+    <string name="confirmacion_borrar_adultos">Are you sure you want to delete all adult history?</string>
+    <string name="confirmacion_borrar_menores">Are you sure you want to delete all children history?</string>
+    <string name="confirmacion_borrar_todos">Are you sure you want to delete ALL histories?</string>
+    <string name="btn_confirmar">Confirm</string>
+    <string name="btn_cancelar">Cancel</string>
+    <string name="exito_borrar_adultos">Adult history deleted</string>
+    <string name="exito_borrar_menores">Children history deleted</string>
+    <string name="exito_borrar_todos">All histories deleted</string>
+    <string name="btn_salir">Exit</string>
+    <string name="mensaje_debe_aceptar">You must accept the terms to use this application</string>
+    <string name="btn_aceptar">Accept</string>
+    <string name="msg_debe_aceptar_disclaimer">You must accept the disclaimer to continue</string>
+
+    <!-- Strings for missing specific errors -->
+    <string name="error_datos_invalidos">Data error: %1$s</string>
+    <string name="error_calculo_guardar">Error calculating BMI to save: %1$s</string>
+    <string name="error_borrar_historial">Error deleting history: %1$s</string>
+    <string name="error_borrar_historiales">Error deleting histories: %1$s</string>
+    <string name="error_generico">Error: %1$s</string>
+    <string name="error_desconocido">Unknown error</string>
+    <string name="interpretacion_con_edad">%1$s (%2$.1f years)</string>
+
+    <!-- Strings for clean disclaimer -->
+    <string name="disclaimer_texto_limpio">This application has been developed for educational and informational purposes, and is intended as a guiding tool for calculating Body Mass Index (BMI) in both adults and minors.\n\nMEDICAL AND PROFESSIONAL USE\n• Does not replace the opinion of a healthcare professional.\n• Calculated values and interpretations provided are approximate and should not be considered medical diagnoses.\n• In case of health concerns, always consult with a doctor or pediatrician.\n\nABOUT MINORS\n• BMI calculation in minors is based on WHO references.\n• Childhood BMI is not interpreted the same as in adults. This application is not designed to evaluate development in children under 5 years.\n\nPRIVACY AND SECURITY\n• This application does not collect or transmit personal data to external servers.\n• All information is stored locally on the device, without encryption. It is recommended not to enter sensitive personal data.\n\nUSER RESPONSIBILITY\n• The user is solely responsible for the use of this application.</string>
+
+    <!-- Strings for WHO percentiles information -->
+    <string name="titulo_info_percentiles">What are percentiles?</string>
+    <string name="info_percentiles_oms">This application uses the growth references from the <b>World Health Organization (WHO)</b> to calculate BMI percentiles in children aged 5 to 19 years.\n\n<b>What does the percentile mean?</b>\nThe percentile indicates what percentage of children of the same age and sex have a lower BMI. For example:\n• 50th percentile: Typical BMI (half have lower BMI)\n• 85th percentile: Only 15% have higher BMI\n• 95th percentile: Only 5% have higher BMI\n\n<b>WHO interpretation:</b>\n• &lt;3: Underweight\n• 3-84: Healthy weight\n• 85-96: Overweight\n• ≥97: Obesity\n\n<b>Important:</b> This application uses the growth references from the <b>World Health Organization (WHO)</b> to calculate BMI percentiles in children aged 5 to 19 years.\n\n<b>What does the percentile mean?</b>\nThe percentile indicates what percentage of children of the same age and sex have a lower BMI. For example:\n• 50th percentile: Typical BMI (half have lower BMI)\n• 85th percentile: Only 15% have higher BMI\n• 95th percentile: Only 5% have higher BMI\n\n<b>WHO interpretation:</b>\n• &lt;3: Underweight\n• 3-84: Healthy weight\n• 85-96: Overweight\n• ≥97: Obesity\n\n<b>Important:</b> These measurements are for guidance only and do not by themselves represent the health status of the child or adolescent. If in doubt, always consult your pediatrician </string>
+    <string name="btn_mostrar_info">Percentile information</string>
+    <string name="btn_ocultar_info">Hide information</string>
+</resources>
