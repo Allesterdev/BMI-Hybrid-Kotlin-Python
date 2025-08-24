@@ -3,7 +3,6 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        // Esta es la línea crucial
         maven { url 'https://www.chaquo.com/maven' }
     }
 }

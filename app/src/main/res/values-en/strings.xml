@@ -122,4 +122,12 @@
     <string name="info_percentiles_oms">This application uses the growth references from the <b>World Health Organization (WHO)</b> to calculate BMI percentiles in children aged 5 to 19 years.\n\n<b>What does the percentile mean?</b>\nThe percentile indicates what percentage of children of the same age and sex have a lower BMI. For example:\n• 50th percentile: Typical BMI (half have lower BMI)\n• 85th percentile: Only 15% have higher BMI\n• 95th percentile: Only 5% have higher BMI\n\n<b>WHO interpretation:</b>\n• &lt;3: Underweight\n• 3-84: Healthy weight\n• 85-96: Overweight\n• ≥97: Obesity\n\n<b>Important:</b> This application uses the growth references from the <b>World Health Organization (WHO)</b> to calculate BMI percentiles in children aged 5 to 19 years.\n\n<b>What does the percentile mean?</b>\nThe percentile indicates what percentage of children of the same age and sex have a lower BMI. For example:\n• 50th percentile: Typical BMI (half have lower BMI)\n• 85th percentile: Only 15% have higher BMI\n• 95th percentile: Only 5% have higher BMI\n\n<b>WHO interpretation:</b>\n• &lt;3: Underweight\n• 3-84: Healthy weight\n• 85-96: Overweight\n• ≥97: Obesity\n\n<b>Important:</b> These measurements are for guidance only and do not by themselves represent the health status of the child or adolescent. If in doubt, always consult your pediatrician </string>
     <string name="btn_mostrar_info">Percentile information</string>
     <string name="btn_ocultar_info">Hide information</string>
+
+    <!-- New strings in English for Legal Notice, About, Licenses, and Back -->
+    <string name="aviso_legal_titulo">Legal Notice</string>
+    <string name="acerca_de_titulo">About the application</string>
+    <string name="acerca_de_texto">Here you will find information about the app, version, developer, contact, etc.</string>
+    <string name="licencias_titulo">Licenses</string>
+    <string name="licencias_texto">Here you will find information about the app license and third-party resources used.</string>
+    <string name="volver">Back</string>
 </resources>

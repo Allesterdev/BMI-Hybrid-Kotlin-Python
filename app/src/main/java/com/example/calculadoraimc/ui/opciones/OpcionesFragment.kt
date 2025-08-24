@@ -11,6 +11,7 @@ import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentOpcionesBinding
+import androidx.navigation.fragment.findNavController
 
 class OpcionesFragment : Fragment() {
 
@@ -40,7 +41,6 @@ class OpcionesFragment : Fragment() {
                 onConfirm = { borrarHistorialAdultos() }
             )
         }
-
         binding.btnBorrarHistorialMenores.setOnClickListener {
             mostrarDialogoConfirmacion(
                 title = getString(R.string.confirmacion_borrar_titulo),
@@ -48,13 +48,18 @@ class OpcionesFragment : Fragment() {
                 onConfirm = { borrarHistorialMenores() }
             )
         }
-
         binding.btnBorrarTodosHistoriales.setOnClickListener {
             mostrarDialogoConfirmacion(
                 title = getString(R.string.confirmacion_borrar_titulo),
                 message = getString(R.string.confirmacion_borrar_todos),
                 onConfirm = { borrarTodosHistoriales() }
             )
+        }
+        binding.btnAvisoLegal.setOnClickListener {
+            findNavController().navigate(R.id.action_opciones_to_avisoLegal)
+        }
+        binding.btnAcercaDe.setOnClickListener {
+            findNavController().navigate(R.id.action_opciones_to_acercaDe)
         }
     }
 
@@ -63,14 +68,16 @@ class OpcionesFragment : Fragment() {
         message: String,
         onConfirm: () -> Unit
     ) {
-        AlertDialog.Builder(requireContext(), R.style.AppAlertDialogTheme)
+        val dialog = AlertDialog.Builder(requireContext(), R.style.AppAlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(getString(R.string.btn_confirmar)) { _, _ ->
                 onConfirm()
             }
             .setNegativeButton(getString(R.string.btn_cancelar), null)
-            .show()
+            .create()
+
+        dialog.show()
     }
 
     private fun borrarHistorialAdultos() {

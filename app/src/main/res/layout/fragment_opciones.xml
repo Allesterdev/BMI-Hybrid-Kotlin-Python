@@ -35,7 +35,59 @@
                 android:gravity="center"
                 android:layout_marginBottom="32dp" />
 
-            <!-- Sección Gestión de Datos (Ahora primero) -->
+            <!-- Card Información y Legal -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="@dimen/card_corner_radius"
+                app:cardElevation="@dimen/card_elevation_standard"
+                app:cardBackgroundColor="@color/input_background"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/padding_card">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Información y Legal"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="16dp" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_aviso_legal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Aviso Legal"
+                        android:layout_marginBottom="12dp"
+                        android:textColor="@android:color/white"
+                        app:backgroundTint="@color/green_primary_light"
+                        app:cornerRadius="@dimen/button_corner_radius"
+                        app:icon="@drawable/outline_gavel_24"
+                        app:iconGravity="start" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_acerca_de"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Acerca de"
+                        android:textColor="@android:color/white"
+                        app:backgroundTint="@color/green_primary_light"
+                        app:cornerRadius="@dimen/button_corner_radius"
+                        app:icon="@drawable/outline_info_24"
+                        app:iconGravity="start" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Sección Gestión de Datos -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -94,42 +146,6 @@
                         app:cornerRadius="@dimen/button_corner_radius"
                         app:strokeWidth="2dp"
                         app:strokeColor="@color/danger_red" />
-
-                </LinearLayout>
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <!-- Sección Disclaimer (Ahora segundo) -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/card_corner_radius"
-                app:cardElevation="@dimen/card_elevation_standard"
-                app:cardBackgroundColor="@color/input_background"
-                app:cardUseCompatPadding="true">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="@dimen/padding_card">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/disclaimer_titulo"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary"
-                        android:layout_marginBottom="12dp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/disclaimer_texto"
-                        android:textSize="16sp"
-                        android:textColor="@color/text_secondary"
-                        android:lineSpacingExtra="4dp" />
 
                 </LinearLayout>
 

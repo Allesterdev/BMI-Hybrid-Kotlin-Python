@@ -28,6 +28,13 @@
         <item name="windowSplashScreenAnimationDuration">0</item>
     </style>
 
+    <!-- Estilo para los botones individuales del dialog -->
+    <style name="DialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/green_primary</item>
+        <item name="rippleColor">@color/green_primary_light</item>
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
     <!-- Estilo personalizado para AlertDialog que fuerza colores de la app -->
     <style name="AppAlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
         <item name="colorPrimary">@color/green_primary</item>
@@ -35,13 +42,8 @@
         <item name="android:textColorPrimary">@color/green_primary_dark</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:colorBackground">@color/white</item>
-        <item name="buttonBarButtonStyle">@style/AppDialogButtonStyle</item>
+        <item name="android:buttonStyle">@style/DialogButtonStyle</item>
     </style>
 
-    <!-- Estilo para los botones del dialog -->
-    <style name="AppDialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
-        <item name="android:textColor">@color/green_primary</item>
-        <item name="rippleColor">@color/green_primary_light</item>
-    </style>
 
 </resources>

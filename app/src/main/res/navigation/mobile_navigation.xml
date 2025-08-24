@@ -42,5 +42,24 @@
         android:id="@+id/navigation_opciones"
         android:name="com.example.calculadoraimc.ui.opciones.OpcionesFragment"
         android:label="@string/title_opciones"
-        tools:layout="@layout/fragment_opciones" />
+        tools:layout="@layout/fragment_opciones">
+        <action
+            android:id="@+id/action_opciones_to_avisoLegal"
+            app:destination="@id/navigation_aviso_legal" />
+        <action
+            android:id="@+id/action_opciones_to_acercaDe"
+            app:destination="@id/navigation_acerca_de" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_aviso_legal"
+        android:name="com.example.calculadoraimc.ui.opciones.AvisoLegalFragment"
+        android:label="Aviso Legal"
+        tools:layout="@layout/fragment_aviso_legal" />
+
+    <fragment
+        android:id="@+id/navigation_acerca_de"
+        android:name="com.example.calculadoraimc.ui.opciones.AcercaDeFragment"
+        android:label="Acerca de"
+        tools:layout="@layout/fragment_acerca_de" />
 </navigation>

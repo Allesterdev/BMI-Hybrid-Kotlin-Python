@@ -29,7 +29,7 @@ android {
 
         // Configuración de Python en Chaquopy
         python {
-            version "3.10"  // Compatible con pandas y scipy
+            version "3.10"
             pip {
                 install "pandas"
 

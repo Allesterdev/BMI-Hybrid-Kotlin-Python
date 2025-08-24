@@ -1,23 +1,43 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.CalculadoraIMC" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color - Usar los colores verdes de la app -->
+        <!-- Primary brand color -->
         <item name="colorPrimary">@color/green_primary</item>
         <item name="colorPrimaryVariant">@color/green_primary_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color - Usar los colores verdes de la app -->
+
+        <!-- Secondary brand color -->
         <item name="colorSecondary">@color/green_primary</item>
         <item name="colorSecondaryVariant">@color/green_primary_dark</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color - Forzar color verde oscuro -->
+
+        <!-- Status bar & nav bar -->
         <item name="android:statusBarColor">@color/green_primary_dark</item>
-        <!-- Navigation bar color - Forzar color verde oscuro -->
         <item name="android:navigationBarColor">@color/green_primary_dark</item>
-        <!-- Force consistent background colors -->
+
+        <!-- Background -->
         <item name="android:windowBackground">@color/app_background</item>
         <item name="android:colorBackground">@color/app_background</item>
-        <!-- Text colors consistentes -->
+
+        <!-- Text colors -->
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:textColorSecondary">@color/text_secondary</item>
+    </style>
+
+    <!-- Estilo para los botones del dialog -->
+    <style name="DialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/green_primary</item>
+        <item name="rippleColor">@color/green_primary_light</item>
+
+    </style>
+
+    <!-- Estilo personalizado para AlertDialog -->
+    <style name="AppAlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/green_primary</item>
+        <item name="colorAccent">@color/green_primary</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowBackground">@color/green_primary_light</item>
+        <item name="android:colorBackground">@color/green_primary_light</item>
+        <item name="android:buttonStyle">@style/DialogButtonStyle</item>
     </style>
 </resources>
