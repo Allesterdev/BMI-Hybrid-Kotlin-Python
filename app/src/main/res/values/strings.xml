@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Calculadora IMC</string>
+    <string name="app_name">IMC Familiar</string>
     <string name="title_adultos">Adultos</string>
     <string name="title_menores">5–19 Años</string>
     <string name="title_historial">Historial</string>
@@ -85,8 +85,8 @@
 
     <!-- Strings para opciones -->
     <string name="titulo_opciones">Opciones</string>
-    <string name="disclaimer_titulo">Aviso Legal</string>
-    <string name="disclaimer_texto">Esta aplicación ha sido desarrollada con fines educativos e informativos, y está pensada como una herramienta orientativa para el cálculo del Índice de Masa Corporal (IMC) tanto en adultos como en menores de edad.\n\nUSO MÉDICO Y PROFESIONAL\n• No sustituye la opinión de un profesional sanitario.\n• Los valores calculados y las interpretaciones ofrecidas son aproximados y no deben considerarse diagnósticos médicos.\n• En caso de dudas sobre su salud, consulte siempre con un médico o pediatra.\n\nSOBRE MENORES DE EDAD\n• El cálculo del IMC en menores se basa en referencias de la OMS.\n• El IMC infantil no se interpreta igual que en adultos. Esta aplicación no está diseñada para evaluar el desarrollo de menores de 5 años.\n\nPRIVACIDAD Y SEGURIDAD\n• Esta aplicación no recopila ni transmite datos personales a servidores externos.\n• Toda la información se guarda de forma local en el dispositivo, sin cifrado. Se recomienda no introducir datos personales sensibles.\n\nRESPONSABILIDAD DEL USUARIO\n• El usuario es el único responsable del uso que haga de la aplicación.</string>
+    <string name="disclaimer_titulo">Aviso Legal y Condiciones de Uso.</string>
+    <string name="disclaimer_texto">Esta aplicación ha sido desarrollada con fines educativos e informativos, y está pensada como una herramienta orientativa para el cálculo del Índice de Masa Corporal (IMC) tanto en adultos como en menores de 20 años.\n\nUSO MÉDICO Y PROFESIONAL\n• No sustituye la opinión de un profesional sanitario.\n• Los valores calculados y las interpretaciones ofrecidas son aproximados y no deben considerarse diagnósticos médicos.\n• En caso de dudas sobre su salud, consulte siempre con un médico o pediatra.\n\nSOBRE 5 A 19 AÑOS DE EDAD\n• El IMC en menores de 20 años no se interpreta igual que en adultos.\n• El cálculo del IMC en menores de 20 años se basa en referencias de la OMS.\n• Esta aplicación no está diseñada para evaluar el desarrollo de menores de 5 años.\n\nPRIVACIDAD Y SEGURIDAD\n• Esta aplicación no recopila ni transmite datos personales a servidores externos.\n• Toda la información se guarda de forma local en el dispositivo, sin cifrado.\n\nRESPONSABILIDAD DEL USUARIO\n• El usuario es el único responsable del uso que haga de la aplicación.\n• El uso de esta aplicación implica la aceptación de estas condiciones.</string>
     <string name="borrar_historiales_titulo">Gestión de Datos</string>
     <string name="btn_borrar_historial_adultos">Borrar Historial Adultos</string>
     <string name="btn_borrar_historial_menores">Borrar Historial Menores</string>
@@ -114,19 +114,23 @@
     <string name="error_desconocido">Error desconocido</string>
     <string name="interpretacion_con_edad">%1$s (%2$.1f años)</string>
 
-    <!-- Strings para disclaimer limpio -->
-    <string name="disclaimer_texto_limpio">Esta aplicación ha sido desarrollada con fines educativos e informativos, y está pensada como una herramienta orientativa para el cálculo del Índice de Masa Corporal (IMC) tanto en adultos como en menores de edad.\n\nUSO MÉDICO Y PROFESIONAL\n• No sustituye la opinión de un profesional sanitario.\n• Los valores calculados y las interpretaciones ofrecidas son aproximados y no deben considerarse diagnósticos médicos.\n• En caso de dudas sobre su salud, consulte siempre con un médico o pediatra.\n\nSOBRE MENORES DE EDAD\n• El cálculo del IMC en menores se basa en referencias de la OMS.\n• El IMC infantil no se interpreta igual que en adultos. Esta aplicación no está diseñada para evaluar el desarrollo de menores de 5 años.\n\nPRIVACIDAD Y SEGURIDAD\n• Esta aplicación no recopila ni transmite datos personales a servidores externos.\n• Toda la información se guarda de forma local en el dispositivo, sin cifrado. Se recomienda no introducir datos personales sensibles.\n\nRESPONSABILIDAD DEL USUARIO\n• El usuario es el único responsable del uso que haga de la aplicación.</string>
-
     <!-- Strings para información de percentiles OMS -->
     <string name="titulo_info_percentiles">¿Qué son los percentiles?</string>
-    <string name="info_percentiles_oms">Esta aplicación utiliza las referencias de crecimiento de la <b>Organización Mundial de la Salud (OMS)</b> para calcular percentiles de IMC en menores de 5 a 19 años.\n\n<b>¿Qué significa el percentil?</b>\nEl percentil indica qué porcentaje de niños de la misma edad y sexo tienen un IMC menor. Por ejemplo:\n• Percentil 50: IMC típico (la mitad tiene menor IMC)\n• Percentil 85: Solo el 15% tiene mayor IMC\n• Percentil 95: Solo el 5% tiene mayor IMC\n\n<b>Interpretación según OMS:</b>\n• &lt;3: Bajo peso\n• 3-84: Peso saludable\n• 85-96: Sobrepeso\n• ≥97: Obesidad\n\n<b>Importante:</b> Esta aplicación utiliza las referencias de crecimiento de la <b>Organización Mundial de la Salud (OMS)</b> para calcular percentiles de IMC en menores de 5 a 19 años.\n\n<b>¿Qué significa el percentil?</b>\nEl percentil indica qué porcentaje de niños de la misma edad y sexo tienen un IMC menor. Por ejemplo:\n• Percentil 50: IMC típico (la mitad tiene menor IMC)\n• Percentil 85: Solo el 15% tiene mayor IMC\n• Percentil 95: Solo el 5% tiene mayor IMC\n\n<b>Interpretación según OMS:</b>\n• &lt;3: Bajo peso\n• 3-84: Peso saludable\n• 85-96: Sobrepeso\n• ≥97: Obesidad\n\n<b>Importante:</b> Estas mediciones son orientativas y no representan por sí solas el estado de salud del niño/a o adolescente. Ante cualquier duda, consulte siempre con su pediatra </string>
+    <string name="info_percentiles_oms">Esta aplicación utiliza las referencias de crecimiento de la <b>Organización Mundial de la Salud (OMS)</b> para calcular percentiles de IMC en menores de 5 a 19 años.\n\n<b>¿Qué significa el percentil?</b>\nEl percentil indica qué porcentaje de niños de la misma edad y sexo tienen un IMC menor. Por ejemplo:\n• Percentil 50: IMC típico (la mitad tiene menor IMC)\n• Percentil 85: Solo el 15% tiene mayor IMC\n• Percentil 95: Solo el 5% tiene mayor IMC\n\n<b>Interpretación según OMS:</b>\n• &lt;3: Bajo peso\n• 3-84: Peso saludable\n• 85-96: Sobrepeso\n• ≥97: Obesidad\n\n<b>Importante:</b> Estas mediciones son orientativas y no representan por sí solas el estado de salud del niño/a o adolescente. Ante cualquier duda, consulte siempre con su pediatra </string>
     <string name="btn_mostrar_info">Información sobre percentiles</string>
     <string name="btn_ocultar_info">Ocultar información</string>
 
     <!-- Nuevas strings para Aviso Legal, Acerca de, Licencias -->
     <string name="aviso_legal_titulo">Aviso Legal</string>
-    <string name="acerca_de_titulo">Acerca de la aplicación</string>
-    <string name="acerca_de_texto">Aquí irá la información sobre la app, versión, desarrollador, contacto, etc.</string>
+    <string name="acerca_de_titulo">Acerca de</string>
+    <string name="acerca_de_texto">IMC Familiar: Adultos y Niños
+
+\n\n<b>Versión:</b> 1.0.0
+\n\n<b>Desarrollador:</b> Singularity Rose
+
+\n\nEsta aplicación permite calcular el Índice de Masa Corporal (IMC) para adultos y menores (a partir de 5 años), guardar resultados y visualizar el historial.
+
+Para dudas o sugerencias, contacta a: oscar@email.com</string>
     <string name="licencias_titulo">Licencias</string>
     <string name="licencias_texto">Aquí irá la información sobre la licencia de la app y los recursos de terceros utilizados.</string>
     <string name="volver">Volver</string>

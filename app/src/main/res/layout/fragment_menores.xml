@@ -50,11 +50,11 @@
                     android:layout_height="wrap_content"
                     android:text="@string/btn_mostrar_info"
                     android:textSize="14sp"
-                    android:textColor="@color/green_primary_dark"
+                    android:textColor="@color/text_primary"
                     app:backgroundTint="@color/green_primary_light"
                     app:cornerRadius="8dp"
                     app:icon="@android:drawable/ic_dialog_info"
-                    app:iconTint="@color/green_primary_dark"
+                    app:iconTint="@color/white"
                     style="@style/Widget.Material3.Button.TonalButton" />
 
                 <!-- Texto informativo (inicialmente oculto) -->

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BMI Calculator</string>
+    <string name="app_name">IMC Family</string>
     <string name="title_adultos">Adults</string>
     <string name="title_menores">5–19 Years</string>
     <string name="title_historial">History</string>
@@ -86,7 +86,23 @@
     <!-- Strings for options -->
     <string name="titulo_opciones">Options</string>
     <string name="disclaimer_titulo">Legal Notice</string>
-    <string name="disclaimer_texto">\nThis application has been developed for educational and informational purposes, and is intended as a guiding tool for calculating Body Mass Index (BMI) in both adults and minors.\n\nMEDICAL AND PROFESSIONAL USE\n• Does not replace the opinion of a healthcare professional.\n• Calculated values and interpretations provided are approximate and should not be considered medical diagnoses.\n• In case of health concerns, always consult with a doctor or pediatrician.\n\nABOUT MINORS\n• BMI calculation in minors is based on WHO references.\n• Childhood BMI is not interpreted the same as in adults. This application is not designed to evaluate development in children under 5 years.\n\nPRIVACY AND SECURITY\n• This application does not collect or transmit personal data to external servers.\n• All information is stored locally on the device, without encryption. It is recommended not to enter sensitive personal data.\n\nUSER RESPONSIBILITY\n• The user is solely responsible for the use of this application.</string>
+    <string name="disclaimer_texto">This application has been developed for educational and informational purposes, and is intended as a guiding tool for calculating Body Mass Index (BMI) in both adults and minors.
+
+MEDICAL AND PROFESSIONAL USE
+• Does not replace the opinion of a healthcare professional.
+• Calculated values and interpretations provided are approximate and should not be considered medical diagnoses.
+• In case of health concerns, always consult with a doctor or pediatrician.
+
+ABOUT MINORS
+• BMI calculation in minors is based on WHO references.
+• Childhood BMI is not interpreted the same as in adults. This application is not designed to evaluate development in children under 5 years.
+
+PRIVACY AND SECURITY
+• This application does not collect or transmit personal data to external servers.
+• All information is stored locally on the device, without encryption. It is recommended not to enter sensitive personal data.
+
+USER RESPONSIBILITY
+• The user is solely responsible for the use of this application.</string>
     <string name="borrar_historiales_titulo">Data Management</string>
     <string name="btn_borrar_historial_adultos">Delete Adult History</string>
     <string name="btn_borrar_historial_menores">Delete Children History</string>
@@ -114,19 +130,21 @@
     <string name="error_desconocido">Unknown error</string>
     <string name="interpretacion_con_edad">%1$s (%2$.1f years)</string>
 
-    <!-- Strings for clean disclaimer -->
-    <string name="disclaimer_texto_limpio">This application has been developed for educational and informational purposes, and is intended as a guiding tool for calculating Body Mass Index (BMI) in both adults and minors.\n\nMEDICAL AND PROFESSIONAL USE\n• Does not replace the opinion of a healthcare professional.\n• Calculated values and interpretations provided are approximate and should not be considered medical diagnoses.\n• In case of health concerns, always consult with a doctor or pediatrician.\n\nABOUT MINORS\n• BMI calculation in minors is based on WHO references.\n• Childhood BMI is not interpreted the same as in adults. This application is not designed to evaluate development in children under 5 years.\n\nPRIVACY AND SECURITY\n• This application does not collect or transmit personal data to external servers.\n• All information is stored locally on the device, without encryption. It is recommended not to enter sensitive personal data.\n\nUSER RESPONSIBILITY\n• The user is solely responsible for the use of this application.</string>
-
     <!-- Strings for WHO percentiles information -->
     <string name="titulo_info_percentiles">What are percentiles?</string>
-    <string name="info_percentiles_oms">This application uses the growth references from the <b>World Health Organization (WHO)</b> to calculate BMI percentiles in children aged 5 to 19 years.\n\n<b>What does the percentile mean?</b>\nThe percentile indicates what percentage of children of the same age and sex have a lower BMI. For example:\n• 50th percentile: Typical BMI (half have lower BMI)\n• 85th percentile: Only 15% have higher BMI\n• 95th percentile: Only 5% have higher BMI\n\n<b>WHO interpretation:</b>\n• &lt;3: Underweight\n• 3-84: Healthy weight\n• 85-96: Overweight\n• ≥97: Obesity\n\n<b>Important:</b> This application uses the growth references from the <b>World Health Organization (WHO)</b> to calculate BMI percentiles in children aged 5 to 19 years.\n\n<b>What does the percentile mean?</b>\nThe percentile indicates what percentage of children of the same age and sex have a lower BMI. For example:\n• 50th percentile: Typical BMI (half have lower BMI)\n• 85th percentile: Only 15% have higher BMI\n• 95th percentile: Only 5% have higher BMI\n\n<b>WHO interpretation:</b>\n• &lt;3: Underweight\n• 3-84: Healthy weight\n• 85-96: Overweight\n• ≥97: Obesity\n\n<b>Important:</b> These measurements are for guidance only and do not by themselves represent the health status of the child or adolescent. If in doubt, always consult your pediatrician </string>
+    <string name="info_percentiles_oms">This application uses the growth references from the <b>World Health Organization (WHO)</b> to calculate BMI percentiles in children aged 5 to 19 years.\n\n<b>What does the percentile mean?</b>\nThe percentile indicates what percentage of children of the same age and sex have a lower BMI. For example:\n• 50th percentile: Typical BMI (half have lower BMI)\n• 85th percentile: Only 15% have higher BMI\n• 95th percentile: Only 5% have higher BMI\n\n<b>WHO interpretation:</b>\n• &lt;3: Underweight\n• 3–84: Healthy weight\n• 85–96: Overweight\n• ≥97: Obesity\n\n<b>Important:</b> This application uses the growth references from the <b>World Health Organization (WHO)</b> to calculate BMI percentiles in children aged 5 to 19 years.\n\n<b>What does the percentile mean?</b>\nThe percentile indicates what percentage of children of the same age and sex have a lower BMI. For example:\n• 50th percentile: Typical BMI (half have lower BMI)\n• 85th percentile: Only 15% have higher BMI\n• 95th percentile: Only 5% have higher BMI\n\n<b>WHO interpretation:</b>\n• &lt;3: Underweight\n• 3–84: Healthy weight\n• 85–96: Overweight\n• ≥97: Obesity\n\n<b>Important:</b> These measurements are for guidance only and do not by themselves represent the health status of the child or adolescent. If in doubt, always consult your pediatrician </string>
     <string name="btn_mostrar_info">Percentile information</string>
     <string name="btn_ocultar_info">Hide information</string>
 
     <!-- New strings in English for Legal Notice, About, Licenses, and Back -->
     <string name="aviso_legal_titulo">Legal Notice</string>
-    <string name="acerca_de_titulo">About the application</string>
-    <string name="acerca_de_texto">Here you will find information about the app, version, developer, contact, etc.</string>
+    <string name="acerca_de_titulo">About</string>
+    <string name="acerca_de_texto">IMC Family: Adults &amp; Kids
+
+Version: 1.0.0
+Developer: Oscar
+
+This app allows you to calculate Body Mass Index (BMI) for adults and children (from 5 years old), save results, and view history. For questions or suggestions, contact: oscar@email.com</string>
     <string name="licencias_titulo">Licenses</string>
     <string name="licencias_texto">Here you will find information about the app license and third-party resources used.</string>
     <string name="volver">Back</string>

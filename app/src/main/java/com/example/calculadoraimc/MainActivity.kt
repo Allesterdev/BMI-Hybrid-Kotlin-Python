@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
     private fun mostrarDisclaimer() {
         AlertDialog.Builder(this, R.style.AppAlertDialogTheme)
             .setTitle(getString(R.string.disclaimer_titulo))
-            .setMessage(getString(R.string.disclaimer_texto_limpio))
+            .setMessage(getString(R.string.disclaimer_texto))
             .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->
                 sharedPreferences.edit().putBoolean("disclaimer_accepted", true).apply()
             }
