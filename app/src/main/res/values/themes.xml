@@ -30,20 +30,24 @@
 
     <!-- Estilo para los botones individuales del dialog -->
     <style name="DialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
-        <item name="android:textColor">@color/green_primary</item>
+        <item name="android:textColor">@color/text_primary</item>
         <item name="rippleColor">@color/green_primary_light</item>
         <item name="android:background">@android:color/transparent</item>
     </style>
 
     <!-- Estilo personalizado para AlertDialog que fuerza colores de la app -->
     <style name="AppAlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/green_primary</item>
-        <item name="colorAccent">@color/green_primary</item>
-        <item name="android:textColorPrimary">@color/green_primary_dark</item>
+        <item name="colorPrimary">@color/white</item>        
+        <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:windowBackground">@color/white</item>
-        <item name="android:colorBackground">@color/white</item>
+        <item name="android:colorBackground">@color/green_primary_light</item>
         <item name="android:buttonStyle">@style/DialogButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/WhiteDialogButton</item>
+        <item name="buttonBarNegativeButtonStyle">@style/WhiteDialogButton</item>        
     </style>
 
+    <style name="WhiteDialogButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
 
 </resources>

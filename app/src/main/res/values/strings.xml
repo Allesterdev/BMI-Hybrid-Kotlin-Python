@@ -134,4 +134,5 @@ Para dudas o sugerencias, contacta a: oscar@email.com</string>
     <string name="licencias_titulo">Licencias</string>
     <string name="licencias_texto">Aquí irá la información sobre la licencia de la app y los recursos de terceros utilizados.</string>
     <string name="volver">Volver</string>
+    <string name="informacion_legal">Información y Legal</string>
 </resources>

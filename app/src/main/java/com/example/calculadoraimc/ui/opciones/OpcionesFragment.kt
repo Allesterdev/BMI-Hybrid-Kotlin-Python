@@ -12,6 +12,7 @@ import com.chaquo.python.android.AndroidPlatform
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentOpcionesBinding
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class OpcionesFragment : Fragment() {
 
@@ -68,7 +69,7 @@ class OpcionesFragment : Fragment() {
         message: String,
         onConfirm: () -> Unit
     ) {
-        val dialog = AlertDialog.Builder(requireContext(), R.style.AppAlertDialogTheme)
+        val dialog = MaterialAlertDialogBuilder(requireContext(), R.style.AppAlertDialogTheme)
             .setTitle(title)
             .setMessage(message)
             .setPositiveButton(getString(R.string.btn_confirmar)) { _, _ ->
