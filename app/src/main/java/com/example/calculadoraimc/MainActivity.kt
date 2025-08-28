@@ -56,15 +56,15 @@ class MainActivity : AppCompatActivity() {
         sharedPreferences = getSharedPreferences("app_preferences", MODE_PRIVATE)
         val disclaimerAccepted = sharedPreferences.getBoolean("disclaimer_accepted", false)
         disclaimerPending = !disclaimerAccepted
-        // No delay: si ya aceptado no hacemos nada; si no, se mostrará tras el fade.
+
     }
 
     private fun addSplashOverlay() {
         val root = findViewById<ViewGroup>(android.R.id.content)
-        if (root.findViewById<ViewGroup?>(R.id.splash_overlay_root) != null) return // ya agregado
+        if (root.findViewById<ViewGroup?>(R.id.splash_overlay_root) != null) return
         val overlay = layoutInflater.inflate(R.layout.view_splash_overlay, root, false)
         root.addView(overlay)
-        // Fade out tras breve retardo (ajusta tiempos a gusto)
+        // Fade out tras breve retardo
         val fadeDuration = OVERLAY_FADE_MS
         overlay.postDelayed({
             overlay.animate()

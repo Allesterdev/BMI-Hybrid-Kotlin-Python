@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IMC Family</string>
+    <string name="app_name">Practical BMI</string>
     <string name="title_adultos">Adults</string>
     <string name="title_menores">5–19 Years</string>
     <string name="title_historial">History</string>
@@ -86,7 +86,7 @@
     <!-- Strings for options -->
     <string name="titulo_opciones">Options</string>
     <string name="disclaimer_titulo">Legal Notice and Terms of Use.</string>
-    <string name="disclaimer_texto">This application has been developed for educational and informational purposes, and is intended as a guiding tool for calculating Body Mass Index (BMI) in both adults and minors under 20 years of age.\n\nMEDICAL AND PROFESSIONAL USE\n• Does not replace the opinion of a healthcare professional.\n• Calculated values and interpretations provided are approximate and should not be considered medical diagnoses.\n• In case of health concerns, always consult with a doctor or pediatrician.\n\nABOUT 5 TO 19 YEARS OF AGE\n• BMI in minors under 20 years of age is not interpreted the same as in adults.\n• BMI calculation in minors under 20 years of age is based on WHO references.\n• This application is not designed to evaluate the development of children under 5 years of age.\n\nPRIVACY AND SECURITY\n• This application does not collect or transmit personal data to external servers.\n• All information is stored locally on the device, without encryption.\n\nUSER RESPONSIBILITY\n• The user is solely responsible for the use of this application.\n• Using this application implies acceptance of these terms.</string>
+    <string name="disclaimer_texto">This application has been developed for educational and informational purposes, and is intended as a guiding tool for calculating Body Mass Index (BMI) in both adults and minors under 20 years of age.\n\nMEDICAL AND PROFESSIONAL USE\n• Does not replace the opinion of a healthcare professional.\n• Calculated values and interpretations provided are guiding and should not be considered medical diagnoses.\n• In case of health concerns, always consult with a doctor or pediatrician.\n\nABOUT 5 TO 19 YEARS OF AGE\n• BMI in minors under 20 years of age is not interpreted the same as in adults.\n• BMI calculation in minors under 20 years of age is based on WHO references.\n• This application is not designed to evaluate the development of children under 5 years of age.\n\nPRIVACY AND SECURITY\n• This application does not collect or transmit personal data to external servers.\n• All information is stored locally on the device, without encryption.\n\nUSER RESPONSIBILITY\n• The user is solely responsible for the use of this application.\n• Using this application implies acceptance of these terms.</string>
     <string name="borrar_historiales_titulo">Data Management</string>
     <string name="btn_borrar_historial_adultos">Delete Adult History</string>
     <string name="btn_borrar_historial_menores">Delete Children History</string>
@@ -123,9 +123,12 @@
     <!-- New strings in English for Legal Notice, About, Licenses, and Back -->
     <string name="aviso_legal_titulo">Legal Notice</string>
     <string name="acerca_de_titulo">About</string>
-    <string name="acerca_de_texto">IMC Family: Adults &amp; Kids\n\nVersion: 1.0.0\nDeveloper: Oscar\n\nThis app allows you to calculate Body Mass Index (BMI) for adults and children (from 5 years old), save results, and view history. For questions or suggestions, contact: oscar@email.com</string>
-    <string name="licencias_titulo">Licenses</string>
-    <string name="licencias_texto">Here you will find information about the app license and third-party resources used.</string>
+    <string name="acerca_de_texto">Practical BMI: Adults &amp; Kids\n\n<b>Version:</b> 1.0.0\n\n<b>Developer:</b> Singularity Rose\n\nThis app allows you to calculate Body Mass Index (BMI) for adults and children (from 5 years old), save results, and view history.\n\nFor questions or suggestions, contact:\nsingularityrose@protonmail.com</string>
+    <string name="licencias_titulo">Credits and Licenses</string>
+    <string name="licencias_texto">This application uses open-source software:\n\n• <b>Chaquopy</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — BSD 3-Clause License (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Public Domain (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nYou can consult the full text of all licenses in the LICENCES.txt file included in this application.</string>
     <string name="volver">Back</string>
     <string name="informacion_legal">Information and Legal</string>
+    <string name="splash_text">Welcome to Practical BMI</string>
+    <string name="splash_app_name"><b>Practical</b> BMI</string>
+    <string name="splash_tagline">- Calculate and understand your BMI -</string>
 </resources>

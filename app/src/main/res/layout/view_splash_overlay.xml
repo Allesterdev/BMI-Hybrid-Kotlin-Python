@@ -13,4 +13,31 @@
         android:src="@drawable/splash_logo"
         android:contentDescription="@string/app_name" />
 
+
+
+    <TextView
+        android:id="@+id/splash_app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="270dp"
+        android:text="@string/splash_app_name"
+        android:textSize="50sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/splash_tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="230dp"
+        android:text="@string/splash_tagline"
+        android:textStyle="italic"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
+        android:gravity="center"
+        android:padding="8dp" />
+
 </FrameLayout>
