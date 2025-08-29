@@ -46,8 +46,13 @@ class BarraIMC @JvmOverloads constructor(
             val pyRanges = funcionesModule.callAttr("obtener_rangos_imc")
 
             ranges = pyRanges.asList().map { pyRange ->
+                val key = pyRange.callAttr("get", "key")?.toString() ?: ""
+                val rawName = pyRange.callAttr("get", "nombre")?.toString() ?: ""
+                val localizedName = resolveRangeName(key, rawName)
+
                 IMCRange(
-                    name = pyRange.callAttr("get", "nombre")?.toString() ?: "",
+                    key = key,
+                    name = localizedName,
                     displayRange = pyRange.callAttr("get", "rango_texto")?.toString() ?: "",
                     minValue = pyRange.callAttr("get", "min_valor")?.toFloat() ?: 0f,
                     maxValue = pyRange.callAttr("get", "max_valor")?.toFloat() ?: 0f,
@@ -57,6 +62,24 @@ class BarraIMC @JvmOverloads constructor(
         } catch (e: Exception) {
             android.util.Log.e("BarraIMC", "Error al cargar rangos: ${e.message}")
             ranges = emptyList()
+        }
+    }
+
+    // Mapear claves a recursos string de forma explícita (evita reflection en recursos)
+    private fun resolveRangeName(key: String, fallback: String): String {
+        return when (key) {
+            "bajo_peso" -> context.getString(com.example.calculadoraimc.R.string.bajo_peso)
+            "peso_normal" -> context.getString(com.example.calculadoraimc.R.string.peso_normal)
+            "sobrepeso" -> context.getString(com.example.calculadoraimc.R.string.sobrepeso)
+            "obesidad_1" -> context.getString(com.example.calculadoraimc.R.string.obesidad_1)
+            "obesidad_2" -> context.getString(com.example.calculadoraimc.R.string.obesidad_2)
+            "obesidad_3" -> context.getString(com.example.calculadoraimc.R.string.obesidad_3)
+            "" -> fallback
+            else -> {
+                // Clave desconocida: registrar y usar el nombre sin traducir como fallback
+                android.util.Log.w("BarraIMC", "Clave de rango desconocida recibida de Python: $key")
+                fallback
+            }
         }
     }
 
@@ -71,7 +94,7 @@ class BarraIMC @JvmOverloads constructor(
         val barBottom = barTop + barHeight
 
         val totalWidth = width.toFloat()
-        val segmentWidth = totalWidth / ranges.size
+        val segmentWidth = if (ranges.isNotEmpty()) totalWidth / ranges.size else totalWidth
 
         // Dibujar segmentos de la barra
         ranges.forEachIndexed { index, range ->
@@ -152,6 +175,7 @@ class BarraIMC @JvmOverloads constructor(
     }
 
     data class IMCRange(
+        val key: String,
         val name: String,
         val displayRange: String,
         val minValue: Float,

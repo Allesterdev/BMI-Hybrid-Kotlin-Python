@@ -120,6 +120,24 @@
     <string name="btn_mostrar_info">Percentile information</string>
     <string name="btn_ocultar_info">Hide information</string>
 
+    <!-- Labels used by the percentiles bar -->
+    <string name="peso_saludable">Healthy weight</string>
+    <string name="obesidad">Obesity</string>
+
+    <!-- Interpretation strings for children (added) -->
+    <string name="interpretacion_bajo_peso">Underweight</string>
+    <string name="interpretacion_peso_saludable">Healthy weight</string>
+    <string name="interpretacion_sobrepeso">Overweight</string>
+    <string name="interpretacion_obesidad">Obesity</string>
+
+    <!-- Interpretation strings for adults (added) -->
+    <string name="interpretacion_bajo_peso_adulto">You are underweight</string>
+    <string name="interpretacion_normal_adulto">Your BMI is normal</string>
+    <string name="interpretacion_sobrepeso_adulto">You are overweight</string>
+    <string name="interpretacion_obesidad_1_adulto">You have obesity grade 1</string>
+    <string name="interpretacion_obesidad_2_adulto">You have obesity grade 2</string>
+    <string name="interpretacion_obesidad_3_adulto">You have obesity grade 3</string>
+
     <!-- New strings in English for Legal Notice, About, Licenses, and Back -->
     <string name="aviso_legal_titulo">Legal Notice</string>
     <string name="acerca_de_titulo">About</string>
@@ -128,7 +146,5 @@
     <string name="licencias_texto">This application uses open-source software:\n\n• <b>Chaquopy</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — BSD 3-Clause License (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Public Domain (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nYou can consult the full text of all licenses in the LICENCES.txt file included in this application.</string>
     <string name="volver">Back</string>
     <string name="informacion_legal">Information and Legal</string>
-    <string name="splash_text">Welcome to Practical BMI</string>
-    <string name="splash_app_name"><b>Practical</b> BMI</string>
-    <string name="splash_tagline">- Calculate and understand your BMI -</string>
+
 </resources>

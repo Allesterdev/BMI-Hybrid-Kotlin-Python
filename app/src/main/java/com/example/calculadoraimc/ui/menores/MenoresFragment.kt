@@ -160,20 +160,34 @@ class MenoresFragment : Fragment() {
             // Extraer valores usando el método correcto para objetos Python en Chaquopy
             val imc = resultado.callAttr("get", "imc")?.toDouble() ?: 0.0
             val percentil = resultado.callAttr("get", "percentil")?.toDouble() ?: 0.0
-            val interpretacion = resultado.callAttr("get", "interpretacion")?.toString() ?: getString(R.string.sin_interpretacion)
+            // La función Python interpretar_percentil ahora devuelve una clave de recurso.
+            val interpretacionKey = resultado.callAttr("get", "interpretacion")?.toString() ?: ""
             val edadAnios = resultado.callAttr("get", "edad_años")?.toDouble() ?: 0.0
 
             // Debug: Mostrar valores extraídos
             android.util.Log.d("MenoresFragment", "Valores extraídos:")
             android.util.Log.d("MenoresFragment", "  IMC: $imc")
             android.util.Log.d("MenoresFragment", "  Percentil: $percentil")
-            android.util.Log.d("MenoresFragment", "  Interpretación: '$interpretacion'")
+            android.util.Log.d("MenoresFragment", "  Interpretación clave: '$interpretacionKey'")
             android.util.Log.d("MenoresFragment", "  Edad años: $edadAnios")
 
             // Mostrar resultados (incluyendo edad calculada)
             binding.tvImcValor.text = getString(R.string.formato_imc, imc)
             binding.tvPercentil.text = getString(R.string.formato_percentil, percentil)
-            binding.tvInterpretacion.text = getString(R.string.interpretacion_con_edad, interpretacion, edadAnios)
+            val interpretacionTexto = when (interpretacionKey) {
+                "interpretacion_bajo_peso" -> getString(R.string.interpretacion_bajo_peso)
+                "interpretacion_peso_saludable" -> getString(R.string.interpretacion_peso_saludable)
+                "interpretacion_sobrepeso" -> getString(R.string.interpretacion_sobrepeso)
+                "interpretacion_obesidad" -> getString(R.string.interpretacion_obesidad)
+                "" -> getString(R.string.sin_interpretacion)
+                else -> {
+                    // Python devolvió una clave inesperada: registrar y usar el texto por defecto
+                    android.util.Log.w("MenoresFragment", "Clave de interpretación desconocida recibida de Python: $interpretacionKey")
+                    getString(R.string.sin_interpretacion)
+                }
+            }
+
+            binding.tvInterpretacion.text = getString(R.string.interpretacion_con_edad, interpretacionTexto, edadAnios)
 
             // Mostrar y actualizar la barra de percentiles
             binding.barraPercentilMenores.setPercentil(percentil)

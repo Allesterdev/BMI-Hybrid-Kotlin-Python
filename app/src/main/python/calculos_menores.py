@@ -51,15 +51,15 @@ def normal_cdf(x, mu=0, sigma=1):
 
 
 def interpretar_percentil(percentil):
-    """Interpreta el percentil de IMC y devuelve un mensaje descriptivo."""
+    """Interpreta el percentil de IMC y devuelve una clave de recurso (no texto)."""
     if percentil < 3:
-        return "Bajo peso."
+        return "interpretacion_bajo_peso"
     elif percentil < 85:
-        return "Peso saludable."
+        return "interpretacion_peso_saludable"
     elif percentil < 97:
-        return "Sobrepeso."
+        return "interpretacion_sobrepeso"
     else:
-        return "Obesidad."
+        return "interpretacion_obesidad"
 
 
 def calcular_imc_menor(sexo: str, edad_input, peso_input, altura_input) -> dict:
@@ -236,9 +236,11 @@ def obtener_rangos_percentiles():
     Devuelve los rangos de percentiles para la barra visual con sus respectivos datos.
     Basado en los estándares de la OMS para menores.
     Retorna una lista de diccionarios con la información de cada rango.
+    Cada rango incluye ahora una clave 'key' estable para localizar el nombre en Android.
     """
     return [
         {
+            "key": "bajo_peso",
             "nombre": "Bajo peso",
             "rango_texto": "<3",
             "min_valor": 0.0,
@@ -246,6 +248,7 @@ def obtener_rangos_percentiles():
             "color": "#2196F3"  # Azul
         },
         {
+            "key": "peso_saludable",
             "nombre": "Peso saludable",
             "rango_texto": "3-84",
             "min_valor": 3.0,
@@ -253,6 +256,7 @@ def obtener_rangos_percentiles():
             "color": "#4CAF50"  # Verde
         },
         {
+            "key": "sobrepeso",
             "nombre": "Sobrepeso",
             "rango_texto": "85-96",
             "min_valor": 85.0,
@@ -260,6 +264,7 @@ def obtener_rangos_percentiles():
             "color": "#FF9800"  # Naranja
         },
         {
+            "key": "obesidad",
             "nombre": "Obesidad",
             "rango_texto": "≥97",
             "min_valor": 97.0,

@@ -45,13 +45,32 @@ class BarraPercentil @JvmOverloads constructor(
 
         ranges = rangosData.map { rangoMap ->
             val mapa = rangoMap.asMap()
+            val key = mapa[com.chaquo.python.PyObject.fromJava("key")]?.toString() ?: ""
+            val rawName = mapa[com.chaquo.python.PyObject.fromJava("nombre")]?.toString() ?: ""
+            val localizedName = resolveRangeNamePercentil(key, rawName)
+
             RangoPercentil(
-                nombre = mapa[com.chaquo.python.PyObject.fromJava("nombre")]?.toString() ?: "",
+                nombre = localizedName,
                 rangoTexto = mapa[com.chaquo.python.PyObject.fromJava("rango_texto")]?.toString() ?: "",
                 minValor = mapa[com.chaquo.python.PyObject.fromJava("min_valor")]?.toString()?.toDouble() ?: 0.0,
                 maxValor = mapa[com.chaquo.python.PyObject.fromJava("max_valor")]?.toString()?.toDouble() ?: 0.0,
                 color = Color.parseColor(mapa[com.chaquo.python.PyObject.fromJava("color")]?.toString() ?: "#2196F3")
             )
+        }
+    }
+
+    // Resolver claves de percentiles a recursos localizados
+    private fun resolveRangeNamePercentil(key: String, fallback: String): String {
+        return when (key) {
+            "bajo_peso" -> context.getString(com.example.calculadoraimc.R.string.bajo_peso)
+            "peso_saludable" -> context.getString(com.example.calculadoraimc.R.string.peso_saludable)
+            "sobrepeso" -> context.getString(com.example.calculadoraimc.R.string.sobrepeso)
+            "obesidad" -> context.getString(com.example.calculadoraimc.R.string.obesidad)
+            "" -> fallback
+            else -> {
+                android.util.Log.w("BarraPercentil", "Clave de percentil desconocida recibida de Python: $key")
+                fallback
+            }
         }
     }
 
@@ -112,7 +131,6 @@ class BarraPercentil @JvmOverloads constructor(
         if (percentilValue > 0) {
             val indicatorX = totalWidth * indicatorPosition
             val indicatorWidth = 8f
-            val indicatorHeight = barHeight + 40f
 
             // Línea del indicador
             paint.color = Color.BLACK

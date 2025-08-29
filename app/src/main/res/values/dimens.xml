@@ -16,5 +16,10 @@
     <!-- Bottom padding para barra de navegación -->
     <dimen name="bottom_nav_padding">120dp</dimen>
     <dimen name="bottom_nav_padding_scroll">80dp</dimen>
-</resources>
 
+    <!-- Dimensiones reutilizables para botones y textos (añadidas) -->
+    <dimen name="button_text_size">18sp</dimen>
+    <dimen name="button_min_height">56dp</dimen>
+    <dimen name="button_text_size_small">16sp</dimen>
+
+</resources>

@@ -66,11 +66,26 @@ class AdultosFragment : Fragment() {
                 return
             }
 
-            val interpretacion = funcionesModule.callAttr("interpretar_imc", imc).toString()
+            // Ahora interpretar_imc devuelve una clave de recurso. Resolverla a string.
+            val interpretacionKey = funcionesModule.callAttr("interpretar_imc", imc).toString()
+
+            val interpretacionTexto = when (interpretacionKey) {
+                "interpretacion_bajo_peso_adulto" -> getString(R.string.interpretacion_bajo_peso_adulto)
+                "interpretacion_normal_adulto" -> getString(R.string.interpretacion_normal_adulto)
+                "interpretacion_sobrepeso_adulto" -> getString(R.string.interpretacion_sobrepeso_adulto)
+                "interpretacion_obesidad_1_adulto" -> getString(R.string.interpretacion_obesidad_1_adulto)
+                "interpretacion_obesidad_2_adulto" -> getString(R.string.interpretacion_obesidad_2_adulto)
+                "interpretacion_obesidad_3_adulto" -> getString(R.string.interpretacion_obesidad_3_adulto)
+                "" -> getString(R.string.sin_interpretacion)
+                else -> {
+                    android.util.Log.w("AdultosFragment", "Clave de interpretación desconocida recibida de Python: $interpretacionKey")
+                    getString(R.string.sin_interpretacion)
+                }
+            }
 
             // Mostrar resultados
             binding.tvImcValor.text = getString(R.string.formato_imc, imc)
-            binding.tvInterpretacion.text = interpretacion
+            binding.tvInterpretacion.text = interpretacionTexto
 
             // Actualizar la barra de IMC con el valor calculado
             binding.barraImc.setIMC(imc.toFloat())

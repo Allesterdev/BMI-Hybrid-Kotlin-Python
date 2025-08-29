@@ -120,6 +120,10 @@
     <string name="btn_mostrar_info">Información sobre percentiles</string>
     <string name="btn_ocultar_info">Ocultar información</string>
 
+    <!-- Etiquetas usadas por la barra de percentiles -->
+    <string name="peso_saludable">Peso saludable</string>
+    <string name="obesidad">Obesidad</string>
+
     <!-- Nuevas strings para Aviso Legal, Acerca de, Licencias -->
     <string name="aviso_legal_titulo">Aviso Legal</string>
     <string name="acerca_de_titulo">Acerca de</string>
@@ -128,7 +132,19 @@
     <string name="licencias_texto">Esta aplicación utiliza software de código abierto:\n\n• <b>Chaquopy</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — Licencia BSD 3 cláusulas (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Dominio público (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nPuedes consultar el texto íntegro de todas las licencias en el archivo LICENCES.txt incluido en esta aplicación.</string>
     <string name="volver">Volver</string>
     <string name="informacion_legal">Información y Legal</string>
-    <string name="splash_text">Bienvenido a IMC Práctico</string>
-    <string name="splash_app_name"><b>IMC</b> Práctico</string>
-    <string name="splash_tagline">- Calcula y entiende tu IMC -</string>
+
+    <!-- Strings de interpretación para menores -->
+    <string name="interpretacion_bajo_peso">Bajo peso</string>
+    <string name="interpretacion_peso_saludable">Peso saludable</string>
+    <string name="interpretacion_sobrepeso">Sobrepeso</string>
+    <string name="interpretacion_obesidad">Obesidad</string>
+
+    <!-- Strings de interpretación para adultos -->
+    <string name="interpretacion_bajo_peso_adulto">Tienes bajo peso</string>
+    <string name="interpretacion_normal_adulto">Tu IMC es normal</string>
+    <string name="interpretacion_sobrepeso_adulto">Tienes sobrepeso</string>
+    <string name="interpretacion_obesidad_1_adulto">Tienes obesidad de grado 1</string>
+    <string name="interpretacion_obesidad_2_adulto">Tienes obesidad de grado 2</string>
+    <string name="interpretacion_obesidad_3_adulto">Tienes obesidad de grado 3</string>
+
 </resources>

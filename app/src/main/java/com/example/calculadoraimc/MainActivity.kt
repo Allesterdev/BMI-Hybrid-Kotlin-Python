@@ -10,15 +10,20 @@ import com.example.calculadoraimc.databinding.ActivityMainBinding
 import androidx.navigation.ui.setupWithNavController
 import androidx.appcompat.app.AlertDialog
 import android.widget.Toast
-import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDelegate
+import android.animation.ObjectAnimator
+import android.animation.AnimatorListenerAdapter
+import android.view.View
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.AccelerateDecelerateInterpolator
+import androidx.core.content.edit
 
 class MainActivity : AppCompatActivity() {
 
     companion object {
-        private const val SPLASH_API_MIN_MS = 120L
-        private const val OVERLAY_VISIBLE_MS = 1550L
-        private const val OVERLAY_FADE_MS = 350L
+        // Aumentado el mínimo para que el splash sea visible más tiempo
+        private const val SPLASH_DURATION_MS = 1400L
+        // Aumentado para un fade más suave
+        private const val OVERLAY_FADE_MS = 600L
         private const val DISCLAIMER_EXIT_DELAY_MS = 1500L
     }
 
@@ -32,20 +37,57 @@ class MainActivity : AppCompatActivity() {
         val splashScreen = installSplashScreen()
         splashStartTime = System.currentTimeMillis()
         splashScreen.setKeepOnScreenCondition {
-            // Garantiza un mínimo de 120 ms para evitar parpadeo
-            System.currentTimeMillis() - splashStartTime < SPLASH_API_MIN_MS
+            // Garantiza un mínimo para evitar parpadeo
+            System.currentTimeMillis() - splashStartTime < SPLASH_DURATION_MS
         }
+
 
         super.onCreate(savedInstanceState)
 
-        // Forzar modo claro
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
+        // Empezamos con el contenido invisible para poder crossfadear con el splash
+        binding.root.alpha = 0f
         setContentView(binding.root)
 
-        // Overlay visual propio (rellena pantalla con la imagen) también sirve en APIs < 31
-        addSplashOverlay()
+        // Configurar animación de salida (fade) del SplashScreen y mostrar disclaimer si procede
+        splashScreen.setOnExitAnimationListener { splashScreenView ->
+            val splashView = splashScreenView.view
+
+            // Preparar animaciones
+            val fade = ObjectAnimator.ofFloat(splashView, View.ALPHA, 1f, 0f)
+            fade.duration = OVERLAY_FADE_MS
+            fade.interpolator = AccelerateDecelerateInterpolator()
+
+            val contentFade = ObjectAnimator.ofFloat(binding.root, View.ALPHA, 0f, 1f)
+            contentFade.duration = OVERLAY_FADE_MS
+            // Pequeño retardo para que el contenido entre ligeramente después y el cambio sea menos brusco
+            contentFade.startDelay = 120L
+            contentFade.interpolator = AccelerateDecelerateInterpolator()
+
+            fade.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: android.animation.Animator) {
+                    // Remover la vista del splash y continuar
+                    splashScreenView.remove()
+                    if (disclaimerPending) {
+                        mostrarDisclaimer()
+                    }
+                }
+            })
+
+            // Asegurar que el splash se muestre al menos SPLASH_DURATION_MS: si el sistema pide salir antes,
+            // retrasamos el inicio de la animación la cantidad restante.
+            val elapsed = System.currentTimeMillis() - splashStartTime
+            val remaining = SPLASH_DURATION_MS - elapsed
+            if (remaining > 0) {
+                binding.root.postDelayed({
+                    contentFade.start()
+                    fade.start()
+                }, remaining)
+            } else {
+                contentFade.start()
+                fade.start()
+            }
+        }
 
         // Python ya está inicializado en CalculadoraIMCApplication
 
@@ -59,34 +101,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun addSplashOverlay() {
-        val root = findViewById<ViewGroup>(android.R.id.content)
-        if (root.findViewById<ViewGroup?>(R.id.splash_overlay_root) != null) return
-        val overlay = layoutInflater.inflate(R.layout.view_splash_overlay, root, false)
-        root.addView(overlay)
-        // Fade out tras breve retardo
-        val fadeDuration = OVERLAY_FADE_MS
-        overlay.postDelayed({
-            overlay.animate()
-                .alpha(0f)
-                .setDuration(fadeDuration)
-                .withEndAction {
-                    root.removeView(overlay)
-                    if (disclaimerPending) {
-                        mostrarDisclaimer()
-                        disclaimerPending = false
-                    }
-                }
-                .start()
-        }, OVERLAY_VISIBLE_MS)
-    }
-
     private fun mostrarDisclaimer() {
         AlertDialog.Builder(this, R.style.AppAlertDialogTheme)
             .setTitle(getString(R.string.disclaimer_titulo))
             .setMessage(getString(R.string.disclaimer_texto))
             .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->
-                sharedPreferences.edit().putBoolean("disclaimer_accepted", true).apply()
+                sharedPreferences.edit { putBoolean("disclaimer_accepted", true) }
             }
             .setNegativeButton(getString(R.string.btn_salir)) { _, _ ->
                 Toast.makeText(this, getString(R.string.msg_debe_aceptar_disclaimer), Toast.LENGTH_LONG).show()
