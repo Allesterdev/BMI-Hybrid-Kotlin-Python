@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.findNavController
 import com.example.calculadoraimc.databinding.ActivityMainBinding
 import androidx.navigation.ui.setupWithNavController
@@ -35,6 +36,9 @@ class MainActivity : AppCompatActivity() {
     private var keyboardLayoutListener: ViewTreeObserver.OnGlobalLayoutListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Forzar modo claro
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+
         // Instalar SplashScreen API antes de super
         val splashScreen = installSplashScreen()
         splashStartTime = System.currentTimeMillis()

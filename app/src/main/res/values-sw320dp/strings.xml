@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Strings optimizados para pantallas pequeñas en español -->
+
+    <!-- Títulos más cortos -->
+    <string name="titulo_calculadora_adultos">IMC Adultos</string>
+    <string name="titulo_calculadora_menores">IMC 5–19 Años</string>
+
+    <!-- Botones más compactos -->
+    <string name="btn_calcular_imc">Calcular</string>
+    <string name="btn_calcular_percentil">Calcular</string>
+    <string name="btn_guardar_historial">Guardar</string>
+    <string name="btn_ver_grafico">Gráfico</string>
+    <string name="btn_volver_historial">Volver</string>
+
+    <!-- Opciones de gestión más cortas -->
+    <string name="btn_borrar_historial_adultos">Borrar Adultos</string>
+    <string name="btn_borrar_historial_menores">Borrar Menores</string>
+    <string name="btn_borrar_todos_historiales">Borrar Todo</string>
+
+    <!-- Información de percentiles más corta -->
+    <string name="btn_mostrar_info">Info percentiles</string>
+    <string name="btn_ocultar_info">Ocultar</string>
+
+    <!-- Mensajes más concisos -->
+    <string name="error_campos_vacios_adultos">Ingresa peso y altura</string>
+    <string name="error_campos_vacios_menores">Completa todos los campos</string>
+    <string name="error_calcular_primero_adultos">Calcula IMC primero</string>
+    <string name="error_calcular_primero_menores">Calcula percentil primero</string>
+    <string name="msg_debe_aceptar_disclaimer">Acepta el disclaimer</string>
+
+    <!-- Títulos de secciones más cortos -->
+    <string name="titulo_historial">Historial</string>
+    <string name="titulo_grafico_historial">Evolución</string>
+    <string name="borrar_historiales_titulo">Gestión Datos</string>
+
+    <!-- Confirmaciones más cortas -->
+    <string name="confirmacion_borrar_adultos">¿Borrar historial adultos?</string>
+    <string name="confirmacion_borrar_menores">¿Borrar historial menores?</string>
+    <string name="confirmacion_borrar_todos">¿Borrar TODOS los historiales?</string>
+
+    <!-- Información legal más corta -->
+    <string name="informacion_legal">Info Legal</string>
+
+</resources>
+

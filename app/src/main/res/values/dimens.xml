@@ -22,4 +22,10 @@
     <dimen name="button_min_height">56dp</dimen>
     <dimen name="button_text_size_small">16sp</dimen>
 
+    <!-- Tamaños de texto responsivos (se sobrescriben en pantallas pequeñas) -->
+    <dimen name="title_text_size">28sp</dimen>
+    <dimen name="large_text_size">20sp</dimen>
+    <dimen name="medium_text_size">18sp</dimen>
+    <dimen name="small_text_size">16sp</dimen>
+    <dimen name="input_text_size">18sp</dimen>
 </resources>

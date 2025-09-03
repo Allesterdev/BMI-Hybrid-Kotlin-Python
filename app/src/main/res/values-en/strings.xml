@@ -27,9 +27,9 @@
 
     <!-- Strings for BMI bar -->
     <string name="titulo_escala_imc">BMI Scale</string>
-    <string name="bajo_peso">Underweight</string>
+    <string name="bajo_peso">UW</string>
     <string name="peso_normal">Normal</string>
-    <string name="sobrepeso">Overweight</string>
+    <string name="sobrepeso">OWe</string>
     <string name="obesidad_1">Ob. I</string>
     <string name="obesidad_2">Ob. II</string>
     <string name="obesidad_3">Ob. III</string>

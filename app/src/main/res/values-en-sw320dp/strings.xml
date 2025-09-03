@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Strings optimized for small screens in English -->
+    <!-- Shorter titles -->
+    <string name="titulo_calculadora_adultos">Adult BMI</string>
+    <string name="titulo_calculadora_menores">BMI 5–19 Years</string>
+    <!-- More compact buttons -->
+    <string name="btn_calcular_imc">Calculate</string>
+    <string name="btn_calcular_percentil">Calculate</string>
+    <string name="btn_guardar_historial">Save</string>
+    <string name="btn_ver_grafico">Chart</string>
+    <string name="btn_volver_historial">Back</string>
+    <!-- Shorter management options -->
+    <string name="btn_borrar_historial_adultos">Delete Adults</string>
+    <string name="btn_borrar_historial_menores">Delete Kids</string>
+    <string name="btn_borrar_todos_historiales">Delete All</string>
+    <!-- Shorter percentile info -->
+    <string name="btn_mostrar_info">Percentile info</string>
+    <string name="btn_ocultar_info">Hide</string>
+    <!-- More concise messages -->
+    <string name="error_campos_vacios_adultos">Enter weight and height</string>
+    <string name="error_campos_vacios_menores">Complete all fields</string>
+    <string name="error_calcular_primero_adultos">Calculate BMI first</string>
+    <string name="error_calcular_primero_menores">Calculate percentile first</string>
+    <string name="msg_debe_aceptar_disclaimer">Accept disclaimer</string>
+    <!-- Shorter section titles -->
+    <string name="titulo_historial">History</string>
+    <string name="titulo_grafico_historial">Evolution</string>
+    <string name="borrar_historiales_titulo">Data Management</string>
+    <!-- Shorter confirmations -->
+    <string name="confirmacion_borrar_adultos">Delete adult history?</string>
+    <string name="confirmacion_borrar_menores">Delete children history?</string>
+    <string name="confirmacion_borrar_todos">Delete ALL histories?</string>
+    <!-- Shorter legal info -->
+    <string name="informacion_legal">Legal Info</string>
+</resources>
+
