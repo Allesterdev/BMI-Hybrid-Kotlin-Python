@@ -18,6 +18,9 @@ class HistorialFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: HistorialAdapter
 
+    // Evita animaciones visibles cuando actualizamos la píldora programáticamente
+    private var suppressPillAnimation: Boolean = false
+
     // Variable para rastrear el modo actual
     private var modoActual: String = "adultos"
 
@@ -38,21 +41,37 @@ class HistorialFragment : Fragment() {
         setupRecyclerView()
         setupToggleButtons()
 
-        // Navegación al gráfico
-        binding.btnVerGrafico.setOnClickListener {
-            // Pasar el modo actual como argumento al gráfico
-            val bundle = Bundle().apply {
-                putString("tipo_historial", modoActual)
+        // Observar cambios desde otros fragmentos (por ejemplo el gráfico) mediante SavedStateHandle
+        val nav = findNavController()
+        nav.currentBackStackEntry?.savedStateHandle?.getLiveData<String>("tipo_historial")
+            ?.observe(viewLifecycleOwner) { tipo ->
+                if (tipo.isNullOrEmpty()) return@observe
+                // Suprimir animaciones mientras aplicamos el cambio programático
+                suppressPillAnimation = true
+                // Ocultar la píldora para evitar cualquier movimiento visible
+                binding.slidingPill.visibility = View.INVISIBLE
+                if (tipo == "menores") {
+                    binding.btnMenores.post { selectMenores(animated = false) }
+                } else if (tipo == "adultos") {
+                    binding.btnAdultos.post { selectAdultos(animated = false) }
+                }
+                // Limpiar para evitar reprocesos
+                nav.currentBackStackEntry?.savedStateHandle?.set("tipo_historial", "")
+                // Restaurar visibilidad y quitar supresión en el siguiente ciclo de evento
+                binding.root.post {
+                    binding.slidingPill.visibility = View.VISIBLE
+                    suppressPillAnimation = false
+                }
             }
+
+        // Navegación al gráfico — pasar el modo actual como argumento
+        binding.btnVerGrafico.setOnClickListener {
+            val bundle = Bundle().apply { putString("tipo_historial", modoActual) }
             findNavController().navigate(R.id.navigation_grafico_historial, bundle)
         }
 
-        // Cargar el historial según el modo recibido
-        if (modoActual == "menores") {
-            selectMenores()
-        } else {
-            consultarHistorialAdultos()
-        }
+        // Cargar el historial según el modo recibido inicialmente
+        if (modoActual == "menores") selectMenores() else consultarHistorialAdultos()
 
         return root
     }
@@ -85,45 +104,59 @@ class HistorialFragment : Fragment() {
             }
         })
 
-        binding.btnAdultos.setOnClickListener {
-            selectAdultos()
-        }
-
-        binding.btnMenores.setOnClickListener {
-            selectMenores()
-        }
+        binding.btnAdultos.setOnClickListener { selectAdultos() }
+        binding.btnMenores.setOnClickListener { selectMenores() }
     }
 
-    private fun selectAdultos() {
-        // Animar la píldora hacia la izquierda
-        binding.slidingPill.animate()
-            .translationX(0f)
-            .setDuration(300)
-            .setInterpolator(android.view.animation.DecelerateInterpolator())
-            .start()
+    private fun selectAdultos(animated: Boolean = true) {
+        // Cancelar posibles animaciones previas
+        binding.slidingPill.animate().cancel()
+        // Si estamos suprimiendo animaciones, forzar movimiento instantáneo
+        if (suppressPillAnimation) {
+            binding.slidingPill.translationX = 0f
+        } else {
+            if (animated) {
+                binding.slidingPill.animate()
+                    .translationX(0f)
+                    .setDuration(300)
+                    .setInterpolator(android.view.animation.DecelerateInterpolator())
+                    .start()
+            } else {
+                binding.slidingPill.translationX = 0f
+            }
+        }
 
         // Actualizar colores del texto
         updateTextColors(isAdultosSelected = true)
 
-        modoActual = "adultos" // Actualizar modo actual
+        modoActual = "adultos"
         consultarHistorialAdultos()
     }
 
-    private fun selectMenores() {
-        // Calcular posición de destino y animar
-        binding.btnAdultos.post {
-            val destinationX = binding.btnAdultos.width.toFloat()
-            binding.slidingPill.animate()
-                .translationX(destinationX)
-                .setDuration(300)
-                .setInterpolator(android.view.animation.DecelerateInterpolator())
-                .start()
+    private fun selectMenores(animated: Boolean = true) {
+        val destinationX = binding.btnAdultos.width.toFloat()
+        // Cancelar posibles animaciones previas
+        binding.slidingPill.animate().cancel()
+        if (suppressPillAnimation) {
+            binding.slidingPill.translationX = destinationX
+        } else {
+            if (animated) {
+                binding.btnAdultos.post {
+                    binding.slidingPill.animate()
+                        .translationX(destinationX)
+                        .setDuration(300)
+                        .setInterpolator(android.view.animation.DecelerateInterpolator())
+                        .start()
+                }
+            } else {
+                binding.slidingPill.translationX = destinationX
+            }
         }
 
         // Actualizar colores del texto
         updateTextColors(isAdultosSelected = false)
 
-        modoActual = "menores" // Actualizar modo actual
+        modoActual = "menores"
         consultarHistorialMenores()
     }
 

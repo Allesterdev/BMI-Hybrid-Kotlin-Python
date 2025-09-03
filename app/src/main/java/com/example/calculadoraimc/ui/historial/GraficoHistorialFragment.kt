@@ -28,9 +28,7 @@ import java.text.DecimalFormat
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.math.abs
 import kotlin.math.ceil
-import kotlin.math.min
 import kotlin.math.roundToInt
 
 class GraficoHistorialFragment : Fragment() {
@@ -64,9 +62,12 @@ class GraficoHistorialFragment : Fragment() {
 
     private fun setupBotonVolver() {
         binding.btnVolverHistorial.setOnClickListener {
-            // Usar popBackStack para volver al fragmento anterior (historial)
-            // Esto mantiene la sincronización correcta con la barra de navegación
-            findNavController().popBackStack()
+            // Antes de volver, comunicar al fragmento anterior qué modo (adultos/menores) queremos mostrar
+            val nav = findNavController()
+            val tipo = if (modoActual == Modo.MENORES) "menores" else "adultos"
+            nav.previousBackStackEntry?.savedStateHandle?.set("tipo_historial", tipo)
+            // Volver al fragmento anterior (historial). El HistorialFragment leerá el savedStateHandle y actualizará su modo.
+            nav.popBackStack()
         }
     }
 

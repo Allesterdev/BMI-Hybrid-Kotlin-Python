@@ -30,9 +30,9 @@
     <string name="bajo_peso">Bajo peso</string>
     <string name="peso_normal">Normal</string>
     <string name="sobrepeso">Sobrepeso</string>
-    <string name="obesidad_1">Obesidad I</string>
-    <string name="obesidad_2">Obesidad II</string>
-    <string name="obesidad_3">Obesidad III</string>
+    <string name="obesidad_1">Obs. I</string>
+    <string name="obesidad_2">Obs. II</string>
+    <string name="obesidad_3">Obs. III</string>
     <string name="rango_bajo_peso">&lt;18.5</string>
     <string name="rango_normal">18.5–24.9</string>
     <string name="rango_sobrepeso">25–29.9</string>
@@ -56,6 +56,9 @@
 
     <!-- Mensajes de éxito -->
     <string name="exito_guardado">Medición guardada en el historial</string>
+
+    <!-- Error para fecha inválida -->
+    <string name="error_fecha_invalida">Fecha inválida</string>
 
     <!-- Formato de resultados -->
     <string name="formato_imc">IMC: %.1f</string>
@@ -127,7 +130,7 @@
     <!-- Nuevas strings para Aviso Legal, Acerca de, Licencias -->
     <string name="aviso_legal_titulo">Aviso Legal</string>
     <string name="acerca_de_titulo">Acerca de</string>
-    <string name="acerca_de_texto">IMC Práctico: Adultos y Niños\n\n<b>Versión:</b> 1.0.0\n\n<b>Desarrollador:</b> Singularity Rose\n\nEsta aplicación permite calcular el Índice de Masa Corporal (IMC) para adultos y menores (a partir de 5 años), guardar resultados y visualizar el historial.\n\nPara dudas o sugerencias, contacta a:\nsingularityrose@protonmail.com</string>
+    <string name="acerca_de_texto">IMC Práctico: Adultos y Niños\n\n<b>Versión:</b> 1.0.0\n\n<b>Desarrollador:</b> Oscar Campoy B.\n\nEsta aplicación permite calcular el Índice de Masa Corporal (IMC) para adultos y menores (a partir de 5 años), guardar resultados y visualizar el historial.\n\nPara dudas o sugerencias, contacta a:\nsingularityrose@protonmail.com</string>
     <string name="licencias_titulo">Créditos y Licencias</string>
     <string name="licencias_texto">Esta aplicación utiliza software de código abierto:\n\n• <b>Chaquopy</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — Licencia BSD 3 cláusulas (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Dominio público (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nPuedes consultar el texto íntegro de todas las licencias en el archivo LICENCES.txt incluido en esta aplicación.</string>
     <string name="volver">Volver</string>

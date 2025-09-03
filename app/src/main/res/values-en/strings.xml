@@ -30,9 +30,9 @@
     <string name="bajo_peso">Underweight</string>
     <string name="peso_normal">Normal</string>
     <string name="sobrepeso">Overweight</string>
-    <string name="obesidad_1">Obesity I</string>
-    <string name="obesidad_2">Obesity II</string>
-    <string name="obesidad_3">Obesity III</string>
+    <string name="obesidad_1">Ob. I</string>
+    <string name="obesidad_2">Ob. II</string>
+    <string name="obesidad_3">Ob. III</string>
     <string name="rango_bajo_peso">&lt;18.5</string>
     <string name="rango_normal">18.5–24.9</string>
     <string name="rango_sobrepeso">25–29.9</string>
@@ -56,6 +56,9 @@
 
     <!-- Success messages -->
     <string name="exito_guardado">Measurement saved to history</string>
+
+    <!-- Error for invalid date -->
+    <string name="error_fecha_invalida">Invalid date</string>
 
     <!-- Result formats -->
     <string name="formato_imc">BMI: %.1f</string>
@@ -141,7 +144,7 @@
     <!-- New strings in English for Legal Notice, About, Licenses, and Back -->
     <string name="aviso_legal_titulo">Legal Notice</string>
     <string name="acerca_de_titulo">About</string>
-    <string name="acerca_de_texto">Practical BMI: Adults &amp; Kids\n\n<b>Version:</b> 1.0.0\n\n<b>Developer:</b> Singularity Rose\n\nThis app allows you to calculate Body Mass Index (BMI) for adults and children (from 5 years old), save results, and view history.\n\nFor questions or suggestions, contact:\nsingularityrose@protonmail.com</string>
+    <string name="acerca_de_texto">Practical BMI: Adults &amp; Kids\n\n<b>Version:</b> 1.0.0\n\n<b>Developer:</b> Oscar Campoy B.\n\nThis app allows you to calculate Body Mass Index (BMI) for adults and children (from 5 years old), save results, and view history.\n\nFor questions or suggestions, contact:\nsingularityrose@protonmail.com</string>
     <string name="licencias_titulo">Credits and Licenses</string>
     <string name="licencias_texto">This application uses open-source software:\n\n• <b>Chaquopy</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — BSD 3-Clause License (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Public Domain (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Apache License 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nYou can consult the full text of all licenses in the LICENCES.txt file included in this application.</string>
     <string name="volver">Back</string>

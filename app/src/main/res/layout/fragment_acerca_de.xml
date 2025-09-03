@@ -46,6 +46,7 @@
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="12dp" />
                     <TextView
+                        android:id="@+id/tv_acerca_de_texto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/acerca_de_texto"
@@ -78,12 +79,16 @@
                         android:textColor="@color/text_primary"
                         android:layout_marginBottom="12dp" />
                     <TextView
+                        android:id="@+id/tv_licencias_texto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/licencias_texto"
                         android:textSize="16sp"
                         android:textColor="@color/text_secondary"
-                        android:lineSpacingExtra="4dp" />
+                        android:lineSpacingExtra="4dp"
+                        android:autoLink="web"
+                        android:linksClickable="true"
+                        android:textColorLink="@color/green_primary_dark" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
