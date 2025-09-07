@@ -13,4 +13,6 @@ buildscript {
 
 plugins {
     id ("com.chaquo.python") version "16.1.0" apply false
+    alias(libs.plugins.google.gms.google.services) apply false
+    alias(libs.plugins.google.firebase.crashlytics) apply false
 }
