@@ -3,7 +3,6 @@ plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
     alias(libs.plugins.google.gms.google.services)
-    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 chaquopy {
@@ -66,7 +65,10 @@ android {
 
 dependencies {
     // Import the BoM for the Firebase platform
-    implementation platform(libs.firebase.bom)
+    implementation platform("com.google.firebase:firebase-bom:34.2.0")
+    // Añadir explícitamente Firebase Analytics
+    implementation "com.google.firebase:firebase-analytics"
+
     implementation 'androidx.core:core:1.16.0'
     implementation libs.androidx.core.splashscreen
     implementation libs.androidx.core.ktx.v1101
@@ -77,7 +79,6 @@ dependencies {
     implementation libs.androidx.lifecycle.viewmodel.ktx
     implementation libs.androidx.navigation.fragment.ktx
     implementation libs.androidx.navigation.ui.ktx
-    implementation libs.firebase.crashlytics
     testImplementation libs.junit
     androidTestImplementation libs.androidx.junit
     androidTestImplementation libs.androidx.espresso.core

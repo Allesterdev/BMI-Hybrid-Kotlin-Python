@@ -18,6 +18,9 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.core.content.edit
 import android.graphics.Rect
 import android.view.ViewTreeObserver
+import com.google.firebase.analytics.FirebaseAnalytics
+import androidx.navigation.NavController
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,6 +37,9 @@ class MainActivity : AppCompatActivity() {
     private var splashStartTime: Long = 0
     private var disclaimerPending = false
     private var keyboardLayoutListener: ViewTreeObserver.OnGlobalLayoutListener? = null
+    // Instancia de Firebase Analytics
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         // Forzar modo claro
@@ -62,6 +68,24 @@ class MainActivity : AppCompatActivity() {
         // Solo iniciar invisible en el arranque frío para poder crossfadear con el splash.
         binding.root.alpha = if (isColdStart) 0f else 1f
         setContentView(binding.root)
+
+        // Inicializar Firebase Analytics
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        // Configurar la versión de la app como parámetro por defecto en todos los eventos
+        configurarParametrosAnalytics()
+
+        // Registrar pantalla principal usando logEvent (método recomendado para reemplazar setCurrentScreen)
+        logScreenView("MainActivity")
+
+        // Registrar el idioma del dispositivo
+        registrarIdiomaDispositivo()
+
+        // Registrar evento de inicio de app
+        val bundle = Bundle()
+        bundle.putString(FirebaseAnalytics.Param.SCREEN_NAME, "MainActivity")
+        bundle.putString("start_type", if (isColdStart) "cold_start" else "warm_start")
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.APP_OPEN, bundle)
 
         // Configurar el listener para manejar el teclado
         setupKeyboardListener()
@@ -127,24 +151,147 @@ class MainActivity : AppCompatActivity() {
         // Python ya está inicializado en CalculadoraIMCApplication
 
         val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navController = findNavController(R.id.nav_host_fragment_activity_main)
+
+        // Configurar listener para rastrear navegación entre pantallas
+        // (Ahora tras inicializar navController, pero con postDelayed para asegurar que se aplique)
+        binding.root.post {
+            configurarRastreoNavegacion()
+        }
+
         navView.setupWithNavController(navController)
 
         sharedPreferences = getSharedPreferences("app_preferences", MODE_PRIVATE)
         val disclaimerAccepted = sharedPreferences.getBoolean("disclaimer_accepted", false)
         disclaimerPending = !disclaimerAccepted
 
+        // Registrar si el disclaimer está pendiente
+        if (disclaimerPending) {
+            firebaseAnalytics.logEvent("disclaimer_pending", null)
+        }
+    }
+
+    /**
+     * Método de utilidad para registrar vistas de pantalla en Analytics
+     * Reemplaza el obsoleto setCurrentScreen
+     */
+    private fun logScreenView(screenName: String, screenClass: String? = null) {
+        val params = Bundle().apply {
+            putString(FirebaseAnalytics.Param.SCREEN_NAME, screenName)
+            screenClass?.let {
+                putString(FirebaseAnalytics.Param.SCREEN_CLASS, it)
+            }
+        }
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SCREEN_VIEW, params)
+        android.util.Log.d("Analytics", "Pantalla registrada: $screenName")
+    }
+
+    /**
+     * Configura parámetros predeterminados para todos los eventos de Analytics,
+     * incluyendo la versión de la app
+     */
+    private fun configurarParametrosAnalytics() {
+        try {
+            val pInfo = packageManager.getPackageInfo(packageName, 0)
+            val versionName = pInfo.versionName
+            val versionCode = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                pInfo.longVersionCode
+            } else {
+                @Suppress("DEPRECATION")
+                pInfo.versionCode.toLong()
+            }
+
+            val defaultParams = Bundle().apply {
+                putString("app_version_name", versionName)
+                putLong("app_version_code", versionCode)
+            }
+
+            // Establecer estos parámetros para todos los eventos futuros
+            firebaseAnalytics.setDefaultEventParameters(defaultParams)
+
+            // También establecer como propiedades de usuario para segmentación
+            firebaseAnalytics.setUserProperty("app_version", versionName)
+
+            android.util.Log.d("Analytics", "Versión registrada: $versionName ($versionCode)")
+        } catch (e: Exception) {
+            android.util.Log.e("Analytics", "Error al obtener información de versión", e)
+        }
+    }
+
+    /**
+     * Configura un listener de navegación para rastrear entre qué pantallas navega el usuario
+     * Usando logEvent con SCREEN_VIEW (enfoque recomendado)
+     */
+    private fun configurarRastreoNavegacion() {
+        navController.addOnDestinationChangedListener { _, destination, arguments ->
+            // Obtener nombre de pantalla basado en el destino
+            val screenName = when (destination.id) {
+                R.id.navigation_adultos -> "Adultos"
+                R.id.navigation_menores -> "Menores"
+                R.id.navigation_historial -> "Historial"
+                R.id.navigation_grafico_historial -> {
+                    val tipoHistorial = arguments?.getString("tipo_historial") ?: "adultos"
+                    "Grafico_$tipoHistorial"
+                }
+                R.id.navigation_opciones -> "Opciones"
+                R.id.navigation_aviso_legal -> "AvisoLegal"
+                R.id.navigation_acerca_de -> "AcercaDe"
+                else -> "Desconocido"
+            }
+
+            // Usar el método recomendado para registrar pantallas: logEvent(SCREEN_VIEW)
+            val screenClass = destination.label?.toString() ?: ""
+            logScreenView(screenName, screenClass)
+
+            // Evento personalizado adicional para asegurar que aparezca
+            val screenBundle = Bundle().apply {
+                putString("screen_name", screenName)
+            }
+            firebaseAnalytics.logEvent("pantalla_visitada", screenBundle)
+
+            android.util.Log.d("Analytics", "Pantalla visitada: $screenName")
+        }
+    }
+
+    /**
+     * Registra el idioma del dispositivo en Firebase Analytics
+     */
+    private fun registrarIdiomaDispositivo() {
+        val currentLocale = resources.configuration.locales.get(0)
+        val idioma = currentLocale.language
+        val pais = currentLocale.country
+        val idiomaCompleto = "$idioma-$pais"
+
+        val bundle = Bundle().apply {
+            putString("idioma", idioma)
+            putString("idioma_pais", idiomaCompleto)
+        }
+
+        // Registrar idioma como evento para poder analizarlo
+        firebaseAnalytics.logEvent("app_idioma", bundle)
+
+        // También establecer como propiedad de usuario para segmentación
+        firebaseAnalytics.setUserProperty("user_language", idioma)
+
+        android.util.Log.d("Analytics", "Idioma registrado: $idiomaCompleto")
     }
 
     private fun mostrarDisclaimer() {
+        // Registrar evento de mostrar disclaimer
+        firebaseAnalytics.logEvent("disclaimer_shown", null)
+
         AlertDialog.Builder(this, R.style.AppAlertDialogTheme)
             .setTitle(getString(R.string.disclaimer_titulo))
             .setMessage(getString(R.string.disclaimer_texto))
             .setPositiveButton(getString(R.string.btn_aceptar)) { _, _ ->
                 sharedPreferences.edit { putBoolean("disclaimer_accepted", true) }
+                // Registrar evento de aceptar disclaimer
+                firebaseAnalytics.logEvent("disclaimer_accepted", null)
             }
             .setNegativeButton(getString(R.string.btn_salir)) { _, _ ->
                 Toast.makeText(this, getString(R.string.msg_debe_aceptar_disclaimer), Toast.LENGTH_LONG).show()
+                // Registrar evento de rechazar disclaimer
+                firebaseAnalytics.logEvent("disclaimer_declined", null)
                 binding.root.postDelayed({ finish() }, DISCLAIMER_EXIT_DELAY_MS)
             }
             .setCancelable(false)
