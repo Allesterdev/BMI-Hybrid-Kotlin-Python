@@ -20,6 +20,7 @@ import android.graphics.Rect
 import android.view.ViewTreeObserver
 import com.google.firebase.analytics.FirebaseAnalytics
 import androidx.navigation.NavController
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 
 
 class MainActivity : AppCompatActivity() {
@@ -39,6 +40,8 @@ class MainActivity : AppCompatActivity() {
     private var keyboardLayoutListener: ViewTreeObserver.OnGlobalLayoutListener? = null
     // Instancia de Firebase Analytics
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+    // Instancia de Firebase Crashlytics
+    private lateinit var crashlytics: FirebaseCrashlytics
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +74,24 @@ class MainActivity : AppCompatActivity() {
 
         // Inicializar Firebase Analytics
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        // Inicializar Crashlytics
+        crashlytics = FirebaseCrashlytics.getInstance()
+
+        // Habilitar la recopilación de Crashlytics en entorno de producción
+        // En un entorno de desarrollo puedes deshabilitar con crashlytics.setCrashlyticsCollectionEnabled(false)
+        crashlytics.setCrashlyticsCollectionEnabled(true)
+
+        // Configurar información de usuario (opcional)
+        try {
+            val userId = sharedPreferences?.getString("user_id", null) ?: "usuario_anónimo"
+            crashlytics.setUserId(userId)
+
+            // Añadir logs para depuración de crashlytics
+            crashlytics.log("MainActivity onCreate - Usuario: $userId")
+        } catch (e: Exception) {
+            android.util.Log.e("Crashlytics", "Error configurando Crashlytics", e)
+        }
 
         // Configurar la versión de la app como parámetro por defecto en todos los eventos
         configurarParametrosAnalytics()

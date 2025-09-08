@@ -3,10 +3,11 @@ plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
     alias(libs.plugins.google.gms.google.services)
+    alias(libs.plugins.google.firebase.crashlytics)
 }
 
 chaquopy {
-    defaultConfig { }
+    defaultConfig {}
     productFlavors { }
     sourceSets { }
 }
@@ -30,7 +31,7 @@ android {
 
         // Configuración de Python en Chaquopy
         python {
-            version "3.10"
+            version "3.10" //
             pip {
                 install "pandas"
 
@@ -64,10 +65,11 @@ android {
 }
 
 dependencies {
-    // Import the BoM for the Firebase platform
+
     implementation platform("com.google.firebase:firebase-bom:34.2.0")
-    // Añadir explícitamente Firebase Analytics
     implementation "com.google.firebase:firebase-analytics"
+    implementation "com.google.firebase:firebase-crashlytics"
+
 
     implementation 'androidx.core:core:1.16.0'
     implementation libs.androidx.core.splashscreen
