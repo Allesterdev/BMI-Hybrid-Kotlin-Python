@@ -11,11 +11,14 @@ import com.example.calculadoraimc.databinding.FragmentAdultosBinding
 import com.chaquo.python.Python
 import android.view.inputmethod.InputMethodManager
 import android.content.Context
+import com.example.calculadoraimc.utils.MeasurementUtils
+import com.example.calculadoraimc.utils.MeasurementUtils.MeasurementSystem
 
 class AdultosFragment : Fragment() {
 
     private var _binding: FragmentAdultosBinding? = null
     private val binding get() = _binding!!
+    private lateinit var measurementSystem: MeasurementSystem
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,9 +28,33 @@ class AdultosFragment : Fragment() {
         _binding = FragmentAdultosBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // Determinar sistema de medición según localización
+        measurementSystem = MeasurementUtils.getPreferredSystem(requireContext())
+
+        // Configurar etiquetas según sistema de medición
+        setupMeasurementLabels()
+
         setupClickListeners()
 
         return root
+    }
+
+    /**
+     * Configura los hints según el sistema de medición detectado
+     */
+    private fun setupMeasurementLabels() {
+        when (measurementSystem) {
+            MeasurementSystem.METRIC -> {
+                // Sistema métrico (cm, kg)
+                binding.tilPeso.hint = getString(R.string.hint_peso)
+                binding.tilAltura.hint = getString(R.string.hint_altura)
+            }
+            MeasurementSystem.IMPERIAL -> {
+                // Sistema imperial (lb, in)
+                binding.tilPeso.hint = getString(R.string.hint_peso_imperial)
+                binding.tilAltura.hint = getString(R.string.hint_altura_imperial)
+            }
+        }
     }
 
     private fun setupClickListeners() {
@@ -53,21 +80,45 @@ class AdultosFragment : Fragment() {
         }
 
         try {
-            // Llamar directamente a Python - Python maneja todas las conversiones
+            // Convertir valores al sistema métrico si es necesario
+            val (pesoKg, alturaCm) = when (measurementSystem) {
+                MeasurementSystem.METRIC -> {
+                    // Ya están en kg y cm, no necesita conversión
+                    Pair(pesoText.toFloat(), alturaText.toFloat())
+                }
+                MeasurementSystem.IMPERIAL -> {
+                    // Convertir de libras a kg y de pulgadas a cm
+                    val pesoLbs = pesoText.toFloat()
+                    val alturaInches = alturaText.toFloat()
+
+                    val pesoKg = MeasurementUtils.lbsToKg(pesoLbs)
+                    val alturaCm = MeasurementUtils.inchesToCm(alturaInches)
+
+                    Pair(pesoKg, alturaCm)
+                }
+            }
+
+            // Llamar a Python con los valores convertidos a métrico
             val python = Python.getInstance()
             val funcionesModule = python.getModule("funciones_imc_android")
 
             // Usar try-catch interno para manejar errores específicos de Python
             val imc = try {
-                funcionesModule.callAttr("calcular_imc", pesoText, alturaText).toDouble()
+                funcionesModule.callAttr("calcular_imc", pesoKg.toString(), alturaCm.toString()).toDouble()
             } catch (e: Exception) {
                 // Si hay error en el cálculo, mostrar mensaje específico
                 Toast.makeText(context, getString(R.string.error_datos_invalidos, e.message ?: ""), Toast.LENGTH_LONG).show()
                 return
             }
 
-            // Ahora interpretar_imc devuelve una clave de recurso. Resolverla a string.
-            val interpretacionKey = funcionesModule.callAttr("interpretar_imc", imc).toString()
+            // Obtener interpretación
+            val interpretacionKey = try {
+                funcionesModule.callAttr("interpretar_imc", imc).toString()
+            } catch (e: Exception) {
+                // Si hay error en la interpretación, mostrar mensaje específico
+                Toast.makeText(context, getString(R.string.error_calculo, e.message ?: ""), Toast.LENGTH_LONG).show()
+                return
+            }
 
             val interpretacionTexto = when (interpretacionKey) {
                 "interpretacion_bajo_peso_adulto" -> getString(R.string.interpretacion_bajo_peso_adulto)
@@ -112,20 +163,39 @@ class AdultosFragment : Fragment() {
         }
 
         try {
-            // Python maneja las conversiones automáticamente
+            // Convertir valores al sistema métrico para guardar
+            val (pesoKg, alturaCm) = when (measurementSystem) {
+                MeasurementSystem.METRIC -> {
+                    // Ya están en kg y cm, no necesita conversión
+                    Pair(pesoText.toFloat(), alturaText.toFloat())
+                }
+                MeasurementSystem.IMPERIAL -> {
+                    // Convertir de libras a kg y de pulgadas a cm
+                    val pesoLbs = pesoText.toFloat()
+                    val alturaInches = alturaText.toFloat()
+
+                    val pesoKg = MeasurementUtils.lbsToKg(pesoLbs)
+                    val alturaCm = MeasurementUtils.inchesToCm(alturaInches)
+
+                    Pair(pesoKg, alturaCm)
+                }
+            }
+
+            // Python espera los valores en sistema métrico
             val python = Python.getInstance()
             val funcionesModule = python.getModule("funciones_imc_android")
 
             // Usar try-catch interno para manejar errores específicos de Python
             val imc = try {
-                funcionesModule.callAttr("calcular_imc", pesoText, alturaText).toDouble()
+                funcionesModule.callAttr("calcular_imc", pesoKg.toString(), alturaCm.toString()).toDouble()
             } catch (e: Exception) {
                 // Si hay error en el cálculo, mostrar mensaje específico
                 Toast.makeText(context, getString(R.string.error_calculo_guardar, e.message ?: ""), Toast.LENGTH_LONG).show()
                 return
             }
 
-            funcionesModule.callAttr("guardar_medicion", pesoText, alturaText, imc)
+            // Guardar datos en formato métrico estándar
+            funcionesModule.callAttr("guardar_medicion", pesoKg.toString(), alturaCm.toString(), imc)
 
             Toast.makeText(context, getString(R.string.exito_guardado), Toast.LENGTH_SHORT).show()
 

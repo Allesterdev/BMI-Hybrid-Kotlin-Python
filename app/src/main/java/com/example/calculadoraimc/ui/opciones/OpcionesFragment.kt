@@ -1,10 +1,10 @@
 package com.example.calculadoraimc.ui.opciones
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.chaquo.python.Python
@@ -12,55 +12,133 @@ import com.chaquo.python.android.AndroidPlatform
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentOpcionesBinding
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.example.calculadoraimc.utils.MeasurementUtils
+import com.example.calculadoraimc.utils.MeasurementUtils.MeasurementSystem
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class OpcionesFragment : Fragment() {
 
     private var _binding: FragmentOpcionesBinding? = null
     private val binding get() = _binding!!
 
+    // Referencias directas a vistas
+    private lateinit var switchSistemaMedida: SwitchMaterial
+    private lateinit var tvSistemaActualValor: TextView
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentOpcionesBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = inflater.inflate(R.layout.fragment_opciones, container, false)
+        _binding = FragmentOpcionesBinding.bind(view)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupClickListeners()
+        // Inicializar referencias directas a vistas
+        try {
+            switchSistemaMedida = view.findViewById(R.id.switch_sistema_medida)
+            tvSistemaActualValor = view.findViewById(R.id.tv_sistema_actual_valor)
+
+            setupMeasurementSystemSwitch()
+        } catch (e: Exception) {
+            android.util.Log.e("OpcionesFragment", "Error al inicializar vistas: ${e.message}", e)
+        }
+
+        setupClickListeners(view)
     }
 
-    private fun setupClickListeners() {
-        binding.btnBorrarHistorialAdultos.setOnClickListener {
-            mostrarDialogoConfirmacion(
-                title = getString(R.string.confirmacion_borrar_titulo),
-                message = getString(R.string.confirmacion_borrar_adultos),
-                onConfirm = { borrarHistorialAdultos() }
-            )
+    private fun setupMeasurementSystemSwitch() {
+        try {
+            // Obtener el sistema actual de medición
+            val currentSystem = MeasurementUtils.getPreferredSystem(requireContext())
+
+            // Inicializar el switch según el sistema actual
+            // true = Imperial, false = Métrico
+            switchSistemaMedida.isChecked = currentSystem == MeasurementSystem.IMPERIAL
+
+            // Actualizar el texto que muestra el sistema actual
+            updateCurrentSystemText(currentSystem)
+
+            // Configurar el listener para cambios en el switch
+            switchSistemaMedida.setOnCheckedChangeListener { _, isChecked ->
+                val newSystem = if (isChecked) MeasurementSystem.IMPERIAL else MeasurementSystem.METRIC
+
+                // Guardar la nueva preferencia
+                MeasurementUtils.setPreferredSystem(requireContext(), newSystem)
+
+                // Actualizar el texto que muestra el sistema actual
+                updateCurrentSystemText(newSystem)
+
+                // Mostrar un mensaje de confirmación del cambio
+                val systemName = getString(
+                    if (isChecked) R.string.sistema_imperial else R.string.sistema_metrico
+                )
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.cambio_sistema_confirmado, systemName),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        } catch (e: Exception) {
+            // Registrar la excepción para diagnóstico
+            android.util.Log.e("OpcionesFragment", "Error al configurar el switch: ${e.message}", e)
         }
-        binding.btnBorrarHistorialMenores.setOnClickListener {
-            mostrarDialogoConfirmacion(
-                title = getString(R.string.confirmacion_borrar_titulo),
-                message = getString(R.string.confirmacion_borrar_menores),
-                onConfirm = { borrarHistorialMenores() }
-            )
+    }
+
+    private fun updateCurrentSystemText(system: MeasurementSystem) {
+        try {
+            val systemText = when (system) {
+                MeasurementSystem.METRIC -> getString(R.string.sistema_metrico)
+                MeasurementSystem.IMPERIAL -> getString(R.string.sistema_imperial)
+            }
+            tvSistemaActualValor.text = systemText
+        } catch (e: Exception) {
+            // Registrar la excepción para diagnóstico
+            android.util.Log.e("OpcionesFragment", "Error al actualizar el texto: ${e.message}", e)
         }
-        binding.btnBorrarTodosHistoriales.setOnClickListener {
-            mostrarDialogoConfirmacion(
-                title = getString(R.string.confirmacion_borrar_titulo),
-                message = getString(R.string.confirmacion_borrar_todos),
-                onConfirm = { borrarTodosHistoriales() }
-            )
-        }
-        binding.btnAvisoLegal.setOnClickListener {
-            findNavController().navigate(R.id.action_opciones_to_avisoLegal)
-        }
-        binding.btnAcercaDe.setOnClickListener {
-            findNavController().navigate(R.id.action_opciones_to_acercaDe)
+    }
+
+    private fun setupClickListeners(view: View) {
+        try {
+            view.findViewById<MaterialButton>(R.id.btn_borrar_historial_adultos).setOnClickListener {
+                mostrarDialogoConfirmacion(
+                    title = getString(R.string.confirmacion_borrar_titulo),
+                    message = getString(R.string.confirmacion_borrar_adultos),
+                    onConfirm = { borrarHistorialAdultos() }
+                )
+            }
+
+            view.findViewById<MaterialButton>(R.id.btn_borrar_historial_menores).setOnClickListener {
+                mostrarDialogoConfirmacion(
+                    title = getString(R.string.confirmacion_borrar_titulo),
+                    message = getString(R.string.confirmacion_borrar_menores),
+                    onConfirm = { borrarHistorialMenores() }
+                )
+            }
+
+            view.findViewById<MaterialButton>(R.id.btn_borrar_todos_historiales).setOnClickListener {
+                mostrarDialogoConfirmacion(
+                    title = getString(R.string.confirmacion_borrar_titulo),
+                    message = getString(R.string.confirmacion_borrar_todos),
+                    onConfirm = { borrarTodosHistoriales() }
+                )
+            }
+
+            view.findViewById<MaterialButton>(R.id.btn_aviso_legal).setOnClickListener {
+                findNavController().navigate(R.id.action_opciones_to_avisoLegal)
+            }
+
+            view.findViewById<MaterialButton>(R.id.btn_acerca_de).setOnClickListener {
+                findNavController().navigate(R.id.action_opciones_to_acercaDe)
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("OpcionesFragment", "Error al configurar click listeners: ${e.message}", e)
         }
     }
 

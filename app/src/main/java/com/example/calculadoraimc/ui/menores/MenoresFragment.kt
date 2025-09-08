@@ -13,11 +13,14 @@ import androidx.fragment.app.Fragment
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentMenoresBinding
 import com.chaquo.python.Python
+import com.example.calculadoraimc.utils.MeasurementUtils
+import com.example.calculadoraimc.utils.MeasurementUtils.MeasurementSystem
 
 class MenoresFragment : Fragment() {
 
     private var _binding: FragmentMenoresBinding? = null
     private val binding get() = _binding!!
+    private lateinit var measurementSystem: MeasurementSystem
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,10 +30,34 @@ class MenoresFragment : Fragment() {
         _binding = FragmentMenoresBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        // Determinar sistema de medición según localización
+        measurementSystem = MeasurementUtils.getPreferredSystem(requireContext())
+
+        // Configurar etiquetas según sistema de medición
+        setupMeasurementLabels()
+
         setupClickListeners()
         setupTextWatchers()
 
         return root
+    }
+
+    /**
+     * Configura los hints según el sistema de medición detectado
+     */
+    private fun setupMeasurementLabels() {
+        when (measurementSystem) {
+            MeasurementSystem.METRIC -> {
+                // Sistema métrico (cm, kg)
+                binding.tilPeso.hint = getString(R.string.hint_peso)
+                binding.tilAltura.hint = getString(R.string.hint_altura)
+            }
+            MeasurementSystem.IMPERIAL -> {
+                // Sistema imperial (lb, in)
+                binding.tilPeso.hint = getString(R.string.hint_peso_imperial)
+                binding.tilAltura.hint = getString(R.string.hint_altura_imperial)
+            }
+        }
     }
 
     fun showSoftKeyboard(view: View) {
@@ -240,19 +267,38 @@ class MenoresFragment : Fragment() {
         try {
             val sexo = if (binding.rbMasculino.isChecked) "Masculino" else "Femenino"
 
+            // Convertir valores al sistema métrico si es necesario
+            val (pesoKg, alturaCm) = when (measurementSystem) {
+                MeasurementSystem.METRIC -> {
+                    // Ya están en kg y cm, no necesita conversión
+                    Pair(pesoText.toFloat(), alturaText.toFloat())
+                }
+                MeasurementSystem.IMPERIAL -> {
+                    // Convertir de libras a kg y de pulgadas a cm
+                    val pesoLbs = pesoText.toFloat()
+                    val alturaInches = alturaText.toFloat()
+
+                    val pesoKg = MeasurementUtils.lbsToKg(pesoLbs)
+                    val alturaCm = MeasurementUtils.inchesToCm(alturaInches)
+
+                    Pair(pesoKg, alturaCm)
+                }
+            }
+
             // Debug: Mostrar qué datos estamos enviando
             android.util.Log.d("MenoresFragment", "Enviando a Python:")
             android.util.Log.d("MenoresFragment", "  Sexo: $sexo")
             android.util.Log.d("MenoresFragment", "  Fecha: '$fechaNacimiento'")
-            android.util.Log.d("MenoresFragment", "  Peso: '$pesoText'")
-            android.util.Log.d("MenoresFragment", "  Altura: '$alturaText'")
+            android.util.Log.d("MenoresFragment", "  Peso (convertido a kg): '$pesoKg'")
+            android.util.Log.d("MenoresFragment", "  Altura (convertida a cm): '$alturaCm'")
 
             // Llamar a la función de Python que usa fecha de nacimiento
             val python = Python.getInstance()
             val funcionesModule = python.getModule("funciones_imc_android")
 
             // Python maneja la validación y conversión de fecha automáticamente
-            val resultado = funcionesModule.callAttr("calcular_imc_menor_por_fecha", sexo, fechaNacimiento, pesoText, alturaText)
+            // Enviamos los valores ya convertidos a sistema métrico
+            val resultado = funcionesModule.callAttr("calcular_imc_menor_por_fecha", sexo, fechaNacimiento, pesoKg.toString(), alturaCm.toString())
 
             // Debug: Mostrar qué devuelve Python
             android.util.Log.d("MenoresFragment", "Resultado Python completo: $resultado")
@@ -307,9 +353,9 @@ class MenoresFragment : Fragment() {
             binding.root.post {
                 binding.root.smoothScrollTo(0, binding.cardResultado.bottom)
             }
-        } catch (_: Exception) {
-            android.util.Log.e("MenoresFragment", "Excepción en calcularPercentil")
-            Toast.makeText(context, getString(R.string.error_calculo, ""), Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            android.util.Log.e("MenoresFragment", "Excepción en calcularPercentil", e)
+            Toast.makeText(context, getString(R.string.error_calculo, e.message ?: ""), Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -360,12 +406,30 @@ class MenoresFragment : Fragment() {
         try {
             val sexo = if (binding.rbMasculino.isChecked) "Masculino" else "Femenino"
 
+            // Convertir valores al sistema métrico si es necesario
+            val (pesoKg, alturaCm) = when (measurementSystem) {
+                MeasurementSystem.METRIC -> {
+                    // Ya están en kg y cm, no necesita conversión
+                    Pair(pesoText.toFloat(), alturaText.toFloat())
+                }
+                MeasurementSystem.IMPERIAL -> {
+                    // Convertir de libras a kg y de pulgadas a cm
+                    val pesoLbs = pesoText.toFloat()
+                    val alturaInches = alturaText.toFloat()
+
+                    val pesoKg = MeasurementUtils.lbsToKg(pesoLbs)
+                    val alturaCm = MeasurementUtils.inchesToCm(alturaInches)
+
+                    Pair(pesoKg, alturaCm)
+                }
+            }
+
             // Python maneja todas las conversiones automáticamente
             val python = Python.getInstance()
             val funcionesModule = python.getModule("funciones_imc_android")
 
-            // Calculamos nuevamente usando la nueva función por fecha
-            val resultado = funcionesModule.callAttr("calcular_imc_menor_por_fecha", sexo, fechaNacimiento, pesoText, alturaText)
+            // Calculamos nuevamente usando la nueva función por fecha y enviando los valores ya convertidos
+            val resultado = funcionesModule.callAttr("calcular_imc_menor_por_fecha", sexo, fechaNacimiento, pesoKg.toString(), alturaCm.toString())
 
             if (resultado.containsKey("error") != true) {
                 // Usar la sintaxis correcta para extraer valores de objetos Python
@@ -373,20 +437,17 @@ class MenoresFragment : Fragment() {
                 val percentil = resultado.callAttr("get", "percentil")?.toDouble() ?: 0.0
                 val edadMeses = resultado.callAttr("get", "edad_meses")?.toInt() ?: 0
 
-                // Convertir peso y altura a valores numéricos antes de guardar
-                val pesoNumerico = pesoText.toDouble()
-                val alturaNumerico = alturaText.toDouble()
-
                 // Log para verificar que los valores son correctos antes de guardar
                 android.util.Log.d("MenoresFragment", "Guardando medición:")
-                android.util.Log.d("MenoresFragment", "  Peso: $pesoNumerico")
-                android.util.Log.d("MenoresFragment", "  Altura: $alturaNumerico")
+                android.util.Log.d("MenoresFragment", "  Peso (kg): $pesoKg")
+                android.util.Log.d("MenoresFragment", "  Altura (cm): $alturaCm")
                 android.util.Log.d("MenoresFragment", "  IMC: $imc")
                 android.util.Log.d("MenoresFragment", "  Sexo: $sexo")
                 android.util.Log.d("MenoresFragment", "  Edad meses: $edadMeses")
                 android.util.Log.d("MenoresFragment", "  Percentil: $percentil")
 
-                funcionesModule.callAttr("guardar_medicion", pesoNumerico, alturaNumerico, imc, sexo, edadMeses, percentil)
+                // Siempre guardamos en sistema métrico para consistencia en la base de datos
+                funcionesModule.callAttr("guardar_medicion", pesoKg, alturaCm, imc, sexo, edadMeses, percentil)
 
                 Toast.makeText(context, getString(R.string.exito_guardado), Toast.LENGTH_SHORT).show()
 
@@ -398,8 +459,9 @@ class MenoresFragment : Fragment() {
                 binding.cardResultado.visibility = View.GONE
             }
 
-        } catch (_: Exception) {
-            Toast.makeText(context, getString(R.string.error_guardar, ""), Toast.LENGTH_SHORT).show()
+        } catch (e: Exception) {
+            android.util.Log.e("MenoresFragment", "Error al guardar medición", e)
+            Toast.makeText(context, getString(R.string.error_guardar, e.message ?: ""), Toast.LENGTH_SHORT).show()
         }
     }
 

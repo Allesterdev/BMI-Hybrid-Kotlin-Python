@@ -8,7 +8,9 @@
     <!-- Strings para la calculadora de adultos -->
     <string name="titulo_calculadora_adultos">Calculadora IMC Adultos</string>
     <string name="hint_peso">Peso (kg)</string>
+    <string name="hint_peso_imperial">Peso (lb)</string>
     <string name="hint_altura">Altura (m o cm)</string>
+    <string name="hint_altura_imperial">Altura (in)</string>
     <string name="btn_calcular_imc">Calcular IMC</string>
     <string name="titulo_resultado">Resultado</string>
     <string name="btn_guardar_historial">Guardar en Historial</string>
@@ -150,4 +152,20 @@
     <string name="interpretacion_obesidad_2_adulto">Tienes obesidad de grado 2</string>
     <string name="interpretacion_obesidad_3_adulto">Tienes obesidad de grado 3</string>
 
+    <!-- Strings para unidades de medida -->
+    <string name="unidad_peso_kg">kg</string>
+    <string name="unidad_peso_libras">lb</string>
+    <string name="unidad_altura_cm">cm</string>
+    <string name="unidad_altura_pulgadas">in</string>
+    <string name="hint_peso_kg">Peso en kg</string>
+    <string name="hint_peso_libras">Peso en libras</string>
+    <string name="hint_altura_cm">Altura en cm</string>
+    <string name="hint_altura_pulgadas">Altura en pulgadas</string>
+
+    <!-- Strings para sistemas de medida -->
+    <string name="sistema_metrico">Sistema Métrico (cm, kg)</string>
+    <string name="sistema_imperial">Sistema Imperial (in, lb)</string>
+    <string name="cambiar_sistema_medida">Cambiar sistema de medidas</string>
+    <string name="ajustes_medicion_titulo">Ajustes de Medición</string>
+    <string name="cambio_sistema_confirmado">Sistema de medición cambiado a: %1$s</string>
 </resources>
