@@ -69,6 +69,8 @@
     <string name="titulo_historial">Measurement History</string>
     <string name="historial_peso">Weight: %.1f kg</string>
     <string name="historial_altura">Height: %.2f m</string>
+    <string name="historial_peso_formato">Weight: %s</string>
+    <string name="historial_altura_formato">Height: %s</string>
     <string name="historial_imc">BMI: %.2f</string>
     <string name="historial_fecha">Date: %s</string>
     <string name="historial_sexo">Sex: %s</string>
@@ -152,18 +154,16 @@
 
     <!-- New: metric and imperial system strings -->
     <string name="hint_peso_imperial">Weight (lb)</string>
-    <string name="hint_altura_imperial">Height (in)</string>
+    <string name="hint_altura_imperial">Height (in or 5\'10\")</string>
+    <string name="hint_altura_imperial_ejemplo">Ex: 5\'10\" or 70</string>
+    <string name="hint_peso_kg">Weight in kg</string>
+    <string name="hint_peso_libras">Weight in pounds</string>
+    <string name="hint_altura_cm">Height in cm</string>
+    <string name="hint_altura_pulgadas">Inches</string>
+    <string name="hint_altura_pies">Feet</string>
+    <string name="formato_altura_imperial">%1$d\' %2$d\"</string>
     <string name="unidad_peso_kg">kg</string>
     <string name="unidad_peso_libras">lb</string>
     <string name="unidad_altura_cm">cm</string>
     <string name="unidad_altura_pulgadas">in</string>
-    <string name="hint_peso_kg">Weight in kg</string>
-    <string name="hint_peso_libras">Weight in pounds</string>
-    <string name="hint_altura_cm">Height in cm</string>
-    <string name="hint_altura_pulgadas">Height in inches</string>
-    <string name="sistema_metrico">Metric System (cm, kg)</string>
-    <string name="sistema_imperial">Imperial System (in, lb)</string>
-    <string name="cambiar_sistema_medida">Change measurement system</string>
-    <string name="ajustes_medicion_titulo">Measurement Settings</string>
-    <string name="cambio_sistema_confirmado">Measurement system changed to: %1$s</string>
 </resources>

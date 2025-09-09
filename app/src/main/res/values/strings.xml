@@ -10,7 +10,8 @@
     <string name="hint_peso">Peso (kg)</string>
     <string name="hint_peso_imperial">Peso (lb)</string>
     <string name="hint_altura">Altura (m o cm)</string>
-    <string name="hint_altura_imperial">Altura (in)</string>
+    <string name="hint_altura_imperial">Altura (in o 5\'10\")</string>
+    <string name="hint_altura_imperial_ejemplo">Ej: 5\'10\" o 70</string>
     <string name="btn_calcular_imc">Calcular IMC</string>
     <string name="titulo_resultado">Resultado</string>
     <string name="btn_guardar_historial">Guardar en Historial</string>
@@ -71,6 +72,8 @@
     <string name="titulo_historial">Historial de Mediciones</string>
     <string name="historial_peso">Peso: %.1f kg</string>
     <string name="historial_altura">Altura: %.2f m</string>
+    <string name="historial_peso_formato">Peso: %s</string>
+    <string name="historial_altura_formato">Altura: %s</string>
     <string name="historial_imc">IMC: %.2f</string>
     <string name="historial_fecha">Fecha: %s</string>
     <string name="historial_sexo">Sexo: %s</string>
@@ -160,7 +163,9 @@
     <string name="hint_peso_kg">Peso en kg</string>
     <string name="hint_peso_libras">Peso en libras</string>
     <string name="hint_altura_cm">Altura en cm</string>
-    <string name="hint_altura_pulgadas">Altura en pulgadas</string>
+    <string name="hint_altura_pulgadas">Pulgadas</string>
+    <string name="hint_altura_pies">Pies</string>
+    <string name="formato_altura_imperial">%1$d\' %2$d\"</string>
 
     <!-- Strings para sistemas de medida -->
     <string name="sistema_metrico">Sistema Métrico (cm, kg)</string>

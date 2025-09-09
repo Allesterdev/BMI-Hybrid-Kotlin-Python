@@ -48,11 +48,18 @@ class AdultosFragment : Fragment() {
                 // Sistema métrico (cm, kg)
                 binding.tilPeso.hint = getString(R.string.hint_peso)
                 binding.tilAltura.hint = getString(R.string.hint_altura)
+
+                // Mostrar campo de altura métrico y ocultar campos imperiales
+                binding.tilAltura.visibility = View.VISIBLE
+                binding.layoutAlturaImperial.visibility = View.GONE
             }
             MeasurementSystem.IMPERIAL -> {
                 // Sistema imperial (lb, in)
                 binding.tilPeso.hint = getString(R.string.hint_peso_imperial)
-                binding.tilAltura.hint = getString(R.string.hint_altura_imperial)
+
+                // Ocultar campo de altura métrico y mostrar campos imperiales
+                binding.tilAltura.visibility = View.GONE
+                binding.layoutAlturaImperial.visibility = View.VISIBLE
             }
         }
     }
@@ -72,27 +79,41 @@ class AdultosFragment : Fragment() {
         hideKeyboard()
 
         val pesoText = binding.etPeso.text.toString()
-        val alturaText = binding.etAltura.text.toString()
-
-        if (pesoText.isEmpty() || alturaText.isEmpty()) {
-            Toast.makeText(context, getString(R.string.error_campos_vacios_adultos), Toast.LENGTH_SHORT).show()
-            return
-        }
 
         try {
             // Convertir valores al sistema métrico si es necesario
             val (pesoKg, alturaCm) = when (measurementSystem) {
                 MeasurementSystem.METRIC -> {
+                    val alturaText = binding.etAltura.text.toString()
+
+                    if (pesoText.isEmpty() || alturaText.isEmpty()) {
+                        Toast.makeText(context, getString(R.string.error_campos_vacios_adultos), Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
                     // Ya están en kg y cm, no necesita conversión
-                    Pair(pesoText.toFloat(), alturaText.toFloat())
+                    Pair(pesoText.toDouble(), alturaText.toDouble())
                 }
                 MeasurementSystem.IMPERIAL -> {
-                    // Convertir de libras a kg y de pulgadas a cm
-                    val pesoLbs = pesoText.toFloat()
-                    val alturaInches = alturaText.toFloat()
+                    val piesText = binding.etAlturaPies.text.toString()
+                    val pulgadasText = binding.etAlturaPulgadas.text.toString()
 
+                    if (pesoText.isEmpty() || (piesText.isEmpty() && pulgadasText.isEmpty())) {
+                        Toast.makeText(context, getString(R.string.error_campos_vacios_adultos), Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
+                    // Convertir de libras a kg
+                    val pesoLbs = pesoText.toDouble()
                     val pesoKg = MeasurementUtils.lbsToKg(pesoLbs)
-                    val alturaCm = MeasurementUtils.inchesToCm(alturaInches)
+
+                    // Convertir pies y pulgadas a centímetros
+                    val pies = if (piesText.isEmpty()) 0 else piesText.toInt()
+                    val pulgadas = if (pulgadasText.isEmpty()) 0 else pulgadasText.toInt()
+
+                    // Total de pulgadas = (pies * 12) + pulgadas
+                    val totalPulgadas = (pies * 12) + pulgadas
+                    val alturaCm = MeasurementUtils.inchesToCm(totalPulgadas.toDouble())
 
                     Pair(pesoKg, alturaCm)
                 }
@@ -154,28 +175,42 @@ class AdultosFragment : Fragment() {
     }
 
     private fun guardarMedicion() {
-        val pesoText = binding.etPeso.text.toString()
-        val alturaText = binding.etAltura.text.toString()
-
-        if (pesoText.isEmpty() || alturaText.isEmpty()) {
-            Toast.makeText(context, getString(R.string.error_calcular_primero_adultos), Toast.LENGTH_SHORT).show()
-            return
-        }
-
         try {
             // Convertir valores al sistema métrico para guardar
             val (pesoKg, alturaCm) = when (measurementSystem) {
                 MeasurementSystem.METRIC -> {
+                    val pesoText = binding.etPeso.text.toString()
+                    val alturaText = binding.etAltura.text.toString()
+
+                    if (pesoText.isEmpty() || alturaText.isEmpty()) {
+                        Toast.makeText(context, getString(R.string.error_calcular_primero_adultos), Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
                     // Ya están en kg y cm, no necesita conversión
-                    Pair(pesoText.toFloat(), alturaText.toFloat())
+                    Pair(pesoText.toDouble(), alturaText.toDouble())
                 }
                 MeasurementSystem.IMPERIAL -> {
-                    // Convertir de libras a kg y de pulgadas a cm
-                    val pesoLbs = pesoText.toFloat()
-                    val alturaInches = alturaText.toFloat()
+                    val pesoText = binding.etPeso.text.toString()
+                    val piesText = binding.etAlturaPies.text.toString()
+                    val pulgadasText = binding.etAlturaPulgadas.text.toString()
 
+                    if (pesoText.isEmpty() || (piesText.isEmpty() && pulgadasText.isEmpty())) {
+                        Toast.makeText(context, getString(R.string.error_calcular_primero_adultos), Toast.LENGTH_SHORT).show()
+                        return
+                    }
+
+                    // Convertir de libras a kg
+                    val pesoLbs = pesoText.toDouble()
                     val pesoKg = MeasurementUtils.lbsToKg(pesoLbs)
-                    val alturaCm = MeasurementUtils.inchesToCm(alturaInches)
+
+                    // Convertir pies y pulgadas a centímetros
+                    val pies = if (piesText.isEmpty()) 0 else piesText.toInt()
+                    val pulgadas = if (pulgadasText.isEmpty()) 0 else pulgadasText.toInt()
+
+                    // Total de pulgadas = (pies * 12) + pulgadas
+                    val totalPulgadas = (pies * 12) + pulgadas
+                    val alturaCm = MeasurementUtils.inchesToCm(totalPulgadas.toDouble())
 
                     Pair(pesoKg, alturaCm)
                 }
@@ -202,6 +237,8 @@ class AdultosFragment : Fragment() {
             // Limpiar campos
             binding.etPeso.text?.clear()
             binding.etAltura.text?.clear()
+            binding.etAlturaPies.text?.clear()
+            binding.etAlturaPulgadas.text?.clear()
             binding.barraImc.clearIndicator()
             binding.cardResultado.visibility = View.GONE
 

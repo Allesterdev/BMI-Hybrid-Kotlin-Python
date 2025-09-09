@@ -51,11 +51,18 @@ class MenoresFragment : Fragment() {
                 // Sistema métrico (cm, kg)
                 binding.tilPeso.hint = getString(R.string.hint_peso)
                 binding.tilAltura.hint = getString(R.string.hint_altura)
+                
+                // Mostrar campo de altura métrico y ocultar campos imperiales
+                binding.tilAltura.visibility = View.VISIBLE
+                binding.layoutAlturaImperial.visibility = View.GONE
             }
             MeasurementSystem.IMPERIAL -> {
                 // Sistema imperial (lb, in)
                 binding.tilPeso.hint = getString(R.string.hint_peso_imperial)
-                binding.tilAltura.hint = getString(R.string.hint_altura_imperial)
+                
+                // Ocultar campo de altura métrico y mostrar campos imperiales
+                binding.tilAltura.visibility = View.GONE
+                binding.layoutAlturaImperial.visibility = View.VISIBLE
             }
         }
     }
@@ -216,12 +223,32 @@ class MenoresFragment : Fragment() {
 
     private fun calcularPercentil() {
         val pesoText = binding.etPeso.text.toString()
-        val alturaText = binding.etAltura.text.toString()
         val fechaNacimiento = binding.etFechaNacimiento.text.toString()
 
-        if (pesoText.isEmpty() || alturaText.isEmpty() || fechaNacimiento.isEmpty()) {
+        // Validar que los campos requeridos no estén vacíos
+        if (pesoText.isEmpty() || fechaNacimiento.isEmpty()) {
             Toast.makeText(context, getString(R.string.error_campos_vacios_menores), Toast.LENGTH_SHORT).show()
             return
+        }
+
+        // Validar que tengamos datos de altura según el sistema de medición
+        when (measurementSystem) {
+            MeasurementSystem.METRIC -> {
+                val alturaText = binding.etAltura.text.toString()
+                if (alturaText.isEmpty()) {
+                    Toast.makeText(context, getString(R.string.error_campos_vacios_menores), Toast.LENGTH_SHORT).show()
+                    return
+                }
+            }
+            MeasurementSystem.IMPERIAL -> {
+                val piesText = binding.etAlturaPies.text.toString()
+                val pulgadasText = binding.etAlturaPulgadas.text.toString()
+
+                if (piesText.isEmpty() && pulgadasText.isEmpty()) {
+                    Toast.makeText(context, getString(R.string.error_campos_vacios_menores), Toast.LENGTH_SHORT).show()
+                    return
+                }
+            }
         }
 
         // Validar fecha localmente: formato, año de 4 dígitos, no futura y rango 5-19 años
@@ -270,16 +297,26 @@ class MenoresFragment : Fragment() {
             // Convertir valores al sistema métrico si es necesario
             val (pesoKg, alturaCm) = when (measurementSystem) {
                 MeasurementSystem.METRIC -> {
+                    val alturaText = binding.etAltura.text.toString()
                     // Ya están en kg y cm, no necesita conversión
-                    Pair(pesoText.toFloat(), alturaText.toFloat())
+                    Pair(pesoText.toDouble(), alturaText.toDouble())
                 }
                 MeasurementSystem.IMPERIAL -> {
-                    // Convertir de libras a kg y de pulgadas a cm
-                    val pesoLbs = pesoText.toFloat()
-                    val alturaInches = alturaText.toFloat()
-
+                    // Convertir de libras a kg
+                    val pesoLbs = pesoText.toDouble()
                     val pesoKg = MeasurementUtils.lbsToKg(pesoLbs)
-                    val alturaCm = MeasurementUtils.inchesToCm(alturaInches)
+
+                    // Usar los campos separados de pies y pulgadas
+                    val piesText = binding.etAlturaPies.text.toString()
+                    val pulgadasText = binding.etAlturaPulgadas.text.toString()
+
+                    // Convertir pies y pulgadas a centímetros
+                    val pies = if (piesText.isEmpty()) 0 else piesText.toInt()
+                    val pulgadas = if (pulgadasText.isEmpty()) 0 else pulgadasText.toInt()
+
+                    // Total de pulgadas = (pies * 12) + pulgadas
+                    val totalPulgadas = (pies * 12) + pulgadas
+                    val alturaCm = MeasurementUtils.inchesToCm(totalPulgadas.toDouble())
 
                     Pair(pesoKg, alturaCm)
                 }
@@ -361,12 +398,32 @@ class MenoresFragment : Fragment() {
 
     private fun guardarMedicion() {
         val pesoText = binding.etPeso.text.toString()
-        val alturaText = binding.etAltura.text.toString()
         val fechaNacimiento = binding.etFechaNacimiento.text.toString()
 
-        if (pesoText.isEmpty() || alturaText.isEmpty() || fechaNacimiento.isEmpty()) {
+        // Validar que los campos requeridos no estén vacíos según el sistema de medición
+        if (pesoText.isEmpty() || fechaNacimiento.isEmpty()) {
             Toast.makeText(context, getString(R.string.error_calcular_primero_menores), Toast.LENGTH_SHORT).show()
             return
+        }
+
+        // Validar que tengamos datos de altura según el sistema de medición
+        when (measurementSystem) {
+            MeasurementSystem.METRIC -> {
+                val alturaText = binding.etAltura.text.toString()
+                if (alturaText.isEmpty()) {
+                    Toast.makeText(context, getString(R.string.error_calcular_primero_menores), Toast.LENGTH_SHORT).show()
+                    return
+                }
+            }
+            MeasurementSystem.IMPERIAL -> {
+                val piesText = binding.etAlturaPies.text.toString()
+                val pulgadasText = binding.etAlturaPulgadas.text.toString()
+                
+                if (piesText.isEmpty() && pulgadasText.isEmpty()) {
+                    Toast.makeText(context, getString(R.string.error_calcular_primero_menores), Toast.LENGTH_SHORT).show()
+                    return
+                }
+            }
         }
 
         // Validar fecha de nuevo antes de guardar
@@ -409,16 +466,26 @@ class MenoresFragment : Fragment() {
             // Convertir valores al sistema métrico si es necesario
             val (pesoKg, alturaCm) = when (measurementSystem) {
                 MeasurementSystem.METRIC -> {
+                    val alturaText = binding.etAltura.text.toString()
                     // Ya están en kg y cm, no necesita conversión
-                    Pair(pesoText.toFloat(), alturaText.toFloat())
+                    Pair(pesoText.toDouble(), alturaText.toDouble())
                 }
                 MeasurementSystem.IMPERIAL -> {
-                    // Convertir de libras a kg y de pulgadas a cm
-                    val pesoLbs = pesoText.toFloat()
-                    val alturaInches = alturaText.toFloat()
-
+                    // Convertir de libras a kg
+                    val pesoLbs = pesoText.toDouble()
                     val pesoKg = MeasurementUtils.lbsToKg(pesoLbs)
-                    val alturaCm = MeasurementUtils.inchesToCm(alturaInches)
+
+                    // Usar los campos separados de pies y pulgadas
+                    val piesText = binding.etAlturaPies.text.toString()
+                    val pulgadasText = binding.etAlturaPulgadas.text.toString()
+                    
+                    // Convertir pies y pulgadas a centímetros
+                    val pies = if (piesText.isEmpty()) 0 else piesText.toInt()
+                    val pulgadas = if (pulgadasText.isEmpty()) 0 else pulgadasText.toInt()
+                    
+                    // Total de pulgadas = (pies * 12) + pulgadas
+                    val totalPulgadas = (pies * 12) + pulgadas
+                    val alturaCm = MeasurementUtils.inchesToCm(totalPulgadas.toDouble())
 
                     Pair(pesoKg, alturaCm)
                 }
@@ -454,6 +521,8 @@ class MenoresFragment : Fragment() {
                 // Limpiar campos
                 binding.etPeso.text?.clear()
                 binding.etAltura.text?.clear()
+                binding.etAlturaPies.text?.clear()
+                binding.etAlturaPulgadas.text?.clear()
                 binding.etFechaNacimiento.text?.clear()
                 binding.rbMasculino.isChecked = true
                 binding.cardResultado.visibility = View.GONE

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.calculadoraimc.R
+import com.example.calculadoraimc.utils.MeasurementUtils
 
 // Modelo para una medición de adulto
 data class HistorialAdulto(
@@ -78,25 +79,38 @@ class HistorialAdapter(private var items: List<ItemHistorial>) : RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val context = holder.itemView.context
+        val measurementSystem = MeasurementUtils.getPreferredSystem(context)
+
         when (val item = items[position]) {
             is ItemHistorial.AdultoItem -> {
                 val adultHolder = holder as HistorialAdultoViewHolder
                 val data = item.data
-                adultHolder.tvPeso.text = holder.itemView.context.getString(R.string.historial_peso, data.peso)
-                adultHolder.tvAltura.text = holder.itemView.context.getString(R.string.historial_altura, data.altura)
-                adultHolder.tvImc.text = holder.itemView.context.getString(R.string.historial_imc, data.imc)
-                adultHolder.tvFecha.text = holder.itemView.context.getString(R.string.historial_fecha, data.fecha)
+
+                // Formatear peso y altura según el sistema de medición
+                val pesoFormateado = MeasurementUtils.formatWeight(data.peso, measurementSystem)
+                val alturaFormateada = MeasurementUtils.formatHeight(data.altura * 100, measurementSystem) // Convertir metros a cm
+
+                adultHolder.tvPeso.text = context.getString(R.string.historial_peso_formato, pesoFormateado)
+                adultHolder.tvAltura.text = context.getString(R.string.historial_altura_formato, alturaFormateada)
+                adultHolder.tvImc.text = context.getString(R.string.historial_imc, data.imc)
+                adultHolder.tvFecha.text = context.getString(R.string.historial_fecha, data.fecha)
             }
             is ItemHistorial.MenorItem -> {
                 val menorHolder = holder as HistorialMenorViewHolder
                 val data = item.data
-                menorHolder.tvPeso.text = holder.itemView.context.getString(R.string.historial_peso, data.peso)
-                menorHolder.tvAltura.text = holder.itemView.context.getString(R.string.historial_altura, data.altura)
-                menorHolder.tvImc.text = holder.itemView.context.getString(R.string.historial_imc, data.imc)
-                menorHolder.tvFecha.text = holder.itemView.context.getString(R.string.historial_fecha, data.fecha)
-                menorHolder.tvSexo.text = holder.itemView.context.getString(R.string.historial_sexo, data.sexo)
-                menorHolder.tvEdad.text = holder.itemView.context.getString(R.string.historial_edad_meses, data.edadMeses)
-                menorHolder.tvPercentil.text = holder.itemView.context.getString(R.string.historial_percentil, data.percentil)
+
+                // Formatear peso y altura según el sistema de medición
+                val pesoFormateado = MeasurementUtils.formatWeight(data.peso, measurementSystem)
+                val alturaFormateada = MeasurementUtils.formatHeight(data.altura * 100, measurementSystem) // Convertir metros a cm
+
+                menorHolder.tvPeso.text = context.getString(R.string.historial_peso_formato, pesoFormateado)
+                menorHolder.tvAltura.text = context.getString(R.string.historial_altura_formato, alturaFormateada)
+                menorHolder.tvImc.text = context.getString(R.string.historial_imc, data.imc)
+                menorHolder.tvFecha.text = context.getString(R.string.historial_fecha, data.fecha)
+                menorHolder.tvSexo.text = context.getString(R.string.historial_sexo, data.sexo)
+                menorHolder.tvEdad.text = context.getString(R.string.historial_edad_meses, data.edadMeses)
+                menorHolder.tvPercentil.text = context.getString(R.string.historial_percentil, data.percentil)
             }
         }
     }
@@ -115,6 +129,13 @@ class HistorialAdapter(private var items: List<ItemHistorial>) : RecyclerView.Ad
 
     fun clearData() {
         items = emptyList()
+        notifyDataSetChanged()
+    }
+
+    /**
+     * Actualiza la visualización del adapter para reflejar cambios en el sistema de medición
+     */
+    fun refreshDisplay() {
         notifyDataSetChanged()
     }
 }

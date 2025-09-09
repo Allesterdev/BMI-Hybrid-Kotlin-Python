@@ -98,61 +98,132 @@ object MeasurementUtils {
         savePreferredSystem(prefs, system)
     }
 
+    // === FUNCIONES DE CONVERSIÓN ===
+
     /**
-     * Convierte altura de centímetros a pies y pulgadas
-     * @return Par donde first = pies, second = pulgadas
+     * Convierte kilogramos a libras
      */
-    fun cmToFeetInches(cm: Float): Pair<Int, Float> {
-        val totalInches = cm / 2.54f
+    fun kgToLbs(kg: Double): Double = kg * 2.20462
+
+    /**
+     * Convierte libras a kilogramos
+     */
+    fun lbsToKg(lbs: Double): Double = lbs / 2.20462
+
+    /**
+     * Convierte centímetros a pies y pulgadas
+     * @return Pair donde first = pies, second = pulgadas
+     */
+    fun cmToFeetInches(cm: Double): Pair<Int, Double> {
+        val totalInches = cm / 2.54
         val feet = (totalInches / 12).toInt()
         val inches = totalInches % 12
         return Pair(feet, inches)
     }
 
     /**
-     * Convierte de pies y pulgadas a centímetros
+     * Convierte pies y pulgadas a centímetros
      */
-    fun feetInchesToCm(feet: Int, inches: Float): Float {
+    fun feetInchesToCm(feet: Int, inches: Double): Double {
         val totalInches = feet * 12 + inches
-        return totalInches * 2.54f
+        return totalInches * 2.54
     }
 
     /**
-     * Convierte directamente de pulgadas a centímetros
+     * Convierte pulgadas a centímetros
      */
-    fun inchesToCm(inches: Float): Float {
-        return inches * 2.54f
-    }
+    fun inchesToCm(inches: Double): Double = inches * 2.54
 
     /**
-     * Convierte peso de kilogramos a libras
+     * Convierte centímetros a pulgadas
      */
-    fun kgToLbs(kg: Float): Float {
-        return kg * 2.20462f
-    }
+    fun cmToInches(cm: Double): Double = cm / 2.54
 
     /**
-     * Convierte peso de libras a kilogramos
+     * Analiza una cadena con formato de pies y pulgadas (ej: "5'10", "5'10.5", "5ft10", "5ft 10.5in", etc.)
+     * y la convierte a centímetros
+     *
+     * @param heightStr String con formato de pies y pulgadas
+     * @return altura en centímetros
+     * @throws NumberFormatException si el formato no es reconocido
      */
-    fun lbsToKg(lbs: Float): Float {
-        return lbs / 2.20462f
-    }
+    fun parseFeetInchesToCm(heightStr: String): Double {
+        // Eliminar espacios y convertir a minúsculas
+        val cleanStr = heightStr.lowercase().trim()
 
-    /**
-     * Calcula el IMC independientemente del sistema de unidades
-     * (IMC = peso(kg) / altura(m)²)
-     */
-    fun calculateBMI(height: Float, weight: Float, system: MeasurementSystem): Float {
-        return when (system) {
-            MeasurementSystem.METRIC -> {
-                // Altura en cm, peso en kg
-                val heightInMeters = height / 100f
-                weight / (heightInMeters * heightInMeters)
+        // Intentar diferentes patrones comunes
+        val patterns = listOf(
+            """(\d+)['´`](\d+\.?\d*)""",    // 5'10 o 5'10.5
+            """(\d+)\s*['´`]\s*(\d+\.?\d*)""",    // 5' 10 o 5' 10.5
+            """(\d+)\s*ft\s*(\d+\.?\d*)""",  // 5ft10 o 5ft 10.5
+            """(\d+)\s*feet\s*(\d+\.?\d*)""",  // 5feet10 o 5feet 10.5
+            """(\d+)[,.](\d+)""",           // 5,10 o 5.10 (como decimal)
+            """(\d+)""",                     // Solo pies (ej: "5")
+            """(\d+)\s*ft""",                // Solo pies con unidad (ej: "5ft")
+            """(\d+)\s*feet"""               // Solo pies con unidad (ej: "5feet")
+        )
+
+        // Probar cada patrón
+        for (pattern in patterns) {
+            val regex = Regex(pattern)
+            val matchResult = regex.find(cleanStr)
+
+            if (matchResult != null) {
+                val groups = matchResult.groupValues
+                when (groups.size) {
+                    3 -> {
+                        // Formato con pies y pulgadas
+                        val feet = groups[1].toDouble()
+                        val inches = groups[2].toDouble()
+                        return feetInchesToCm(feet.toInt(), inches)
+                    }
+                    2 -> {
+                        if (pattern.contains("ft") || pattern.contains("feet")) {
+                            // Solo pies con unidad
+                            return feetInchesToCm(groups[1].toInt(), 0.0)
+                        } else if (pattern.contains("[,.]")) {
+                            // Formato decimal (ej: 5.10 = 5 pies 10 pulgadas)
+                            val feet = groups[1].toDouble().toInt()
+                            val inchesStr = "0." + groups[2]
+                            val inches = (inchesStr.toDouble() * 100.0) / 8.333 // Convertir décimas a pulgadas
+                            return feetInchesToCm(feet, inches)
+                        } else {
+                            // Solo pies
+                            return feetInchesToCm(groups[1].toInt(), 0.0)
+                        }
+                    }
+                }
             }
+        }
+
+        // Si no se pudo parsear, intentar como simple número de pulgadas
+        return try {
+            val inches = cleanStr.toDouble()
+            inchesToCm(inches)
+        } catch (e: NumberFormatException) {
+            throw NumberFormatException("No se pudo reconocer el formato de altura: $heightStr")
+        }
+    }
+
+    /**
+     * Formatea el peso según el sistema de medición preferido
+     */
+    fun formatWeight(weightKg: Double, system: MeasurementSystem): String {
+        return when (system) {
+            MeasurementSystem.METRIC -> String.format(Locale.US, "%.1f kg", weightKg)
+            MeasurementSystem.IMPERIAL -> String.format(Locale.US, "%.1f lbs", kgToLbs(weightKg))
+        }
+    }
+
+    /**
+     * Formatea la altura según el sistema de medición preferido
+     */
+    fun formatHeight(heightCm: Double, system: MeasurementSystem): String {
+        return when (system) {
+            MeasurementSystem.METRIC -> String.format(Locale.US, "%.0f cm", heightCm)
             MeasurementSystem.IMPERIAL -> {
-                // Altura en pulgadas, peso en libras
-                // Fórmula imperial: (peso en libras * 703) / (altura en pulgadas)²
-                (weight * 703) / (height * height)
+                val (feet, inches) = cmToFeetInches(heightCm)
+                String.format(Locale.US, "%d'%.1f\"", feet, inches)
             }
         }
     }

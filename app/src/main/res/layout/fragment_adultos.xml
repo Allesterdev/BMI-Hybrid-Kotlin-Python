@@ -87,6 +87,62 @@
                         android:textSize="18sp" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <!-- Campos para sistema imperial (pies y pulgadas) -->
+                <LinearLayout
+                    android:id="@+id/layout_altura_imperial"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="24dp"
+                    android:visibility="gone">
+
+                    <!-- Campo para pies -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_altura_pies"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        app:boxStrokeColor="@color/green_primary"
+                        app:hintTextColor="@color/green_primary_dark"
+                        app:boxBackgroundColor="@color/green_primary_light"
+                        app:boxBackgroundMode="filled">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_altura_pies"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/white"
+                            android:hint="@string/hint_altura_pies"
+                            android:textColorHint="@color/text_secondary"
+                            android:textSize="18sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <!-- Campo para pulgadas -->
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/til_altura_pulgadas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        app:boxStrokeColor="@color/green_primary"
+                        app:hintTextColor="@color/green_primary_dark"
+                        app:boxBackgroundColor="@color/green_primary_light"
+                        app:boxBackgroundMode="filled">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_altura_pulgadas"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number"
+                            android:textColor="@color/white"
+                            android:hint="@string/hint_altura_pulgadas"
+                            android:textColorHint="@color/text_secondary"
+                            android:textSize="18sp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+
                 <!-- Botón Calcular -->
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/btn_calcular"
