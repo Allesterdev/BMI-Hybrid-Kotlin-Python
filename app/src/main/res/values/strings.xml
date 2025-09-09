@@ -173,4 +173,8 @@
     <string name="cambiar_sistema_medida">Cambiar sistema de medidas</string>
     <string name="ajustes_medicion_titulo">Ajustes de Medición</string>
     <string name="cambio_sistema_confirmado">Sistema de medición cambiado a: %1$s</string>
+
+    <!-- Strings para sexo (para internacionalización del historial) -->
+    <string name="sexo_masculino">Masculino</string>
+    <string name="sexo_femenino">Femenino</string>
 </resources>

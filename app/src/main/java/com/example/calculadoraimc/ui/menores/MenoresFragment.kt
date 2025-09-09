@@ -292,7 +292,8 @@ class MenoresFragment : Fragment() {
         }
 
         try {
-            val sexo = if (binding.rbMasculino.isChecked) "Masculino" else "Femenino"
+            // Para Python siempre necesitamos usar "Masculino" o "Femenino" (valores fijos en español)
+            val sexoPython = if (binding.rbMasculino.isChecked) "Masculino" else "Femenino"
 
             // Convertir valores al sistema métrico si es necesario
             val (pesoKg, alturaCm) = when (measurementSystem) {
@@ -324,7 +325,7 @@ class MenoresFragment : Fragment() {
 
             // Debug: Mostrar qué datos estamos enviando
             android.util.Log.d("MenoresFragment", "Enviando a Python:")
-            android.util.Log.d("MenoresFragment", "  Sexo: $sexo")
+            android.util.Log.d("MenoresFragment", "  Sexo Python: $sexoPython")
             android.util.Log.d("MenoresFragment", "  Fecha: '$fechaNacimiento'")
             android.util.Log.d("MenoresFragment", "  Peso (convertido a kg): '$pesoKg'")
             android.util.Log.d("MenoresFragment", "  Altura (convertida a cm): '$alturaCm'")
@@ -335,14 +336,21 @@ class MenoresFragment : Fragment() {
 
             // Python maneja la validación y conversión de fecha automáticamente
             // Enviamos los valores ya convertidos a sistema métrico
-            val resultado = funcionesModule.callAttr("calcular_imc_menor_por_fecha", sexo, fechaNacimiento, pesoKg.toString(), alturaCm.toString())
+            // IMPORTANTE: Sexo debe ser "Masculino" o "Femenino" para Python
+            val resultado = funcionesModule.callAttr(
+                "calcular_imc_menor_por_fecha",
+                sexoPython,
+                fechaNacimiento,
+                pesoKg.toString(),
+                alturaCm.toString()
+            )
 
             // Debug: Mostrar qué devuelve Python
             android.util.Log.d("MenoresFragment", "Resultado Python completo: $resultado")
 
             // Verificar si hay error en el resultado
             if (resultado.containsKey("error")) {
-                val error = resultado["error"]?.toString() ?: "Error desconocido"
+                val error = resultado["error"]?.toString() ?: getString(R.string.error_desconocido)
                 android.util.Log.e("MenoresFragment", "Error de Python: $error")
                 Toast.makeText(context, getString(R.string.error_percentiles, error), Toast.LENGTH_LONG).show()
                 return
@@ -378,12 +386,10 @@ class MenoresFragment : Fragment() {
                 }
             }
 
+            // Mostrar tarjeta de resultados
             binding.tvInterpretacion.text = getString(R.string.interpretacion_con_edad, interpretacionTexto, edadAnios)
-
-            // Mostrar y actualizar la barra de percentiles
             binding.barraPercentilMenores.setPercentil(percentil)
             binding.barraPercentilMenores.visibility = View.VISIBLE
-
             binding.cardResultado.visibility = View.VISIBLE
 
             // Auto-scroll para mostrar los resultados y el botón de guardar
@@ -461,7 +467,11 @@ class MenoresFragment : Fragment() {
         }
 
         try {
-            val sexo = if (binding.rbMasculino.isChecked) "Masculino" else "Femenino"
+            // Usar el valor localizado del recurso (Male/Female) en lugar del valor fijo en español
+            val sexoLocalizado = if (binding.rbMasculino.isChecked)
+                getString(R.string.sexo_masculino)
+            else
+                getString(R.string.sexo_femenino)
 
             // Convertir valores al sistema métrico si es necesario
             val (pesoKg, alturaCm) = when (measurementSystem) {
@@ -496,7 +506,9 @@ class MenoresFragment : Fragment() {
             val funcionesModule = python.getModule("funciones_imc_android")
 
             // Calculamos nuevamente usando la nueva función por fecha y enviando los valores ya convertidos
-            val resultado = funcionesModule.callAttr("calcular_imc_menor_por_fecha", sexo, fechaNacimiento, pesoKg.toString(), alturaCm.toString())
+            // Usamos sexoPython para el cálculo (requiere "Masculino" o "Femenino")
+            val sexoPython = if (binding.rbMasculino.isChecked) "Masculino" else "Femenino"
+            val resultado = funcionesModule.callAttr("calcular_imc_menor_por_fecha", sexoPython, fechaNacimiento, pesoKg.toString(), alturaCm.toString())
 
             if (resultado.containsKey("error") != true) {
                 // Usar la sintaxis correcta para extraer valores de objetos Python
@@ -509,12 +521,12 @@ class MenoresFragment : Fragment() {
                 android.util.Log.d("MenoresFragment", "  Peso (kg): $pesoKg")
                 android.util.Log.d("MenoresFragment", "  Altura (cm): $alturaCm")
                 android.util.Log.d("MenoresFragment", "  IMC: $imc")
-                android.util.Log.d("MenoresFragment", "  Sexo: $sexo")
+                android.util.Log.d("MenoresFragment", "  Sexo localizado: $sexoLocalizado")
                 android.util.Log.d("MenoresFragment", "  Edad meses: $edadMeses")
                 android.util.Log.d("MenoresFragment", "  Percentil: $percentil")
 
-                // Siempre guardamos en sistema métrico para consistencia en la base de datos
-                funcionesModule.callAttr("guardar_medicion", pesoKg, alturaCm, imc, sexo, edadMeses, percentil)
+                // Guardamos el valor localizado (Male/Female) para el historial
+                funcionesModule.callAttr("guardar_medicion", pesoKg, alturaCm, imc, sexoLocalizado, edadMeses, percentil)
 
                 Toast.makeText(context, getString(R.string.exito_guardado), Toast.LENGTH_SHORT).show()
 

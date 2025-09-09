@@ -166,4 +166,13 @@
     <string name="unidad_peso_libras">lb</string>
     <string name="unidad_altura_cm">cm</string>
     <string name="unidad_altura_pulgadas">in</string>
+    <string name="sistema_metrico">Metric System (cm, kg)</string>
+    <string name="sistema_imperial">Imperial System (in, lb)</string>
+    <string name="cambiar_sistema_medida">Change measurement system</string>
+    <string name="ajustes_medicion_titulo">Measurement Settings</string>
+    <string name="cambio_sistema_confirmado">Measurement system changed to: %1$s</string>
+
+    <!-- Strings for sex (for history internationalization) -->
+    <string name="sexo_masculino">Male</string>
+    <string name="sexo_femenino">Female</string>
 </resources>

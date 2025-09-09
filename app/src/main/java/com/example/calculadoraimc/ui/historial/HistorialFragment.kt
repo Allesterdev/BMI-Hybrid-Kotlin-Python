@@ -251,7 +251,7 @@ class HistorialFragment : Fragment() {
                     edadMeses = getIntValue("edad_meses"),
                     percentil = getDoubleValue("percentil")
                 )
-            }
+            }.reversed() // Invertir la lista para mostrar los más recientes primero
 
             adapter.updateDataMenores(historial)
             binding.tvHistorialVacio.visibility = if (historial.isEmpty()) View.VISIBLE else View.GONE

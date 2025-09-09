@@ -309,12 +309,7 @@ class MainActivity : AppCompatActivity() {
                 // Registrar evento de aceptar disclaimer
                 firebaseAnalytics.logEvent("disclaimer_accepted", null)
             }
-            .setNegativeButton(getString(R.string.btn_salir)) { _, _ ->
-                Toast.makeText(this, getString(R.string.msg_debe_aceptar_disclaimer), Toast.LENGTH_LONG).show()
-                // Registrar evento de rechazar disclaimer
-                firebaseAnalytics.logEvent("disclaimer_declined", null)
-                binding.root.postDelayed({ finish() }, DISCLAIMER_EXIT_DELAY_MS)
-            }
+            // Eliminamos el botón de salir para que el usuario solo pueda aceptar
             .setCancelable(false)
             .show()
     }

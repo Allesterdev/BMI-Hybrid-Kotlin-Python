@@ -346,13 +346,14 @@ def obtener_historial_adultos():
 def obtener_historial_menores():
     """
     Devuelve el historial de mediciones de menores (donde sexo NO es NULL).
-    Retorna una lista de diccionarios con los campos relevantes.
+    Retorna una lista de diccionarios con los campos relevantes,
+    ordenados por fecha descendente (más recientes primero).
     """
     inicializar_base_de_datos()
     db_path = obtener_ruta_base_datos()
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
-        cur.execute('SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha DESC')
+        cur.execute('SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha ASC')
         datos = cur.fetchall()
     historial = []
     for d in datos:
@@ -365,5 +366,5 @@ def obtener_historial_menores():
             "edad_meses": d[5],
             "percentil": d[6]
         })
-    return historial
-
+    # Invertir la lista para que los registros más recientes aparezcan primero
+    return list(reversed(historial))
