@@ -89,7 +89,7 @@ class HistorialAdapter(private var items: List<ItemHistorial>) : RecyclerView.Ad
 
                 // Formatear peso y altura según el sistema de medición
                 val pesoFormateado = MeasurementUtils.formatWeight(data.peso, measurementSystem)
-                val alturaFormateada = MeasurementUtils.formatHeight(data.altura * 100, measurementSystem) // Convertir metros a cm
+                val alturaFormateada = MeasurementUtils.formatHeight(data.altura, measurementSystem)
 
                 adultHolder.tvPeso.text = context.getString(R.string.historial_peso_formato, pesoFormateado)
                 adultHolder.tvAltura.text = context.getString(R.string.historial_altura_formato, alturaFormateada)
