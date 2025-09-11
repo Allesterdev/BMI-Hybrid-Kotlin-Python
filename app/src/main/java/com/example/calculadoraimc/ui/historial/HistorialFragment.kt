@@ -191,8 +191,11 @@ class HistorialFragment : Fragment() {
                 )
             }
 
-            adapter.updateDataAdultos(historial)
-            binding.tvHistorialVacio.visibility = if (historial.isEmpty()) View.VISIBLE else View.GONE
+            // Ordenar explícitamente por fecha (más reciente primero) para ser robustos ante formatos distintos
+            val historialOrdenado = historial.sortedByDescending { parseFechaParaOrden(it.fecha) }
+
+            adapter.updateDataAdultos(historialOrdenado)
+            binding.tvHistorialVacio.visibility = if (historialOrdenado.isEmpty()) View.VISIBLE else View.GONE
 
         } catch (e: Exception) {
             android.util.Log.e("HistorialFragment", "Error al consultar historial de adultos: ${e.message}", e)
@@ -251,10 +254,13 @@ class HistorialFragment : Fragment() {
                     edadMeses = getIntValue("edad_meses"),
                     percentil = getDoubleValue("percentil")
                 )
-            }.reversed() // Invertir la lista para mostrar los más recientes primero
+            }
 
-            adapter.updateDataMenores(historial)
-            binding.tvHistorialVacio.visibility = if (historial.isEmpty()) View.VISIBLE else View.GONE
+            // Ordenar explícitamente por fecha (más reciente primero)
+            val historialOrdenado = historial.sortedByDescending { parseFechaParaOrden(it.fecha) }
+
+            adapter.updateDataMenores(historialOrdenado)
+            binding.tvHistorialVacio.visibility = if (historialOrdenado.isEmpty()) View.VISIBLE else View.GONE
 
         } catch (e: Exception) {
             android.util.Log.e("HistorialFragment", "Error al consultar historial de menores: ${e.message}", e)
@@ -262,6 +268,28 @@ class HistorialFragment : Fragment() {
             adapter.clearData()
             binding.tvHistorialVacio.visibility = View.VISIBLE
         }
+    }
+
+    // Función auxiliar para intentar parsear fechas en varios formatos y devolver epoch millis para ordenar
+    private fun parseFechaParaOrden(fecha: String): Long {
+        if (fecha.isEmpty()) return 0L
+        val formatos = arrayOf(
+            java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()),
+            java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss", java.util.Locale.getDefault()),
+            java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss", java.util.Locale.getDefault()),
+            java.text.SimpleDateFormat("dd-MM-yyyy", java.util.Locale.getDefault()),
+            java.text.SimpleDateFormat("dd/MM/yyyy", java.util.Locale.getDefault())
+        )
+        for (fmt in formatos) {
+            try {
+                fmt.isLenient = false
+                val d = fmt.parse(fecha)
+                if (d != null) return d.time
+            } catch (_: Exception) {
+                // probar siguiente formato
+            }
+        }
+        return 0L
     }
 
     override fun onDestroyView() {

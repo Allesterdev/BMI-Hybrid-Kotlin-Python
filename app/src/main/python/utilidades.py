@@ -123,6 +123,13 @@ def inicializar_base_de_datos():
 
 
 def obtener_ruta_base_datos():
+    # Normalizar fechas existentes en la base de datos a formato ISO para asegurar orden correcto
+    try:
+        normalizar_fechas_bd(db_path)
+    except Exception:
+        # No fallamos la inicialización si la normalización da problemas
+        pass
+
     """
     Obtiene la ruta correcta para la base de datos en Android.
     """
@@ -368,3 +375,4 @@ def obtener_historial_menores():
         })
     # Invertir la lista para que los registros más recientes aparezcan primero
     return list(reversed(historial))
+

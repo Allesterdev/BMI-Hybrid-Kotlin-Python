@@ -118,11 +118,13 @@ class HistorialAdapter(private var items: List<ItemHistorial>) : RecyclerView.Ad
     override fun getItemCount(): Int = items.size
 
     fun updateDataAdultos(newItems: List<HistorialAdulto>) {
+        // No invertir aquí: la fuente ya devuelve ORDER BY fecha DESC (más recientes primero)
         items = newItems.map { ItemHistorial.AdultoItem(it) }
         notifyDataSetChanged()
     }
 
     fun updateDataMenores(newItems: List<HistorialMenor>) {
+        // No invertir aquí: la fuente ya devuelve ORDER BY fecha DESC (más recientes primero)
         items = newItems.map { ItemHistorial.MenorItem(it) }
         notifyDataSetChanged()
     }
