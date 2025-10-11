@@ -8,6 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.RatingBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.calculadoraimc.R
@@ -15,12 +19,26 @@ import com.example.calculadoraimc.databinding.FragmentMenoresBinding
 import com.chaquo.python.Python
 import com.example.calculadoraimc.utils.MeasurementUtils
 import com.example.calculadoraimc.utils.MeasurementUtils.MeasurementSystem
+import com.example.calculadoraimc.utils.AdManager
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdLoader
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.nativead.MediaView
+import com.google.android.gms.ads.nativead.NativeAd
+import com.google.android.gms.ads.nativead.NativeAdOptions
+import com.google.android.gms.ads.nativead.NativeAdView
 
 class MenoresFragment : Fragment() {
 
     private var _binding: FragmentMenoresBinding? = null
     private val binding get() = _binding!!
     private lateinit var measurementSystem: MeasurementSystem
+
+    // Variables para AdMob nativo
+    private var adLoader: AdLoader? = null
+    private var nativeAd: NativeAd? = null
+    private var nativeAdView: NativeAdView? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,10 +54,15 @@ class MenoresFragment : Fragment() {
         // Configurar etiquetas según sistema de medición
         setupMeasurementLabels()
 
+        // Configurar eventos
         setupClickListeners()
         setupTextWatchers()
 
         return root
+    }
+
+    fun cargarAnuncios() {
+        cargarAnuncioNativo()
     }
 
     /**
@@ -51,7 +74,7 @@ class MenoresFragment : Fragment() {
                 // Sistema métrico (cm, kg)
                 binding.tilPeso.hint = getString(R.string.hint_peso)
                 binding.tilAltura.hint = getString(R.string.hint_altura)
-                
+
                 // Mostrar campo de altura métrico y ocultar campos imperiales
                 binding.tilAltura.visibility = View.VISIBLE
                 binding.layoutAlturaImperial.visibility = View.GONE
@@ -59,7 +82,7 @@ class MenoresFragment : Fragment() {
             MeasurementSystem.IMPERIAL -> {
                 // Sistema imperial (lb, in)
                 binding.tilPeso.hint = getString(R.string.hint_peso_imperial)
-                
+
                 // Ocultar campo de altura métrico y mostrar campos imperiales
                 binding.tilAltura.visibility = View.GONE
                 binding.layoutAlturaImperial.visibility = View.VISIBLE
@@ -67,7 +90,7 @@ class MenoresFragment : Fragment() {
         }
     }
 
-    fun showSoftKeyboard(view: View) {
+    private fun showSoftKeyboard(view: View) {
         if (view.requestFocus()) {
             val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
             imm?.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT)
@@ -424,7 +447,7 @@ class MenoresFragment : Fragment() {
             MeasurementSystem.IMPERIAL -> {
                 val piesText = binding.etAlturaPies.text.toString()
                 val pulgadasText = binding.etAlturaPulgadas.text.toString()
-                
+
                 if (piesText.isEmpty() && pulgadasText.isEmpty()) {
                     Toast.makeText(context, getString(R.string.error_calcular_primero_menores), Toast.LENGTH_SHORT).show()
                     return
@@ -488,11 +511,11 @@ class MenoresFragment : Fragment() {
                     // Usar los campos separados de pies y pulgadas
                     val piesText = binding.etAlturaPies.text.toString()
                     val pulgadasText = binding.etAlturaPulgadas.text.toString()
-                    
+
                     // Convertir pies y pulgadas a centímetros
                     val pies = if (piesText.isEmpty()) 0 else piesText.toInt()
                     val pulgadas = if (pulgadasText.isEmpty()) 0 else pulgadasText.toInt()
-                    
+
                     // Total de pulgadas = (pies * 12) + pulgadas
                     val totalPulgadas = (pies * 12) + pulgadas
                     val alturaCm = MeasurementUtils.inchesToCm(totalPulgadas.toDouble())
@@ -540,14 +563,153 @@ class MenoresFragment : Fragment() {
                 binding.cardResultado.visibility = View.GONE
             }
 
+                // Mostrar anuncio intersticial después de guardar el cálculo
+                activity?.let {
+                    AdManager.getInstance(requireContext()).showAdAfterSaving(it)
+                }
+
+
         } catch (e: Exception) {
             android.util.Log.e("MenoresFragment", "Error al guardar medición", e)
             Toast.makeText(context, getString(R.string.error_guardar, e.message ?: ""), Toast.LENGTH_SHORT).show()
         }
     }
 
+    // Método para cargar el anuncio nativo
+    private fun cargarAnuncioNativo() {
+        if (adLoader?.isLoading == true) {
+            return
+        }
+        try {
+            adLoader = AdLoader.Builder(requireContext(), "ca-app-pub-3940256099942544/2247696110")
+                .forNativeAd { ad ->
+                    try {
+                        if (!isAdded) {
+                            ad.destroy()
+                            return@forNativeAd
+                        }
+
+                        nativeAd?.destroy()
+                        nativeAd = ad
+
+                        val inflater = LayoutInflater.from(requireContext())
+                        nativeAdView = inflater.inflate(R.layout.layout_anuncio_nativo, binding.adContainer, false) as NativeAdView
+
+                        mostrarAnuncioNativo()
+                    } catch (e: Exception) {
+                        android.util.Log.e("AdMob", "Error al procesar anuncio nativo: ${e.message}")
+                    }
+                }
+                .withAdListener(object : AdListener() {
+                    override fun onAdFailedToLoad(adError: LoadAdError) {
+                        android.util.Log.e("AdMob", "Error al cargar anuncio: ${adError.message}")
+                        try {
+                            if (isAdded) {
+                                binding.adContainer.visibility = View.GONE
+                            }
+                        } catch (e: Exception) {
+                            android.util.Log.e("AdMob", "Error al ocultar contenedor: ${e.message}")
+                        }
+                    }
+                })
+                .withNativeAdOptions(
+                    NativeAdOptions.Builder()
+                        .setAdChoicesPlacement(NativeAdOptions.ADCHOICES_TOP_RIGHT)
+                        .setMediaAspectRatio(NativeAdOptions.NATIVE_MEDIA_ASPECT_RATIO_LANDSCAPE)
+                        .build()
+                )
+                .build()
+
+            val adRequest = AdRequest.Builder().build()
+            adLoader?.loadAd(adRequest)
+        } catch (e: Exception) {
+            android.util.Log.e("AdMob", "Error general en cargarAnuncioNativo: ${e.message}")
+        }
+    }
+
+    // Método para mostrar el anuncio nativo
+    private fun mostrarAnuncioNativo() {
+        try {
+            val adView = nativeAdView
+            val ad = nativeAd
+
+            if (!isAdded || adView == null || ad == null) {
+                return
+            }
+
+            try {
+                val headlineView = adView.findViewById<TextView>(R.id.ad_title)
+                val bodyView = adView.findViewById<TextView>(R.id.ad_body)
+                val callToActionView = adView.findViewById<Button>(R.id.ad_call_to_action)
+                val iconView = adView.findViewById<ImageView>(R.id.ad_app_icon)
+                val starsView = adView.findViewById<RatingBar>(R.id.ad_rating)
+                val mediaView = adView.findViewById<MediaView>(R.id.ad_media)
+
+                headlineView.text = ad.headline
+                adView.headlineView = headlineView
+
+                ad.body?.let {
+                    bodyView.visibility = View.VISIBLE
+                    bodyView.text = it
+                    adView.bodyView = bodyView
+                } ?: run {
+                    bodyView.visibility = View.INVISIBLE
+                }
+
+                ad.callToAction?.let {
+                    callToActionView.visibility = View.VISIBLE
+                    callToActionView.text = it
+                    adView.callToActionView = callToActionView
+                } ?: run {
+                    callToActionView.visibility = View.INVISIBLE
+                }
+
+                ad.icon?.let {
+                    iconView.visibility = View.VISIBLE
+                    iconView.setImageDrawable(it.drawable)
+                    adView.iconView = iconView
+                } ?: run {
+                    iconView.visibility = View.GONE
+                }
+
+                ad.starRating?.let {
+                    starsView.visibility = View.VISIBLE
+                    starsView.rating = it.toFloat()
+                    adView.starRatingView = starsView
+                } ?: run {
+                    starsView.visibility = View.INVISIBLE
+                }
+                
+                ad.mediaContent?.let {
+                    mediaView.visibility = View.VISIBLE
+                    mediaView.mediaContent = it
+                    adView.mediaView = mediaView
+                } ?: run {
+                    mediaView.visibility = View.GONE
+                }
+
+                adView.setNativeAd(ad)
+
+                if (isAdded && _binding != null) {
+                    binding.adContainer.removeAllViews()
+                    binding.adContainer.addView(adView)
+                    binding.adContainer.visibility = View.VISIBLE
+                }
+            } catch (e: Exception) {
+                android.util.Log.e("AdMob", "Error al configurar vistas del anuncio nativo: ${e.message}")
+                if (isAdded && _binding != null) {
+                    binding.adContainer.visibility = View.GONE
+                }
+            }
+        } catch (e: Exception) {
+            android.util.Log.e("AdMob", "Error general en mostrarAnuncioNativo: ${e.message}")
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+        nativeAd?.destroy()
+        nativeAd = null
         _binding = null
     }
 }

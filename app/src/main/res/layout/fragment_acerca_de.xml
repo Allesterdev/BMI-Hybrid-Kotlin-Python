@@ -89,6 +89,18 @@
                         android:autoLink="web"
                         android:linksClickable="true"
                         android:textColorLink="@color/green_primary_dark" />
+
+                    <!-- Botón dedicado para abrir el archivo LICENCES.txt -->
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_ver_licencias"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="@string/btn_ver_licencias"
+                        app:backgroundTint="@color/green_primary"
+                        app:iconTint="@color/white"
+                        app:cornerRadius="16dp" />
+
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 

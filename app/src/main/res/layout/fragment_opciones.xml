@@ -141,6 +141,30 @@
                         app:iconGravity="start" />
 
                     <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_politicas_privacidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/politicas_privacidad"
+                        android:layout_marginBottom="12dp"
+                        android:textColor="@android:color/white"
+                        app:backgroundTint="@color/green_primary_light"
+                        app:cornerRadius="@dimen/button_corner_radius"
+                        app:icon="@drawable/outline_privacy_tip_24"
+                        app:iconGravity="start" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_opciones_privacidad"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/opciones_privacidad"
+                        android:layout_marginBottom="12dp"
+                        android:textColor="@android:color/white"
+                        app:backgroundTint="@color/green_primary_light"
+                        app:cornerRadius="@dimen/button_corner_radius"
+                        app:icon="@drawable/outline_settings_24"
+                        app:iconGravity="start" />
+
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/btn_acerca_de"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -1,5 +1,6 @@
 package com.example.calculadoraimc.ui.opciones
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,13 @@ class AcercaDeFragment : Fragment() {
         val fabVolver = view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_volver_acerca_de)
         fabVolver.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        // Botón dedicado para abrir LicencesActivity
+        val btnVerLicencias = view.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_ver_licencias)
+        btnVerLicencias.setOnClickListener {
+            val intent = Intent(requireContext(), LicencesActivity::class.java)
+            startActivity(intent)
         }
     }
 }

@@ -34,13 +34,13 @@
 
     <!-- Estilo personalizado para AlertDialog que fuerza colores de la app -->
     <style name="AppAlertDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
-        <item name="colorPrimary">@color/white</item>        
+        <item name="colorPrimary">@color/white</item>
         <item name="android:textColorPrimary">@color/text_primary</item>
         <item name="android:windowBackground">@color/white</item>
         <item name="android:colorBackground">@color/green_primary_light</item>
         <item name="android:buttonStyle">@style/DialogButtonStyle</item>
         <item name="buttonBarPositiveButtonStyle">@style/WhiteDialogButton</item>
-        <item name="buttonBarNegativeButtonStyle">@style/WhiteDialogButton</item>        
+        <item name="buttonBarNegativeButtonStyle">@style/WhiteDialogButton</item>
     </style>
 
     <style name="WhiteDialogButton" parent="Widget.MaterialComponents.Button.TextButton">

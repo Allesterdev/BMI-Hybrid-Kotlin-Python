@@ -269,6 +269,15 @@
                     app:backgroundTint="@color/green_primary"
                     app:cornerRadius="@dimen/button_corner_radius"
                     android:textColor="@color/white" />
+
+                <!-- Contenedor para el anuncio nativo -->
+                <FrameLayout
+                    android:id="@+id/ad_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone" />
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -354,5 +363,6 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 </ScrollView>

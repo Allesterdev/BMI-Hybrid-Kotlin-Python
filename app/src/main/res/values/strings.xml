@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">IMC Practico</string>
+    <string name="app_name">IMC Práctico</string>
     <string name="title_adultos">Adultos</string>
     <string name="title_menores">5–19 Años</string>
     <string name="title_historial">Historial</string>
@@ -94,7 +94,7 @@
     <!-- Strings para opciones -->
     <string name="titulo_opciones">Opciones</string>
     <string name="disclaimer_titulo">Aviso Legal y Condiciones de Uso.</string>
-    <string name="disclaimer_texto">Esta aplicación ha sido desarrollada con fines educativos e informativos, y está pensada como una herramienta orientativa para el cálculo del Índice de Masa Corporal (IMC) tanto en adultos como en menores de 20 años.\n\nUSO MÉDICO Y PROFESIONAL\n• No sustituye la opinión de un profesional sanitario.\n• Los valores calculados y las interpretaciones ofrecidas son orientativas y no deben considerarse diagnósticos médicos.\n• En caso de dudas sobre su salud, consulte siempre con un médico o pediatra.\n\nSOBRE 5 A 19 AÑOS DE EDAD\n• El IMC en menores de 20 años no se interpreta igual que en adultos.\n• El cálculo del IMC en menores de 20 años se basa en referencias de la OMS.\n• Esta aplicación no está diseñada para evaluar el desarrollo de menores de 5 años.\n\nPRIVACIDAD Y SEGURIDAD\n• Esta aplicación no recopila ni transmite datos personales a servidores externos.\n• Toda la información se guarda de forma local en el dispositivo, sin cifrado.\n\nRESPONSABILIDAD DEL USUARIO\n• El usuario es el único responsable del uso que haga de la aplicación.\n• El uso de esta aplicación implica la aceptación de estas condiciones.</string>
+    <string name="disclaimer_texto">Esta aplicación ha sido desarrollada con fines educativos e informativos dirigida al público adulto, y está pensada como una herramienta orientativa para el cálculo del Índice de Masa Corporal (IMC) tanto en adultos como en menores de 20 años.\n\nUSO MÉDICO Y PROFESIONAL\n• No sustituye la opinión de un profesional sanitario.\n• Los valores calculados y las interpretaciones ofrecidas son orientativas y no deben considerarse diagnósticos médicos.\n• En caso de dudas sobre su salud, consulte siempre con un médico o pediatra.\n\nSOBRE 5 A 19 AÑOS DE EDAD\n• El IMC en menores de 20 años no se interpreta igual que en adultos.\n• El cálculo del IMC en menores de 20 años se basa en referencias de la OMS.\n• Esta aplicación no está diseñada para evaluar el desarrollo de menores de 5 años.\n\nPRIVACIDAD Y SEGURIDAD\n• Esta aplicación no recopila ni transmite datos personales a servidores externos.\n• Toda la información se guarda de forma local en el dispositivo, sin cifrado.\n\nRESPONSABILIDAD DEL USUARIO\n• El usuario es el único responsable del uso que haga de la aplicación.\n• El uso de esta aplicación implica la aceptación de estas condiciones.</string>
     <string name="borrar_historiales_titulo">Gestión de Datos</string>
     <string name="btn_borrar_historial_adultos">Borrar Historial Adultos</string>
     <string name="btn_borrar_historial_menores">Borrar Historial Menores</string>
@@ -135,11 +135,13 @@
     <!-- Nuevas strings para Aviso Legal, Acerca de, Licencias -->
     <string name="aviso_legal_titulo">Aviso Legal</string>
     <string name="acerca_de_titulo">Acerca de</string>
-    <string name="acerca_de_texto">IMC Práctico: Adultos y Niños\n\n<b>Versión:</b> 1.0.0\n\n<b>Desarrollador:</b> Oscar Campoy B.\n\nEsta aplicación permite calcular el Índice de Masa Corporal (IMC) para adultos y menores (a partir de 5 años), guardar resultados y visualizar el historial.\n\nPara dudas o sugerencias, contacta a:\nsingularityrose@protonmail.com</string>
+    <string name="acerca_de_texto">IMC Práctico: Adultos y Niños\n\n<b>Versión:</b> 1.0.2\n\n<b>Desarrollador:</b> Oscar Campoy B.\n\nEsta aplicación permite calcular el Índice de Masa Corporal (IMC) para adultos y menores (a partir de 5 años), guardar resultados y visualizar el historial.\n\nPara dudas o sugerencias, contacta a:\noscarcampoy.dev@gmail.com</string>
     <string name="licencias_titulo">Créditos y Licencias</string>
-    <string name="licencias_texto">Esta aplicación utiliza software de código abierto:\n\n• <b>Chaquopy</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — Licencia BSD 3 cláusulas (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Dominio público (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nPuedes consultar el texto íntegro de todas las licencias en el archivo LICENCES.txt incluido en esta aplicación.</string>
+    <string name="licencias_texto">Esta aplicación utiliza software de código abierto:\n\n• <b>Chaquopy</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — Licencia BSD 3 cláusulas (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Dominio público (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nPuedes consultar el texto íntegro de todas las licencias en el botón ver licencias.</string>
     <string name="volver">Volver</string>
     <string name="informacion_legal">Información y Legal</string>
+    <string name="politicas_privacidad">Políticas de Privacidad</string>
+    <string name="opciones_privacidad">Opciones de Privacidad</string>
 
     <!-- Strings de interpretación para menores -->
     <string name="interpretacion_bajo_peso">Bajo peso</string>
@@ -177,4 +179,10 @@
     <!-- Strings para sexo (para internacionalización del historial) -->
     <string name="sexo_masculino">Masculino</string>
     <string name="sexo_femenino">Femenino</string>
+
+    <!-- String para anuncio nativo -->
+    <string name="anuncio">Anuncio</string>
+
+    <string name="btn_ver_licencias">Ver licencias</string>
+    <string name="licences_asset_missing">No se encontró el archivo %1$s en los assets.</string>
 </resources>

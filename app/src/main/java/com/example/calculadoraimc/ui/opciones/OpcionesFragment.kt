@@ -1,11 +1,13 @@
 package com.example.calculadoraimc.ui.opciones
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
@@ -17,6 +19,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.example.calculadoraimc.utils.MeasurementUtils
 import com.example.calculadoraimc.utils.MeasurementUtils.MeasurementSystem
 import com.google.android.material.switchmaterial.SwitchMaterial
+import com.google.android.ump.UserMessagingPlatform
 
 class OpcionesFragment : Fragment() {
 
@@ -134,6 +137,19 @@ class OpcionesFragment : Fragment() {
                 findNavController().navigate(R.id.action_opciones_to_avisoLegal)
             }
 
+            view.findViewById<MaterialButton>(R.id.btn_politicas_privacidad).setOnClickListener {
+                abrirPoliticasPrivacidad()
+            }
+
+            view.findViewById<MaterialButton>(R.id.btn_opciones_privacidad).setOnClickListener {
+                UserMessagingPlatform.showPrivacyOptionsForm(requireActivity()) { formError: com.google.android.ump.FormError? ->
+                    if (formError != null) {
+                        android.util.Log.e("UMP", "Error al mostrar el formulario de opciones de privacidad: ${formError.message}")
+                        Toast.makeText(requireContext(), "Error al abrir opciones de privacidad", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+
             view.findViewById<MaterialButton>(R.id.btn_acerca_de).setOnClickListener {
                 findNavController().navigate(R.id.action_opciones_to_acercaDe)
             }
@@ -234,6 +250,23 @@ class OpcionesFragment : Fragment() {
                 getString(R.string.error_borrar_historiales, e.message ?: ""),
                 Toast.LENGTH_LONG
             ).show()
+        }
+    }
+
+    private fun abrirPoliticasPrivacidad() {
+        try {
+            val url = "https://allesterdev.github.io/privacy-policy/"
+            val intent = Intent(Intent.ACTION_VIEW).apply {
+                data = url.toUri()
+            }
+            startActivity(intent)
+        } catch (e: Exception) {
+            Toast.makeText(
+                requireContext(),
+                "Error al abrir las políticas de privacidad",
+                Toast.LENGTH_SHORT
+            ).show()
+            android.util.Log.e("OpcionesFragment", "Error al abrir URL: ${e.message}", e)
         }
     }
 
