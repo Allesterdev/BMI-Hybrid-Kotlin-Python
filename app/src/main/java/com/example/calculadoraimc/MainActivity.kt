@@ -21,6 +21,9 @@ import com.example.calculadoraimc.ui.adultos.AdultosFragment
 import com.example.calculadoraimc.ui.menores.MenoresFragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.core.content.edit
+import androidx.activity.enableEdgeToEdge
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,6 +45,9 @@ class MainActivity : AppCompatActivity() {
     private var isAppReady = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Habilitar edge-to-edge para cumplir con Android 15+
+        enableEdgeToEdge()
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         val splashScreen = installSplashScreen()
@@ -52,6 +58,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportActionBar?.hide()
+
+        // Configurar manejo de insets del sistema para edge-to-edge
+        setupEdgeToEdgeInsets()
 
         isUiReady = true
 
@@ -209,6 +218,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.root.viewTreeObserver.addOnGlobalLayoutListener(keyboardLayoutListener)
+    }
+
+    private fun setupEdgeToEdgeInsets() {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
+            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
+            val navigationBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+
+            view.setPadding(0, statusBarHeight, 0, navigationBarHeight)
+            insets
+        }
     }
 
     override fun onDestroy() {
