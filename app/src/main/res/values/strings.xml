@@ -135,7 +135,13 @@
     <!-- Nuevas strings para Aviso Legal, Acerca de, Licencias -->
     <string name="aviso_legal_titulo">Aviso Legal</string>
     <string name="acerca_de_titulo">Acerca de</string>
-    <string name="acerca_de_texto">IMC Práctico: Adultos y Niños\n\n<b>Versión:</b> 1.0.2\n\n<b>Desarrollador:</b> Oscar Campoy B.\n\nEsta aplicación permite calcular el Índice de Masa Corporal (IMC) para adultos y menores (a partir de 5 años), guardar resultados y visualizar el historial.\n\nPara dudas o sugerencias, contacta a:\noscarcampoy.dev@gmail.com</string>
+    <!-- Strings para el contenido de Acerca de -->
+    <string name="acerca_de_nombre_app">IMC Práctico: Adultos y Niños</string>
+    <string name="acerca_de_version">Versión:</string>
+    <string name="acerca_de_desarrollador">Desarrollador:</string>
+    <string name="acerca_de_desarrollador_nombre">Oscar Campoy B.</string>
+    <string name="acerca_de_descripcion">Esta aplicación permite calcular el Índice de Masa Corporal (IMC) para adultos y menores (a partir de 5 años), guardar resultados y visualizar el historial.</string>
+    <string name="acerca_de_contacto">Para dudas o sugerencias, contacta a:\noscarcampoy.dev@gmail.com</string>
     <string name="licencias_titulo">Créditos y Licencias</string>
     <string name="licencias_texto">Esta aplicación utiliza software de código abierto:\n\n• <b>Chaquopy</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — Licencia BSD 3 cláusulas (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Dominio público (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Licencia Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nPuedes consultar el texto íntegro de todas las licencias en el botón ver licencias.</string>
     <string name="volver">Volver</string>

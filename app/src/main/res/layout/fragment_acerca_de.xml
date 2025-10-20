@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background"
-    android:paddingBottom="80dp"
+    android:paddingBottom="16dp"
     android:clipToPadding="false"
     tools:context=".ui.opciones.AcercaDeFragment">
 
@@ -49,10 +49,10 @@
                         android:id="@+id/tv_acerca_de_texto"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/acerca_de_texto"
                         android:textSize="16sp"
                         android:textColor="@color/text_secondary"
-                        android:lineSpacingExtra="4dp" />
+                        android:lineSpacingExtra="4dp"
+                        tools:text="App information will be loaded dynamically" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -112,7 +112,7 @@
         android:id="@+id/btn_volver_acerca_de"
         android:layout_width="56dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginBottom="8dp"
         android:contentDescription="@string/volver"
         app:backgroundTint="@color/green_primary"
         app:cornerRadius="24dp"
