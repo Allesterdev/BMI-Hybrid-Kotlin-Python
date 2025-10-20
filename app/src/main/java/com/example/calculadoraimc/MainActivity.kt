@@ -222,10 +222,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupEdgeToEdgeInsets() {
         ViewCompat.setOnApplyWindowInsetsListener(binding.root) { view, insets ->
-            val statusBarHeight = insets.getInsets(WindowInsetsCompat.Type.statusBars()).top
-            val navigationBarHeight = insets.getInsets(WindowInsetsCompat.Type.navigationBars()).bottom
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 
-            view.setPadding(0, statusBarHeight, 0, navigationBarHeight)
+            // Aplicar padding al contenedor principal para la barra de estado
+            view.setPadding(0, systemBars.top, 0, 0)
+
+            // El BottomNavigationView maneja su propio padding para la barra de navegación
+            binding.navView.setPadding(
+                binding.navView.paddingLeft,
+                binding.navView.paddingTop,
+                binding.navView.paddingRight,
+                systemBars.bottom
+            )
+
             insets
         }
     }

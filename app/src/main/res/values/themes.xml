@@ -9,13 +9,9 @@
         <item name="colorSecondary">@color/green_primary</item>
         <item name="colorSecondaryVariant">@color/green_primary_dark</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@color/green_primary_dark</item>
-        <!-- Navigation bar color - Forzar color verde oscuro -->
-        <item name="android:navigationBarColor">@color/green_primary_dark</item>
-        <!-- Force light mode -->
+        <!-- Configuración de barras del sistema para edge-to-edge -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:windowLightStatusBar">false</item>
-        <!-- Forzar color de la barra de navegación en modo claro -->
         <item name="android:windowLightNavigationBar">false</item>
     </style>
 
