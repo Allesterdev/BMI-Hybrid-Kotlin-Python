@@ -17,7 +17,7 @@
         <!-- Configuración de AdMob -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3183197075562187~8423151311"/>
+            android:value="${admobAppId}"/>
 
         <meta-data
             android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION"

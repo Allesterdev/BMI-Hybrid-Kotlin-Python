@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.chaquo.python.Python
+import com.example.calculadoraimc.BuildConfig
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentAdultosBinding
 import com.example.calculadoraimc.utils.MeasurementUtils
@@ -285,7 +286,7 @@ class AdultosFragment : Fragment() {
     // Método para cargar anuncio nativo
     private fun cargarAnuncioNativo() {
         try {
-            adLoader = AdLoader.Builder(requireContext(), "ca-app-pub-3940256099942544/2247696110")
+            adLoader = AdLoader.Builder(requireContext(), BuildConfig.ADMOB_NATIVE_ADULTOS_ID)
                 .forNativeAd { ad ->
                     try {
                         if (!isAdded) {

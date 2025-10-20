@@ -20,8 +20,8 @@ android {
         applicationId "com.allesterdev.imcpractico"
         minSdk 28
         targetSdk 36
-        versionCode 3
-        versionName "1.0.2"
+        versionCode 4
+        versionName "1.0.3"
 
         ndk {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
@@ -42,10 +42,22 @@ android {
     buildTypes {
         debug {
             buildConfigField "boolean", "DEBUG_LOGS", "true"
+            // IDs de prueba oficiales de Google AdMob para testing
+            buildConfigField "String", "ADMOB_APP_ID", "\"ca-app-pub-3940256099942544~3347511713\""
+            buildConfigField "String", "ADMOB_INTERSTITIAL_ID", "\"ca-app-pub-3940256099942544/1033173712\""
+            buildConfigField "String", "ADMOB_NATIVE_ADULTOS_ID", "\"ca-app-pub-3940256099942544/2247696110\""
+            buildConfigField "String", "ADMOB_NATIVE_MENORES_ID", "\"ca-app-pub-3940256099942544/2247696110\""
+            manifestPlaceholders = [admobAppId: "ca-app-pub-3940256099942544~3347511713"]
             // Removed applicationIdSuffix ".debug"
         }
         release {
             buildConfigField "boolean", "DEBUG_LOGS", "false"
+            // IDs reales de producción
+            buildConfigField "String", "ADMOB_APP_ID", "\"ca-app-pub-3183197075562187~8423151311\""
+            buildConfigField "String", "ADMOB_INTERSTITIAL_ID", "\"ca-app-pub-3183197075562187/4318619265\""
+            buildConfigField "String", "ADMOB_NATIVE_ADULTOS_ID", "\"ca-app-pub-3183197075562187/5625522573\""
+            buildConfigField "String", "ADMOB_NATIVE_MENORES_ID", "\"ca-app-pub-3183197075562187/2999359230\""
+            manifestPlaceholders = [admobAppId: "ca-app-pub-3183197075562187~8423151311"]
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

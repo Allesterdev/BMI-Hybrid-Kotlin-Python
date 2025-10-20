@@ -3,7 +3,7 @@ package com.example.calculadoraimc.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import com.example.calculadoraimc.utils.Logger
+import com.example.calculadoraimc.BuildConfig
 import com.google.android.gms.ads.AdError
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.FullScreenContentCallback
@@ -19,8 +19,8 @@ import java.util.concurrent.TimeUnit
  */
 class AdManager private constructor(context: Context) {
 
-    // ID del anuncio intersticial de prueba de AdMob
-    private val interstitialAdId = "ca-app-pub-3940256099942544/1033173712"
+    // ID del anuncio intersticial - cambia automáticamente según build type
+    private val interstitialAdId = BuildConfig.ADMOB_INTERSTITIAL_ID
 
     // Referencia débil al contexto para evitar fugas de memoria
     private val contextRef = WeakReference(context.applicationContext)

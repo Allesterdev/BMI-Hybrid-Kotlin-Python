@@ -14,6 +14,7 @@ import android.widget.RatingBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.calculadoraimc.BuildConfig
 import com.example.calculadoraimc.R
 import com.example.calculadoraimc.databinding.FragmentMenoresBinding
 import com.chaquo.python.Python
@@ -581,7 +582,7 @@ class MenoresFragment : Fragment() {
             return
         }
         try {
-            adLoader = AdLoader.Builder(requireContext(), "ca-app-pub-3940256099942544/2247696110")
+            adLoader = AdLoader.Builder(requireContext(), BuildConfig.ADMOB_NATIVE_MENORES_ID)
                 .forNativeAd { ad ->
                     try {
                         if (!isAdded) {
