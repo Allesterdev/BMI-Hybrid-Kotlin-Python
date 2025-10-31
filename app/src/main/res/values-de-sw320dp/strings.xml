@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Kürzere Strings für kleine Displays (de) -->
+    <!-- Kürzere Titel -->
+    <string name="titulo_calculadora_adultos">BMI Erw.</string>
+    <string name="titulo_calculadora_menores">BMI 5–19</string>
+
+    <!-- Kompaktere Buttons -->
+    <string name="btn_calcular_imc">Berechnen</string>
+    <string name="btn_calcular_percentil">Berechnen</string>
+    <string name="btn_guardar_historial">Speichern</string>
+    <string name="btn_ver_grafico">Diagramm</string>
+    <string name="btn_volver_historial">Zurück</string>
+
+    <!-- Kürzere Verwaltungsoptionen -->
+    <string name="btn_borrar_historial_adultos">Erw. löschen</string>
+    <string name="btn_borrar_historial_menores">Kinder löschen</string>
+    <string name="btn_borrar_todos_historiales">Alle löschen</string>
+
+    <!-- Kürzere Perzentil-Info -->
+    <string name="btn_mostrar_info">Perzentil-Info</string>
+    <string name="btn_ocultar_info">Ausblenden</string>
+
+    <!-- Kürzere Meldungen -->
+    <string name="error_campos_vacios_adultos">Gewicht und Größe</string>
+    <string name="error_campos_vacios_menores">Alle Felder</string>
+    <string name="error_calcular_primero_adultos">Erst BMI</string>
+    <string name="error_calcular_primero_menores">Erst Perzentil</string>
+    <string name="msg_debe_aceptar_disclaimer">Disclaimer akzeptieren</string>
+
+    <!-- Kürzere Abschnittstitel -->
+    <string name="titulo_historial">Verlauf</string>
+    <string name="titulo_grafico_historial">Entwicklung</string>
+    <string name="borrar_historiales_titulo">Daten-Verw.</string>
+
+    <!-- Kürzere Bestätigungen -->
+    <string name="confirmacion_borrar_adultos">Erw.-Verlauf löschen?</string>
+    <string name="confirmacion_borrar_menores">Kinder-Verlauf löschen?</string>
+    <string name="confirmacion_borrar_todos">ALLE Verläufe löschen?</string>
+
+    <!-- Kürzere rechtliche Info -->
+    <string name="informacion_legal">Rechtl. Info</string>
+
+    <!-- Abkürzungen für BMI-Skala -->
+    <string name="bajo_peso">UG</string>
+    <string name="peso_normal">Normal</string>
+    <string name="sobrepeso">ÜG</string>
+    <string name="obesidad_1">Adip. I</string>
+    <string name="obesidad_2">Adip. II</string>
+    <string name="obesidad_3">Adip. III</string>
+</resources>
