@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">IMC Pratique</string>
+    <string name="title_adultos">Adultes</string>
+    <string name="title_menores">5–19 ans</string>
+    <string name="title_historial">Historique</string>
+    <string name="title_opciones">Options</string>
+
+    <!-- Calculatrice (Adultes) -->
+    <string name="titulo_calculadora_adultos">Calculateur d\'IMC Adultes</string>
+    <string name="hint_peso">Poids (kg)</string>
+    <string name="hint_peso_imperial">Poids (lb)</string>
+    <string name="hint_altura">Taille (m ou cm)</string>
+    <string name="hint_altura_imperial">Taille (in ou 5\'10\")</string>
+    <string name="hint_altura_imperial_ejemplo">Ex : 5\'10\" ou 70</string>
+    <string name="btn_calcular_imc">Calculer l\'IMC</string>
+    <string name="titulo_resultado">Résultat</string>
+    <string name="btn_guardar_historial">Enregistrer dans l\'historique</string>
+
+    <!-- Calculatrice (5–19) -->
+    <string name="titulo_calculadora_menores">Calculateur IMC 5–19 ans</string>
+    <string name="hint_edad">Âge (ans)</string>
+    <string name="label_sexo">Sexe</string>
+    <string name="radio_masculino">Masculin</string>
+    <string name="radio_femenino">Féminin</string>
+    <string name="btn_calcular_percentil">Calculer le percentile</string>
+
+    <!-- Date de naissance -->
+    <string name="hint_fecha_nacimiento">Date de naissance (JJ/MM/AAAA)</string>
+    <string name="btn_seleccionar_fecha">Choisir la date</string>
+
+    <!-- Échelle IMC -->
+    <string name="titulo_escala_imc">Échelle IMC</string>
+    <string name="bajo_peso">Sous-poids</string>
+    <string name="peso_normal">Normal</string>
+    <string name="sobrepeso">Surpoids</string>
+    <string name="obesidad_1">Obés. I</string>
+    <string name="obesidad_2">Obés. II</string>
+    <string name="obesidad_3">Obés. III</string>
+    <string name="rango_bajo_peso">&lt;18.5</string>
+    <string name="rango_normal">18.5–24.9</string>
+    <string name="rango_sobrepeso">25–29.9</string>
+    <string name="rango_obesidad_1">30–34.9</string>
+    <string name="rango_obesidad_2">35–39.9</string>
+    <string name="rango_obesidad_3">≥40</string>
+    <string name="imc_inicial">IMC: —</string>
+    <string name="percentil_inicial">Percentile: —</string>
+
+    <!-- Erreurs/Validation -->
+    <string name="error_campos_vacios_adultos">Veuillez saisir le poids et la taille</string>
+    <string name="error_campos_vacios_menores">Veuillez compléter tous les champs</string>
+    <string name="error_valores_positivos">Les valeurs doivent être &gt; 0</string>
+    <string name="error_edad_rango">Valeurs invalides. L\'âge doit être compris entre 5 et 19 ans</string>
+    <string name="error_valores_numericos">Veuillez saisir des valeurs numériques valides</string>
+    <string name="error_calcular_primero_adultos">Calculez d\'abord l\'IMC</string>
+    <string name="error_calcular_primero_menores">Calculez d\'abord le percentile</string>
+    <string name="error_calculo">Erreur de calcul : %1$s</string>
+    <string name="error_guardar">Erreur d\'enregistrement : %1$s</string>
+    <string name="error_percentiles">Erreur : %1$s</string>
+
+    <!-- Succès -->
+    <string name="exito_guardado">Mesure enregistrée dans l\'historique</string>
+
+    <!-- Date invalide -->
+    <string name="error_fecha_invalida">Date invalide</string>
+
+    <!-- Formats de résultat -->
+    <string name="formato_imc">IMC: %.1f</string>
+    <string name="formato_percentil">Percentile: %.1f</string>
+    <string name="sin_interpretacion">Sans interprétation</string>
+
+    <!-- Historique -->
+    <string name="titulo_historial">Historique des mesures</string>
+    <string name="historial_peso">Poids : %.1f kg</string>
+    <string name="historial_altura">Taille : %.2f m</string>
+    <string name="historial_peso_formato">Poids : %s</string>
+    <string name="historial_altura_formato">Taille : %s</string>
+    <string name="historial_imc">IMC : %.2f</string>
+    <string name="historial_fecha">Date : %s</string>
+    <string name="historial_sexo">Sexe : %s</string>
+    <string name="historial_edad_meses">Âge : %d mois</string>
+    <string name="historial_percentil">Percentile : %.1f</string>
+    <string name="historial_vacio">Aucune mesure enregistrée</string>
+    <string name="btn_ver_grafico">Voir le graphique</string>
+
+    <!-- Graphique -->
+    <string name="titulo_grafico_historial">Évolution des mesures</string>
+    <string name="btn_volver_historial">Retour à l\'historique</string>
+    <string name="sin_datos_grafico">Aucune donnée à afficher</string>
+    <string name="label_imc">IMC</string>
+    <string name="label_peso">Poids</string>
+    <string name="label_percentil">Percentile</string>
+    <string name="label_altura">Taille</string>
+
+    <!-- Options -->
+    <string name="titulo_opciones">Options</string>
+    <string name="disclaimer_titulo">Avertissement légal et conditions d\'utilisation.</string>
+    <string name="disclaimer_texto">Cette application a été développée à des fins éducatives et informatives pour un public adulte, et sert d\'outil indicatif pour le calcul de l\'Indice de Masse Corporelle (IMC) chez les adultes ainsi que chez les mineurs entre 5 et 19 ans.\n\nUSAGE MÉDICAL ET PROFESSIONNEL\n• Ne remplace pas l\'avis d\'un professionnel de santé.\n• Les valeurs calculées et les interprétations fournies sont indicatives et ne constituent pas un diagnostic médical.\n• En cas de question de santé, consultez toujours un médecin ou un pédiatre.\n\nÀ PROPOS DES 5 À 19 ANS\n• L\'IMC chez les mineurs de moins de 20 ans ne s\'interprète pas de la même manière que chez les adultes.\n• Le calcul chez les mineurs entre 5 et 19 ans est basé sur les références de l\'OMS.\n• Cette application n\'est pas destinée à évaluer le développement des enfants de moins de 5 ans.\n\nCONFIDENTIALITÉ ET SÉCURITÉ\n• Cette application ne collecte ni n\'envoie de données personnelles à des serveurs externes.\n• Toutes les informations sont stockées localement sur l\'appareil, sans chiffrement.\n\nRESPONSABILITÉ DE L\'UTILISATEUR\n• L\'utilisateur est seul responsable de l\'utilisation de l\'application.\n• L\'utilisation de cette application implique l\'acceptation de ces conditions.</string>
+    <string name="borrar_historiales_titulo">Gestion des données</string>
+    <string name="btn_borrar_historial_adultos">Supprimer historique Adultes</string>
+    <string name="btn_borrar_historial_menores">Supprimer historique Enfants</string>
+    <string name="btn_borrar_todos_historiales">Supprimer tous les historiques</string>
+    <string name="confirmacion_borrar_titulo">Confirmer la suppression</string>
+    <string name="confirmacion_borrar_adultos">Voulez-vous vraiment supprimer tout l\'historique des adultes ?</string>
+    <string name="confirmacion_borrar_menores">Voulez-vous vraiment supprimer tout l\'historique des enfants ?</string>
+    <string name="confirmacion_borrar_todos">Voulez-vous vraiment supprimer TOUS les historiques ?</string>
+    <string name="btn_confirmar">Confirmer</string>
+    <string name="btn_cancelar">Annuler</string>
+    <string name="exito_borrar_adultos">Historique des adultes supprimé</string>
+    <string name="exito_borrar_menores">Historique des enfants supprimé</string>
+    <string name="exito_borrar_todos">Tous les historiques supprimés</string>
+    <string name="btn_salir">Quitter</string>
+    <string name="mensaje_debe_aceptar">Vous devez accepter les conditions pour utiliser cette application</string>
+    <string name="btn_aceptar">Accepter</string>
+    <string name="msg_debe_aceptar_disclaimer">Vous devez accepter l\'avertissement</string>
+
+    <!-- Autres erreurs -->
+    <string name="error_datos_invalidos">Erreur de données : %1$s</string>
+    <string name="error_calculo_guardar">Erreur lors du calcul de l\'IMC pour l\'enregistrement : %1$s</string>
+    <string name="error_borrar_historial">Erreur lors de la suppression de l\'historique : %1$s</string>
+    <string name="error_borrar_historiales">Erreur lors de la suppression des historiques : %1$s</string>
+    <string name="error_generico">Erreur : %1$s</string>
+    <string name="error_desconocido">Erreur inconnue</string>
+    <string name="interpretacion_con_edad">%1$s (%2$.1f ans)</string>
+
+    <!-- Infos percentiles OMS -->
+    <string name="titulo_info_percentiles">Qu\'est-ce que les percentiles ?</string>
+    <string name="info_percentiles_oms">Cette application utilise les références de croissance de l\'<b>Organisation mondiale de la Santé (OMS)</b> pour calculer les percentiles d\'IMC chez les enfants et adolescents de 5 à 19 ans.\n\n<b>Que signifie le percentile ?</b>\nLe percentile indique quel pourcentage d\'enfants du même âge et du même sexe ont un IMC inférieur. Par exemple :\n• Percentile 50 : IMC typique (la moitié a un IMC inférieur)\n• Percentile 85 : Seulement 15 % ont un IMC plus élevé\n• Percentile 95 : Seulement 5 % ont un IMC plus élevé\n\n<b>Interprétation OMS :</b>\n• &lt;3 : Sous-poids\n• 3–84 : Poids sain\n• 85–96 : Surpoids\n• ≥97 : Obésité\n\n<b>Important :</b> Ces mesures sont indicatives et ne reflètent pas à elles seules l\'état de santé de l\'enfant ou de l\'adolescent. En cas de doute, consultez toujours votre pédiatre.</string>
+    <string name="btn_mostrar_info">Infos percentiles</string>
+    <string name="btn_ocultar_info">Masquer les informations</string>
+
+    <!-- Étiquettes de la barre de percentiles -->
+    <string name="peso_saludable">Poids sain</string>
+    <string name="obesidad">Obésité</string>
+
+    <!-- Mentions légales / À propos / Licences -->
+    <string name="aviso_legal_titulo">Mention légale</string>
+    <string name="acerca_de_titulo">À propos</string>
+    <string name="acerca_de_nombre_app">IMC Pratique : Adultes &amp; Enfants</string>
+    <string name="acerca_de_version">Version :</string>
+    <string name="acerca_de_desarrollador">Développeur :</string>
+    <string name="acerca_de_desarrollador_nombre">Oscar Campoy B.</string>
+    <string name="acerca_de_descripcion">Cette application calcule l\'indice de masse corporelle (IMC) pour adultes et enfants (à partir de 5 ans), enregistre les résultats et affiche un historique.</string>
+    <string name="acerca_de_contacto">Pour questions ou suggestions :\noscarcampoy.dev@gmail.com</string>
+    <string name="licencias_titulo">Crédits et licences</string>
+    <string name="licencias_texto">Cette application utilise des logiciels open source :\n\n• <b>Chaquopy</b> — Licence Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Pandas</b> — Licence BSD à 3 clauses (<a href="https://opensource.org/licenses/BSD-3-Clause">opensource.org/licenses/BSD-3-Clause</a>)\n\n• <b>AndroidX</b> — Licence Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>Kotlin</b> — Licence Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\n• <b>SQLite</b> — Domaine public (<a href="https://www.sqlite.org/copyright.html">sqlite.org/copyright.html</a>)\n\n• <b>MPAndroidChart</b> — Licence Apache 2.0 (<a href="https://www.apache.org/licenses/LICENSE-2.0">apache.org/licenses/LICENSE-2.0</a>)\n\nVous pouvez consulter le texte intégral de toutes les licences via « Voir les licences ».</string>
+    <string name="volver">Retour</string>
+    <string name="informacion_legal">Informations &amp; Légal</string>
+    <string name="politicas_privacidad">Politique de confidentialité</string>
+    <string name="opciones_privacidad">Options de confidentialité</string>
+
+    <!-- Interprétation (Enfants) -->
+    <string name="interpretacion_bajo_peso">Sous-poids</string>
+    <string name="interpretacion_peso_saludable">Poids sain</string>
+    <string name="interpretacion_sobrepeso">Surpoids</string>
+    <string name="interpretacion_obesidad">Obésité</string>
+
+    <!-- Interprétation (Adultes) -->
+    <string name="interpretacion_bajo_peso_adulto">Vous êtes en sous-poids</string>
+    <string name="interpretacion_normal_adulto">Votre IMC est normal</string>
+    <string name="interpretacion_sobrepeso_adulto">Vous êtes en surpoids</string>
+    <string name="interpretacion_obesidad_1_adulto">Vous présentez une obésité de grade 1</string>
+    <string name="interpretacion_obesidad_2_adulto">Vous présentez une obésité de grade 2</string>
+    <string name="interpretacion_obesidad_3_adulto">Vous présentez une obésité de grade 3</string>
+
+    <!-- Unités -->
+    <string name="unidad_peso_kg">kg</string>
+    <string name="unidad_peso_libras">lb</string>
+    <string name="unidad_altura_cm">cm</string>
+    <string name="unidad_altura_pulgadas">in</string>
+    <string name="hint_peso_kg">Poids en kg</string>
+    <string name="hint_peso_libras">Poids en livres</string>
+    <string name="hint_altura_cm">Taille en cm</string>
+    <string name="hint_altura_pulgadas">Pouces</string>
+    <string name="hint_altura_pies">Pieds</string>
+    <string name="formato_altura_imperial">%1$d\' %2$d\"</string>
+
+    <!-- Systèmes de mesure -->
+    <string name="sistema_metrico">Système métrique (cm, kg)</string>
+    <string name="sistema_imperial">Système impérial (in, lb)</string>
+    <string name="cambiar_sistema_medida">Changer le système de mesure</string>
+    <string name="ajustes_medicion_titulo">Paramètres de mesure</string>
+    <string name="cambio_sistema_confirmado">Système de mesure changé en : %1$s</string>
+
+    <!-- Sexe (pour historique) -->
+    <string name="sexo_masculino">Masculin</string>
+    <string name="sexo_femenino">Féminin</string>
+
+    <!-- Annonce native -->
+    <string name="anuncio">Publicité</string>
+
+    <string name="btn_ver_licencias">Voir les licences</string>
+    <string name="licences_asset_missing">Fichier d\'asset %1$s introuvable.</string>
+</resources>

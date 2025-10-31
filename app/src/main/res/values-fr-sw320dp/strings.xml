@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Chaînes abrégées pour petits écrans (fr) -->
+
+    <!-- Titres plus courts -->
+    <string name="titulo_calculadora_adultos">IMC Adultes</string>
+    <string name="titulo_calculadora_menores">IMC 5–19</string>
+
+    <!-- Boutons compacts -->
+    <string name="btn_calcular_imc">Calculer</string>
+    <string name="btn_calcular_percentil">Calculer</string>
+    <string name="btn_guardar_historial">Enreg.</string>
+    <string name="btn_ver_grafico">Graphique</string>
+    <string name="btn_volver_historial">Retour</string>
+
+    <!-- Options de gestion courtes -->
+    <string name="btn_borrar_historial_adultos">Suppr. Adultes</string>
+    <string name="btn_borrar_historial_menores">Suppr. Enfants</string>
+    <string name="btn_borrar_todos_historiales">Tout suppr.</string>
+
+    <!-- Infos percentiles plus courtes -->
+    <string name="btn_mostrar_info">Infos percentiles</string>
+    <string name="btn_ocultar_info">Masquer</string>
+
+    <!-- Messages concis -->
+    <string name="error_campos_vacios_adultos">Poids et taille</string>
+    <string name="error_campos_vacios_menores">Tous les champs</string>
+    <string name="error_calcular_primero_adultos">D\'abord IMC</string>
+    <string name="error_calcular_primero_menores">D\'abord percentile</string>
+    <string name="msg_debe_aceptar_disclaimer">Acceptez l\'avert.</string>
+
+    <!-- Titres de section courts -->
+    <string name="titulo_historial">Historique</string>
+    <string name="titulo_grafico_historial">Évolution</string>
+    <string name="borrar_historiales_titulo">Gest. données</string>
+
+    <!-- Confirmations courtes -->
+    <string name="confirmacion_borrar_adultos">Suppr. hist. adultes ?</string>
+    <string name="confirmacion_borrar_menores">Suppr. hist. enfants ?</string>
+    <string name="confirmacion_borrar_todos">Suppr. TOUS les hist. ?</string>
+
+    <!-- Info légale courte -->
+    <string name="informacion_legal">Infos légales</string>
+
+    <!-- Abréviations échelle IMC -->
+    <string name="bajo_peso">SP</string>
+    <string name="peso_normal">Normal</string>
+    <string name="sobrepeso">Surp.</string>
+    <string name="obesidad_1">Obés. I</string>
+    <string name="obesidad_2">Obés. II</string>
+    <string name="obesidad_3">Obés. III</string>
+</resources>
