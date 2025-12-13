@@ -1,19 +1,83 @@
+# Archivos sensibles - NO COMMITEAR
+*.jks
+*.keystore
+*-keystore.jks
+*keystore*.jks
+keystore-base64.txt
+*base64*.txt
+TUS-SECRETOS.md
+REFERENCIA-SECRETOS.md
+google-services.json
+*.aab
+*.apk
+
+# Service Account JSON de Google Play
+service-account*.json
+play-store-credentials.json
+
+# Keystores y certificados
+.android-keystores/
+release.keystore
+debug.keystore
+
+# Guías internas de configuración (no para reclutadores)
+STEP2-KEYSTORE.md
+STEP3-GITHUB-SECRETS.md
+QUE-SUBIR-AL-REPO.md
+
+# Scripts internos de setup (no mostrar públicamente)
+scripts/generate-keystore.sh
+scripts/convert-keystore-to-base64.sh
+scripts/convert-existing-keystore.sh
+scripts/show-secrets-for-github.sh
+
+# Configuración local
+local.properties
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+venv/
+ENV/
+env/
+
+# Android
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+/.idea/
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
-local.properties
-*.apk
-*.aab
-*/release/
+
+# Reportes de seguridad (opcionales, pero pueden ser grandes)
+bandit-report.json
+app/build/reports/
+build/reports/
+
+# Configuraciones personales de IDE
+.vscode/
+*.swp
+*.swo
+*~
 

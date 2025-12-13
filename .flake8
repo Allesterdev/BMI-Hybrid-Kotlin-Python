@@ -1,0 +1,22 @@
+# Flake8 configuration
+[flake8]
+max-line-length = 120
+exclude =
+    .git,
+    __pycache__,
+    build,
+    dist,
+    .gradle,
+    .idea,
+    *.egg-info
+
+# Extend default ignore list
+extend-ignore = E203, W503
+
+# McCabe complexity
+max-complexity = 10
+
+# Per-file ignores
+per-file-ignores =
+    __init__.py:F401
+

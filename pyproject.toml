@@ -1,0 +1,101 @@
+# Configuración de herramientas Python para DevSecOps
+# Este archivo centraliza la configuración de Black, Ruff, Bandit, etc.
+
+[tool.black]
+line-length = 120
+target-version = ['py310']
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  # Directorios a excluir
+  | build
+  | dist
+  | \.git
+  | \.gradle
+  | \.idea
+)/
+'''
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+# Seleccionar reglas a aplicar
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "UP",  # pyupgrade
+    "S",   # bandit (seguridad)
+    "N",   # pep8-naming
+]
+
+# Ignorar reglas específicas si es necesario
+ignore = [
+    "E203", # whitespace before ':'
+    "E501", # line too long (black se encarga)
+    "W503", # line break before binary operator
+]
+
+# Directorios a excluir
+exclude = [
+    ".git",
+    ".gradle",
+    "build",
+    "dist",
+    ".idea",
+    "__pycache__",
+]
+
+[tool.ruff.per-file-ignores]
+"__init__.py" = ["F401"]  # Permitir imports no usados en __init__.py
+
+[tool.bandit]
+# Configuración de Bandit para análisis de seguridad
+exclude_dirs = [
+    "build",
+    "dist",
+    ".gradle",
+    "tests",
+]
+
+# Tests a ejecutar (todos los tests de seguridad)
+tests = ["B201", "B301", "B302", "B303", "B304", "B305", "B306", "B307", "B308", "B309", "B310", "B311", "B312", "B313", "B314", "B315", "B316", "B317", "B318", "B319", "B320", "B321", "B323", "B324", "B325", "B401", "B402", "B403", "B404", "B405", "B406", "B407", "B408", "B409", "B410", "B411", "B412", "B413", "B501", "B502", "B503", "B504", "B505", "B506", "B507", "B601", "B602", "B603", "B604", "B605", "B606", "B607", "B608", "B609", "B610", "B611", "B701", "B702", "B703"]
+
+# Nivel de severidad mínimo
+severity = "low"
+
+[tool.pylint.messages_control]
+# Configuración de Pylint
+max-line-length = 120
+disable = [
+    "C0111",  # missing-docstring
+    "C0103",  # invalid-name (para nombres cortos como 'df')
+    "R0913",  # too-many-arguments
+    "R0914",  # too-many-locals
+]
+
+[tool.mypy]
+# Configuración de MyPy para type checking
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+# Configuración de Pytest
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--verbose",
+    "--cov=app/src/main/python",
+    "--cov-report=html",
+    "--cov-report=term-missing",
+]
+
