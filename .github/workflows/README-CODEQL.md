@@ -40,9 +40,10 @@ Mientras tanto, estas herramientas SÍ están activas:
 
 ### 🤖 Android:
 - ✅ Android Lint (security + quality)
+- ✅ OWASP Dependency Check (CVE scanner con NVD API key)
 - ✅ Dependabot (dependency updates)
 
-### Total: 7 herramientas activas
+### Total: 8 herramientas activas
 
 ## 📊 Cobertura Sin CodeQL
 
@@ -57,5 +58,5 @@ Activa CodeQL cuando:
 - ✅ Hagas el repositorio público (gratis)
 - ✅ Obtengas GitHub Enterprise (corporativo)
 
-Hasta entonces, las 7 herramientas activas son suficientes para demostrar DevSecOps.
+Hasta entonces, las 8 herramientas activas son suficientes para demostrar DevSecOps.
 
