@@ -4,7 +4,8 @@ plugins {
     id ("org.jetbrains.kotlin.android")
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.crashlytics)
-    id "org.owasp.dependencycheck" version "10.0.4"
+    // OWASP Dependency Check desactivado (muy lento sin NVD API key)
+    // id "org.owasp.dependencycheck" version "10.0.4"
 }
 
 chaquopy {
