@@ -4,8 +4,28 @@ plugins {
     id ("org.jetbrains.kotlin.android")
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.crashlytics)
-    // OWASP Dependency Check desactivado (muy lento sin NVD API key)
-    // id "org.owasp.dependencycheck" version "10.0.4"
+    id "org.owasp.dependencycheck" version "10.0.4"
+}
+
+// Configuración de OWASP Dependency Check
+dependencyCheck {
+    // Formato de reportes
+    formats = ['HTML', 'JSON']
+
+    // Usar NVD API Key si está disponible (desde variable de entorno o gradle.properties)
+    nvd {
+        apiKey = System.getenv('NVD_API_KEY') ?: project.findProperty('nvdApiKey') ?: ''
+    }
+
+    // Configuración de análisis
+    analyzers {
+        assemblyEnabled = false
+        nuspecEnabled = false
+    }
+
+    // Suprimir falsos positivos conocidos si es necesario
+    suppressionFile = file("$projectDir/dependency-check-suppressions.xml").exists() ?
+                     "$projectDir/dependency-check-suppressions.xml" : null
 }
 
 chaquopy {

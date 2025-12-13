@@ -34,11 +34,11 @@ Este proyecto implementa un **pipeline DevSecOps completo** que verifica:
 
 ### 🤖 Android
 - ✅ **Android Lint** - Análisis estático
-- ⏸️ **OWASP Dependency Check** - CVEs (desactivado: muy lento sin API key)
+- ✅ **OWASP Dependency Check** - CVEs en dependencias
 - ⏸️ **CodeQL** - Análisis profundo (desactivado: requiere repo público)
 - ✅ **Dependabot** - Actualizaciones automáticas
 
-**Total: 7 herramientas activas** (OWASP y CodeQL se activarán con repo público)
+**Total: 8 herramientas activas** (CodeQL se activará con repo público)
 
 📚 **Documentación completa:** [TOOLS_SUMMARY.md](TOOLS_SUMMARY.md)
 
