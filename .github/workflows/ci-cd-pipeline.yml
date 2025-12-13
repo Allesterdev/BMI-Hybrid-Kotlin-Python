@@ -41,32 +41,32 @@ jobs:
       - name: 🔍 Bandit - Security Scanner
         run: |
           echo "🔒 Analizando vulnerabilidades de seguridad en código Python..."
-          bandit -r app/src/main/python/ -f json -o bandit-report.json || true
-          bandit -r app/src/main/python/ -f txt
+          python -m bandit -r app/src/main/python/ -f json -o bandit-report.json || true
+          python -m bandit -r app/src/main/python/ -f txt
         continue-on-error: true
 
       - name: 🎨 Black - Code Formatter Check
         run: |
           echo "✨ Verificando formato del código Python..."
-          black --check --diff app/src/main/python/
+          python -m black --check --diff app/src/main/python/
         continue-on-error: true
 
       - name: ⚡ Ruff - Fast Linter
         run: |
           echo "⚡ Ejecutando Ruff linter..."
-          ruff check app/src/main/python/ --output-format=github
+          python -m ruff check app/src/main/python/ --output-format=github
         continue-on-error: true
 
       - name: 🔬 Flake8 - Style Guide Enforcement
         run: |
           echo "📏 Verificando estilo con Flake8..."
-          flake8 app/src/main/python/ --max-line-length=120 --extend-ignore=E203,W503
+          python -m flake8 app/src/main/python/ --max-line-length=120 --extend-ignore=E203,W503
         continue-on-error: true
 
       - name: 🛡️ Safety - Dependency Vulnerability Scanner
         run: |
           echo "🔐 Verificando vulnerabilidades en dependencias Python..."
-          pip freeze | safety check --stdin || true
+          pip freeze | python -m safety check --stdin || true
         continue-on-error: true
 
       - name: 📊 Upload Bandit Report
@@ -133,8 +133,10 @@ jobs:
         with:
           name: owasp-dependency-check-report
           path: |
-            app/build/reports/dependency-check-report.html
-            app/build/reports/dependency-check-report.json
+            **/build/reports/dependency-check-report.*
+            build/reports/*.html
+            build/reports/*.json
+          if-no-files-found: warn
           retention-days: 30
 
   # ============================================
