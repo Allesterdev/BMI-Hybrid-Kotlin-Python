@@ -169,8 +169,16 @@ com.google.firebase:firebase-bom:33.0.0
 
 ---
 
-### 8. **CodeQL** 🧠 - Análisis Semántico Profundo
-**¿Qué verifica?**
+### 8. **CodeQL** 🧠 - Análisis Semántico Profundo (Desactivado)
+
+**Estado:** ⏸️ Temporalmente desactivado
+
+**¿Por qué desactivado?**
+- Requiere repositorio público O GitHub Advanced Security
+- El repositorio actual es privado
+- Se activará automáticamente cuando el repo sea público
+
+**¿Qué verifica cuando está activo?**
 
 #### Java/Kotlin:
 - ✅ **SQL Injection** en queries dinámicas
