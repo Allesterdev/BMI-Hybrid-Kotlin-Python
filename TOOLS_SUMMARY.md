@@ -137,8 +137,16 @@ Recomendación: Actualizar a pandas >= 1.5.3
 
 ---
 
-### 7. **OWASP Dependency Check** 🔐 - CVEs en Dependencias
-**¿Qué verifica?**
+#### 7. **OWASP Dependency Check** 🔐 - CVEs en Dependencias (Desactivado)
+
+**Estado:** ⏸️ Temporalmente desactivado
+
+**¿Por qué desactivado?**
+- Requiere NVD API key para ser eficiente
+- Sin API key tarda 30-60 minutos en primera ejecución
+- Descarga completa de base de datos CVE (~2GB)
+
+**¿Qué verifica cuando está activo?**
 - ✅ **CVEs en Firebase** (firebase-bom, crashlytics, analytics)
 - ✅ **CVEs en Google Play Services** (play-services-ads)
 - ✅ **CVEs en AndroidX** (core, appcompat, etc.)
