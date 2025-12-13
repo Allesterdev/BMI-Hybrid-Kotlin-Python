@@ -118,11 +118,14 @@ jobs:
           name: android-lint-report
           path: app/build/reports/lint-results-debug.html
 
-      - name: 🔐 Dependency Check (OWASP)
-        run: |
-          echo "🛡️ Verificando vulnerabilidades en dependencias Android..."
-          ./gradlew dependencyCheckAnalyze || true
-        continue-on-error: true
+      # OWASP Dependency Check - Desactivado temporalmente (tarda 30-60 min sin NVD API key)
+      # Para activarlo: obtener API key en https://nvd.nist.gov/developers/request-an-api-key
+      # y configurar en gradle.properties: dependencyCheckNvdApiKey=YOUR_KEY
+      # - name: 🔐 Dependency Check (OWASP)
+      #   run: |
+      #     echo "🛡️ Verificando vulnerabilidades en dependencias Android..."
+      #     ./gradlew dependencyCheckAnalyze || true
+      #   continue-on-error: true
 
   # ============================================
   # JOB 3: TESTS UNITARIOS
