@@ -12,7 +12,7 @@ safety==3.7.0                # Verificador de vulnerabilidades en dependencias
 black==24.10.0                # Formateador automático de código
 ruff==0.8.4                   # Linter moderno y rápido (reemplaza flake8, isort, etc.)
 flake8==7.1.1                 # Checker de estilo tradicional
-pylint==3.3.2                 # Análisis estático avanzado
+pylint==4.0.4                 # Análisis estático avanzado
 
 # Type checking
 mypy==1.13.0                  # Verificador de tipos estático
