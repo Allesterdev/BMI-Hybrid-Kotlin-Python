@@ -298,19 +298,51 @@ Después de cada ejecución del pipeline, puedes descargar:
 
 ---
 
+## 🔐 GitHub Secrets y Configuración Sensible
+
+### Gestión de Secretos
+
+Este proyecto utiliza **GitHub Secrets** para proteger datos sensibles en el pipeline CI/CD:
+- 🔑 Credenciales de firma de aplicaciones Android
+- 🔑 Claves API para servicios externos
+- 🔑 Credenciales de despliegue a Play Store
+- 🔑 API keys para herramientas de análisis de seguridad
+
+**Importante:**
+- ✅ Todos los secretos están configurados en GitHub Actions
+- ✅ GitHub **NUNCA** expone secretos en logs públicos
+- ✅ Los secretos **NO** son accesibles en PRs de forks
+- ✅ Este es un proyecto de **solo lectura** - no se aceptan contribuciones externas
+
+### Archivos Protegidos
+
+Los siguientes archivos **NO deben commitearse** y están en `.gitignore`:
+```
+google-services.json          # Firebase configuration
+*.jks, *.keystore            # Android signing keys
+local.properties             # SDK paths y configuración local
+keystore.properties          # Credenciales de firma
+*base64*.txt                 # Keystores encoded
+service-account*.json        # Play Store credentials
+```
+
+### Para Desarrollo Local
+
+Si clonas este proyecto para referencia (solo lectura):
+1. **NO** tendrás acceso a los secretos (es correcto, están protegidos)
+2. Puedes ejecutar los checks de seguridad localmente sin secretos
+3. **NO** podrás hacer builds de release firmados (requiere keystores privados)
+4. Puedes usar el build `debug` que no requiere signing
+
+---
+
 ## ⚠️ Notas Importantes
 
 ### Sobre el Repositorio Público
 - ✅ Los secretos están 100% seguros en repos públicos
 - ✅ GitHub NUNCA expone secretos en logs
 - ✅ Los secretos NO son accesibles en PRs de forks
-- ⚠️ **NO** commiteés `google-services.json` si contiene info sensible
-- ⚠️ **NO** commiteés archivos `.jks` o `.keystore`
-
-### Sobre los AdMob IDs
-- ❓ Los IDs de AdMob están hardcodeados en `build.gradle`
-- 💡 **Recomendación**: Moverlos a GitHub Secrets para mayor seguridad
-- 💡 Usar `buildConfigField` con valores de secrets en CI
+- ✅ Este proyecto es de **solo lectura** - no se aceptan contribuciones
 
 ### Sobre el Despliegue
 - 🎮 **Control total**: TÚ decides cuándo lanzar a producción

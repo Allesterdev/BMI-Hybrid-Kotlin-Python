@@ -212,7 +212,15 @@ jobs:
       - name: 🔧 Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: 🔐 Create google-services.json from secret
+        run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/google-services.json
+
       - name: 🔨 Build Release AAB
+        env:
+          ADMOB_APP_ID_RELEASE: ${{ secrets.ADMOB_APP_ID_RELEASE }}
+          ADMOB_INTERSTITIAL_ID_RELEASE: ${{ secrets.ADMOB_INTERSTITIAL_ID_RELEASE }}
+          ADMOB_NATIVE_ADULTOS_ID_RELEASE: ${{ secrets.ADMOB_NATIVE_ADULTOS_ID_RELEASE }}
+          ADMOB_NATIVE_MENORES_ID_RELEASE: ${{ secrets.ADMOB_NATIVE_MENORES_ID_RELEASE }}
         run: ./gradlew bundleRelease
 
       - name: 🔑 Sign AAB
@@ -295,4 +303,3 @@ jobs:
           echo "- **Unit Tests:** ${{ needs.unit-tests.result }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "✅ Pipeline completado exitosamente!" >> $GITHUB_STEP_SUMMARY
-

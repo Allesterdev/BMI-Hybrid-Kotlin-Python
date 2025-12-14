@@ -74,12 +74,28 @@ android {
         }
         release {
             buildConfigField "boolean", "DEBUG_LOGS", "false"
-            // IDs reales de producción
-            buildConfigField "String", "ADMOB_APP_ID", "\"ca-app-pub-3183197075562187~8423151311\""
-            buildConfigField "String", "ADMOB_INTERSTITIAL_ID", "\"ca-app-pub-3183197075562187/4318619265\""
-            buildConfigField "String", "ADMOB_NATIVE_ADULTOS_ID", "\"ca-app-pub-3183197075562187/5625522573\""
-            buildConfigField "String", "ADMOB_NATIVE_MENORES_ID", "\"ca-app-pub-3183197075562187/2999359230\""
-            manifestPlaceholders = [admobAppId: "ca-app-pub-3183197075562187~8423151311"]
+
+            // 🔒 SEGURIDAD: IDs de producción desde variables de entorno (CI/CD) o local.properties (desarrollo local)
+            // Prioridad: 1) ENV vars (GitHub Actions), 2) local.properties, 3) Fallback a test IDs
+            def admobAppId = System.getenv('ADMOB_APP_ID_RELEASE') ?:
+                             project.findProperty('admobAppId') ?:
+                             'ca-app-pub-3940256099942544~3347511713'
+            def admobInterstitialId = System.getenv('ADMOB_INTERSTITIAL_ID_RELEASE') ?:
+                                      project.findProperty('admobInterstitialId') ?:
+                                      'ca-app-pub-3940256099942544/1033173712'
+            def admobNativeAdultosId = System.getenv('ADMOB_NATIVE_ADULTOS_ID_RELEASE') ?:
+                                       project.findProperty('admobNativeAdultosId') ?:
+                                       'ca-app-pub-3940256099942544/2247696110'
+            def admobNativeMenoresId = System.getenv('ADMOB_NATIVE_MENORES_ID_RELEASE') ?:
+                                       project.findProperty('admobNativeMenoresId') ?:
+                                       'ca-app-pub-3940256099942544/2247696110'
+
+            buildConfigField "String", "ADMOB_APP_ID", "\"${admobAppId}\""
+            buildConfigField "String", "ADMOB_INTERSTITIAL_ID", "\"${admobInterstitialId}\""
+            buildConfigField "String", "ADMOB_NATIVE_ADULTOS_ID", "\"${admobNativeAdultosId}\""
+            buildConfigField "String", "ADMOB_NATIVE_MENORES_ID", "\"${admobNativeMenoresId}\""
+            manifestPlaceholders = [admobAppId: admobAppId]
+
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

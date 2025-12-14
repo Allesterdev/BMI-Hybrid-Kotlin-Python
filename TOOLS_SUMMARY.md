@@ -139,7 +139,7 @@ Recomendación: Actualizar a pandas >= 1.5.3
 
 #### 7. **OWASP Dependency Check** 🔐 - CVEs en Dependencias
 
-**Estado:** ✅ Activo (con NVD API Key)
+**Estado:** ✅ Activo (con NVD API Key configurada en GitHub Secrets)
 
 **¿Qué verifica?**
 - ✅ **CVEs en Firebase** (firebase-bom, crashlytics, analytics)
