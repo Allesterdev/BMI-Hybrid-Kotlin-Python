@@ -20,5 +20,5 @@ mypy==1.13.0                  # Verificador de tipos estático
 # Testing
 pytest==8.3.4                 # Framework de testing
 pytest-cov==6.0.0             # Plugin para coverage de tests
-pytest-mock==3.14.0           # Plugin para mocking
+pytest-mock==3.15.1           # Plugin para mocking
 
