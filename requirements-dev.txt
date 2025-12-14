@@ -9,7 +9,7 @@ bandit[toml]==1.7.10          # Escáner de seguridad para Python
 safety==3.7.0                # Verificador de vulnerabilidades en dependencias
 
 # Herramientas de formato y linting
-black==24.10.0                # Formateador automático de código
+black==25.12.0                # Formateador automático de código
 ruff==0.8.4                   # Linter moderno y rápido (reemplaza flake8, isort, etc.)
 flake8==7.1.1                 # Checker de estilo tradicional
 pylint==3.3.2                 # Análisis estático avanzado
