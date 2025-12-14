@@ -7,12 +7,12 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:8.6.0'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.0'
-        classpath 'com.chaquo.python:gradle:16.1.0'
+        classpath 'com.chaquo.python:gradle:17.0.0'
     }
 }
 
 plugins {
-    id ("com.chaquo.python") version "16.1.0" apply false
+    id ("com.chaquo.python") version "17.0.0" apply false
     alias(libs.plugins.google.gms.google.services) apply false
     alias(libs.plugins.google.firebase.crashlytics) apply false
 }
