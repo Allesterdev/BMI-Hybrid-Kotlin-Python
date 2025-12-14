@@ -33,10 +33,6 @@ updates:
       - dependency-name: "com.android.application"
         update-types: ["version-update:semver-major", "version-update:semver-minor"]
 
-    # Labels para identificar fácilmente
-    labels:
-      - "dependencies"
-      - "android"
 
   # ============================================
   # PYTHON DEPENDENCIES
@@ -54,9 +50,6 @@ updates:
       - dependency-name: "pandas"
         update-types: ["version-update:semver-major"]
 
-    labels:
-      - "dependencies"
-      - "python"
 
   # ============================================
   # GITHUB ACTIONS (Siempre seguro actualizar)
@@ -69,10 +62,6 @@ updates:
       time: "09:00"
     open-pull-requests-limit: 10
 
-    # GitHub Actions son seguros, no ignorar nada
-    labels:
-      - "dependencies"
-      - "github-actions"
 
 # ============================================
 # NOTAS:
