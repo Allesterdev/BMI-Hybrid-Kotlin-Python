@@ -18,7 +18,7 @@ pylint==3.3.2                 # Análisis estático avanzado
 mypy==1.13.0                  # Verificador de tipos estático
 
 # Testing
-pytest==8.3.4                 # Framework de testing
+pytest==9.0.2                 # Framework de testing
 pytest-cov==6.0.0             # Plugin para coverage de tests
 pytest-mock==3.14.0           # Plugin para mocking
 
