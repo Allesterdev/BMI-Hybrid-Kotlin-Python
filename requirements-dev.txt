@@ -6,7 +6,7 @@ pandas==2.2.3
 
 # Herramientas de seguridad
 bandit[toml]==1.7.10          # Escáner de seguridad para Python
-safety==3.2.11                # Verificador de vulnerabilidades en dependencias
+safety==3.7.0                # Verificador de vulnerabilidades en dependencias
 
 # Herramientas de formato y linting
 black==24.10.0                # Formateador automático de código
