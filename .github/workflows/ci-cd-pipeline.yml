@@ -120,6 +120,18 @@ jobs:
         with:
           name: android-lint-report
           path: app/build/reports/lint-results-debug.html
+          if-no-files-found: warn
+
+      - name: 📊 Upload Build Error Reports
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: android-build-errors
+          path: |
+            build/reports/
+            app/build/reports/
+            **/build/reports/problems/
+          if-no-files-found: ignore
 
       - name: 🔐 OWASP Dependency Check
         env:
@@ -184,13 +196,28 @@ jobs:
 
       - name: 🧪 Run Unit Tests
         run: ./gradlew testDebugUnitTest
+        continue-on-error: false
 
       - name: 📊 Upload Test Reports
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-reports
-          path: app/build/reports/tests/
+          path: |
+            app/build/reports/tests/
+            app/build/test-results/
+          if-no-files-found: warn
+
+      - name: 📊 Upload Build Reports (on failure)
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: build-error-reports
+          path: |
+            build/reports/
+            app/build/reports/
+            **/build/reports/problems/
+          if-no-files-found: ignore
 
   # ============================================
   # JOB 4: BUILD RELEASE AAB (Solo en Release)
