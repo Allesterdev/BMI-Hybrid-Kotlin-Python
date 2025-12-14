@@ -105,6 +105,9 @@ jobs:
       - name: 🔧 Make gradlew executable
         run: chmod +x ./gradlew
 
+      - name: 🔐 Create google-services.json from secret
+        run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/google-services.json
+
       - name: 🧹 Android Lint
         run: |
           echo "🔍 Ejecutando Android Lint..."
@@ -175,6 +178,9 @@ jobs:
 
       - name: 🔧 Make gradlew executable
         run: chmod +x ./gradlew
+
+      - name: 🔐 Create google-services.json from secret
+        run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/google-services.json
 
       - name: 🧪 Run Unit Tests
         run: ./gradlew testDebugUnitTest
