@@ -70,7 +70,7 @@ jobs:
         continue-on-error: true
 
       - name: 📊 Upload Bandit Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: bandit-security-report
@@ -112,7 +112,7 @@ jobs:
         continue-on-error: true
 
       - name: 📊 Upload Lint Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: android-lint-report
@@ -129,7 +129,7 @@ jobs:
 
       - name: 📊 Upload OWASP Report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: owasp-dependency-check-report
           path: |
@@ -175,7 +175,7 @@ jobs:
         run: ./gradlew testDebugUnitTest
 
       - name: 📊 Upload Test Reports
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: test-reports
@@ -236,7 +236,7 @@ jobs:
           BUILD_TOOLS_VERSION: "34.0.0"
 
       - name: 📤 Upload Signed AAB
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: signed-aab
           path: ${{ steps.sign_aab.outputs.signedReleaseFile }}
@@ -251,7 +251,7 @@ jobs:
           echo "**Commit:** ${{ github.sha }}" >> release-notes.txt
 
       - name: 📄 Upload Release Notes
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: release-notes
           path: release-notes.txt
