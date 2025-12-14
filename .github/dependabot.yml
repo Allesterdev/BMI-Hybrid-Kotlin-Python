@@ -1,48 +1,97 @@
-# Dependabot - Actualización automática de dependencias
-# Mantiene las dependencias seguras y actualizadas
-
 version: 2
 updates:
-  # GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      interval: "weekly"
-      day: "monday"
-    open-pull-requests-limit: 5
-    labels:
-      - "dependencies"
-      - "github-actions"
-    commit-message:
-      prefix: "chore(deps)"
-
-  # Gradle (Android)
+  # ============================================
+  # GRADLE DEPENDENCIES (Android/Kotlin)
+  # ============================================
   - package-ecosystem: "gradle"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
-    open-pull-requests-limit: 10
+      time: "09:00"
+    open-pull-requests-limit: 5
+
+    # 🔒 IGNORAR actualizaciones PELIGROSAS que pueden romper la app
+    ignore:
+      # Android Gradle Plugin - Solo actualizar parches
+      - dependency-name: "com.android.tools.build:gradle"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
+      # Chaquopy - Actualizaciones mayores pueden romper Python
+      - dependency-name: "com.chaquo.python:gradle"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "com.chaquo.python"
+        update-types: ["version-update:semver-major"]
+
+      # Kotlin - Actualizaciones mayores pueden tener breaking changes
+      - dependency-name: "org.jetbrains.kotlin.android"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "org.jetbrains.kotlin:kotlin-gradle-plugin"
+        update-types: ["version-update:semver-major"]
+
+      # Android Application Plugin - Debe ir en sync con Gradle Plugin
+      - dependency-name: "com.android.application"
+        update-types: ["version-update:semver-major", "version-update:semver-minor"]
+
+    # Labels para identificar fácilmente
     labels:
       - "dependencies"
       - "android"
-    commit-message:
-      prefix: "chore(deps)"
-    ignore:
-      # Ignorar actualizaciones major de Kotlin (requieren revisión manual)
-      - dependency-name: "org.jetbrains.kotlin:*"
-        update-types: ["version-update:semver-major"]
 
-  # Python (dependencias de Chaquopy)
+  # ============================================
+  # PYTHON DEPENDENCIES
+  # ============================================
   - package-ecosystem: "pip"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "monday"
+      time: "09:00"
     open-pull-requests-limit: 5
+
+    # 🔒 IGNORAR actualizaciones mayores de pandas (puede romper scripts)
+    ignore:
+      - dependency-name: "pandas"
+        update-types: ["version-update:semver-major"]
+
     labels:
       - "dependencies"
       - "python"
-    commit-message:
-      prefix: "chore(deps)"
+
+  # ============================================
+  # GITHUB ACTIONS (Siempre seguro actualizar)
+  # ============================================
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+
+    # GitHub Actions son seguros, no ignorar nada
+    labels:
+      - "dependencies"
+      - "github-actions"
+
+# ============================================
+# NOTAS:
+# ============================================
+#
+# Esta configuración permite:
+# ✅ Actualizaciones PATCH de todo (ej: 8.6.0 → 8.6.1) - Siempre seguro
+# ✅ Actualizaciones MINOR de Firebase, AdMob, etc. - Generalmente seguro
+# ✅ Actualizaciones de GitHub Actions - Siempre seguro
+#
+# Y BLOQUEA:
+# ❌ Actualizaciones MAJOR/MINOR de Gradle Plugin
+# ❌ Actualizaciones MAJOR de Chaquopy
+# ❌ Actualizaciones MAJOR de Kotlin
+# ❌ Actualizaciones MAJOR de pandas
+#
+# Para actualizar dependencias bloqueadas:
+# 1. Hacerlo manualmente en una rama de testing
+# 2. Probar exhaustivamente
+# 3. Si funciona, mergear
+# 4. Luego actualizar este archivo para permitirla
 
