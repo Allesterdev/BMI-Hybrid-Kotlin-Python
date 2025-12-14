@@ -2,7 +2,7 @@
 # Instalar con: pip install -r requirements-dev.txt
 
 # Dependencias de la aplicación
-pandas==2.2.3
+pandas==2.3.3
 
 # Herramientas de seguridad
 bandit[toml]==1.7.10          # Escáner de seguridad para Python
