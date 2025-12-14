@@ -4,7 +4,7 @@ plugins {
     id ("org.jetbrains.kotlin.android")
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.crashlytics)
-    id "org.owasp.dependencycheck" version "10.0.4"
+    id "org.owasp.dependencycheck" version "12.1.9"
 }
 
 // Configuración de OWASP Dependency Check
