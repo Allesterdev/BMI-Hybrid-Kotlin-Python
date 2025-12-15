@@ -2,7 +2,7 @@
 
 [![CI/CD Pipeline](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions)
 [![CodeQL](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions)
-[![Security Rating](https://img.shields.io/badge/security-A+-brightgreen.svg)](SECURITY.md)
+[![Security Rating](https://img.shields.io/badge/security-A+-brightgreen.svg)](SECURITY.es.md)
 
 > Android BMI calculator app with comprehensive analysis for adults and children, implementing DevSecOps best practices.
 
@@ -22,6 +22,40 @@
 - **Google AdMob** integrated
 - **Firebase Analytics & Crashlytics**
 - **Complete CI/CD Pipeline** with DevSecOps
+
+---
+
+## 📜 Technical Evolution & Engineering Journey
+
+This project is the result of a rigorous engineering process, evolving from a simple CLI tool to a production-grade hybrid application. The journey highlights a strategic shift from pure development to a **Security-First** mindset.
+
+### 🔹 Phase 1: Rapid Prototyping (Python)
+The project began as a Python script to validate BMI algorithms and WHO data classification.
+* **Focus:** Logic validation using Pandas.
+* **Environment:** CLI (VS Code).
+
+### 🔹 Phase 2: The Cross-Platform Bottleneck (Kivy)
+I initially attempted a cross-platform GUI using **Kivy** and **Buildozer**.
+* **The Challenge:** Compiling scientific libraries like **NumPy** and **Matplotlib** for Android ARM architecture proved unstable due to complex C-dependencies.
+* **The Pivot:** After facing constant ABI incompatibilities and realizing the UI limitations for a modern user experience, a strategic decision was made to migrate to a native architecture.
+
+### 🔹 Phase 3: The Hybrid Solution & Tooling Shift
+The solution pivoted to a **Hybrid Architecture** (Kotlin UI + Python Logic via Chaquopy), requiring a complete change of environment.
+* **🛠️ The Tooling Upgrade:** I migrated from VS Code to **Android Studio** to leverage professional debugging tools, native emulators, and strict project structure enforcement.
+* **🛑 The Blocker:** Integrating Chaquopy into the modern Android ecosystem caused severe Gradle build failures that AI assistants could not resolve.
+* **✅ The Fix:** I manually debugged the build process by analyzing the official documentation, restructuring the `build.gradle` dependency graph, and enforcing version locking.
+
+### 🔹 Phase 4: The DevSecOps Integration (Security First)
+**Parallel to development, I was advancing my training in Cybersecurity.** I realized that functional code is not enough; it must be secure by design. This led to the adoption of the **DevSecOps culture**:
+* **Shift-Left Security:** I integrated automated security scanners (Bandit, OWASP, Lint) directly into the CI pipeline to catch vulnerabilities *before* the merge.
+* **Release Management:** Automated the deployment to Google Play (Internal Track) to eliminate human error during release, successfully managing the 14-day Closed Testing mandate.
+
+### 📸 Visual Evolution: Before & After
+
+| Initial Cross-Platform (Kivy) | Final Native Architecture (Kotlin) |
+| :---: | :---: |
+| <img src="project_docs/kivy_capture.png" width="350"> | <img src="project_docs/final_capture.png" width="350"> |
+| *Python GUI (Buildozer issues)* | *Production Hybrid App (Android Studio)* |
 
 ---
 
@@ -66,22 +100,13 @@ This project implements a **complete DevSecOps pipeline** that verifies:
 ### 🤖 Android
 - ✅ **Android Lint** - Static analysis
 - ✅ **OWASP Dependency Check** - CVEs in dependencies
-- ⏸️ **CodeQL** - Deep analysis (disabled: requires public repo)
 - ✅ **Dependabot** - Automatic updates
 
-**Total: 8 active tools** (CodeQL will activate with public repo)
+**Total: 8 active tools**
 
-📚 **Complete documentation:** [TOOLS_SUMMARY.md](TOOLS_SUMMARY.md)
+> **Note on CodeQL:** Deep semantic analysis with CodeQL is currently disabled due to compatibility challenges with Chaquopy (Python-Android hybrid architecture). The current 8-tool security stack provides comprehensive coverage (~90% of what CodeQL would detect). CodeQL can be re-enabled when the build complexity is resolved or if the project structure changes.
 
----
-
-## 📋 Documentation
-
-| Document | Description |
-|-----------|-------------|
-| [QUICKSTART.md](QUICKSTART.md) | 🚀 Quick setup guide |
-| [SECURITY.md](SECURITY.md) | 🔒 Detailed security guide |
-| [TOOLS_SUMMARY.md](TOOLS_SUMMARY.md) | 🛠️ Implemented tools |
+📚 **Complete documentation:** [SECURITY.md](SECURITY.md)
 
 ---
 
@@ -99,23 +124,6 @@ This project implements a **complete DevSecOps pipeline** that verifies:
 
 ---
 
-## 📦 Local Installation
-
-```bash
-# Clone the repository
-git clone git@github.com:Allesterdev/BMI-Hybrid-Kotlin-Python.git
-cd BMI-Hybrid-Kotlin-Python
-
-# Install Python dependencies for development
-pip install -r requirements-dev.txt
-
-# Run security checks locally
-./run-security-checks.sh
-
-# Open in Android Studio and sync Gradle
-```
-
----
 
 ## 🧪 Run Tests
 

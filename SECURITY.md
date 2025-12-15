@@ -1,86 +1,74 @@
-# 🔒 Guía de Seguridad DevSecOps - Calculadora IMC
-
-## 📋 Herramientas de Seguridad Implementadas
-
-### 🐍 **Python Security & Quality**
-
-#### 1. **Bandit** - Security Scanner
-- **Qué hace**: Analiza el código Python en busca de vulnerabilidades de seguridad comunes
-- **Ejemplos de detección**:
-  - Uso de `eval()`, `exec()`, `pickle` (code injection)
-  - Contraseñas hardcodeadas
-  - SQL injection
-  - Uso de funciones criptográficas débiles
-  - Llamadas de sistema inseguras
-- **Comando local**: `bandit -r app/src/main/python/`
-
-#### 2. **Black** - Code Formatter
-- **Qué hace**: Asegura formato consistente del código Python
-- **Beneficio**: Código más legible, mantenible y profesional
-- **Comando local**: `black app/src/main/python/`
-
-#### 3. **Ruff** - Fast Linter
-- **Qué hace**: Linter ultrarrápido que combina múltiples herramientas (Flake8, isort, pyupgrade, etc.)
-- **Detección de**:
-  - Errores de sintaxis
-  - Variables no usadas
-  - Imports incorrectos
-  - Problemas de seguridad (integra reglas de Bandit)
-  - Code smells
-- **Comando local**: `ruff check app/src/main/python/`
-
-#### 4. **Flake8** - Style Guide Enforcement
-- **Qué hace**: Verifica que el código siga PEP 8 (estándar Python)
-- **Comando local**: `flake8 app/src/main/python/ --max-line-length=120`
-
-#### 5. **Safety** - Dependency Vulnerability Scanner
-- **Qué hace**: Verifica si las dependencias Python (pandas) tienen CVEs conocidos
-- **Base de datos**: PyUp Safety DB con vulnerabilidades conocidas
-- **Comando local**: `pip freeze | safety check --stdin`
-
+# 🔒 DevSecOps Security Guide - BMI Calculator
+**🌐 Language:** **🇬🇧 English** | [🇪🇸 Español](SECURITY.es.md)
 ---
-
+## 📋 Implemented Security Tools
+### 🐍 **Python Security & Quality**
+#### 1. **Bandit** - Security Scanner
+- **What it does**: Analyzes Python code for common security vulnerabilities
+- **Detection examples**:
+  - Use of `eval()`, `exec()`, `pickle` (code injection)
+  - Hardcoded passwords
+  - SQL injection
+  - Use of weak cryptographic functions
+  - Insecure system calls
+- **Local command**: `bandit -r app/src/main/python/`
+#### 2. **Black** - Code Formatter
+- **What it does**: Ensures consistent Python code formatting
+- **Benefit**: More readable, maintainable and professional code
+- **Local command**: `black app/src/main/python/`
+#### 3. **Ruff** - Fast Linter
+- **What it does**: Ultra-fast linter that combines multiple tools (Flake8, isort, pyupgrade, etc.)
+- **Detects**:
+  - Syntax errors
+  - Unused variables
+  - Incorrect imports
+  - Security issues (integrates Bandit rules)
+  - Code smells
+- **Local command**: `ruff check app/src/main/python/`
+#### 4. **Flake8** - Style Guide Enforcement
+- **What it does**: Verifies code follows PEP 8 (Python standard)
+- **Local command**: `flake8 app/src/main/python/ --max-line-length=120`
+#### 5. **Safety** - Dependency Vulnerability Scanner
+- **What it does**: Checks if Python dependencies (pandas) have known CVEs
+- **Database**: PyUp Safety DB with known vulnerabilities
+- **Local command**: `pip freeze | safety check --stdin`
+---
 ### 🤖 **Android/Kotlin Security**
-
 #### 1. **Android Lint**
-- **Qué hace**: Análisis estático del código Android
-- **Detección de**:
-  - Problemas de seguridad (permisos innecesarios, exportación de componentes)
+- **What it does**: Static analysis of Android code
+- **Detects**:
+  - Security issues (unnecessary permissions, component exports)
   - Hardcoded secrets
-  - API deprecadas
-  - Problemas de rendimiento
-  - Internacionalización
-- **Comando local**: `./gradlew lintDebug`
-
+  - Deprecated APIs
+  - Performance issues
+  - Internationalization
+- **Local command**: `./gradlew lintDebug`
 #### 2. **OWASP Dependency Check**
-- **Qué hace**: Identifica CVEs en todas las dependencias (Firebase, AdMob, etc.)
-- **Base de datos**: National Vulnerability Database (NVD)
-- **Comando local**: `./gradlew dependencyCheckAnalyze`
-
+- **What it does**: Identifies CVEs in all dependencies (Firebase, AdMob, etc.)
+- **Database**: National Vulnerability Database (NVD)
+- **Local command**: `./gradlew dependencyCheckAnalyze`
 #### 3. **CodeQL** (GitHub Advanced Security)
-- **Qué hace**: Análisis semántico profundo del código
-- **Detecta**:
-  - Inyecciones SQL
+- **What it does**: Deep semantic code analysis
+- **Detects**:
+  - SQL injections
   - Cross-site scripting (XSS)
   - Path traversal
-  - Uso inseguro de criptografía
-  - Manejo inseguro de datos sensibles
-- **Ejecución**: Automática en cada push
+  - Insecure cryptography usage
+  - Insecure sensitive data handling
+- **Execution**: Automatic on every push
+- **Status**: ⏸️ **Temporarily Disabled**
 
+> **Why disabled?** CodeQL Java/Kotlin analysis requires complex build configuration that is incompatible with Chaquopy's Python-Android integration. The autobuild process cannot properly trace the hybrid compilation. Current security tools (Bandit, Android Lint, OWASP) provide ~90% coverage of what CodeQL would detect. Can be re-enabled in the future with manual build configuration improvements.
 #### 4. **Dependabot**
-- **Qué hace**: Actualización automática de dependencias con parches de seguridad
-- **Crea PRs** automáticos cuando hay vulnerabilidades
-- **Ecosistemas cubiertos**: Gradle, Python, GitHub Actions
-
+- **What it does**: Automatic dependency updates with security patches
+- **Creates PRs** automatically when vulnerabilities exist
+- **Covered ecosystems**: Gradle, Python, GitHub Actions
 ---
-
-## 🚀 Pipeline CI/CD Completo
-
-### Flujo de Trabajo
-
+## 🚀 Complete CI/CD Pipeline
+### Workflow
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  1. PUSH/PR a main o develop                                │
+│  1. PUSH/PR to main or develop                              │
 └──────────────────┬──────────────────────────────────────────┘
                    │
     ┌──────────────┴──────────────┐
@@ -109,7 +97,7 @@
                   │
                   ▼
     ┌─────────────────────────────────┐
-    │  Solo si es Release/Manual      │
+    │  Only if Release/Manual         │
     └──────────────┬──────────────────┘
                    │
                    ▼
@@ -126,80 +114,68 @@
     │  Deploy to Play Store           │
     │  (Internal Testing)             │
     │                                 │
-    │  Promoción a Producción: MANUAL │
+    │  Promote to Production: MANUAL  │
     └─────────────────────────────────┘
 ```
-
 ---
-
-## 🔑 Secretos Requeridos en GitHub
-
-Configura estos secretos en: **Settings → Secrets and variables → Actions → New repository secret**
-
-### Para Firma de APK/AAB:
+## 🔑 GitHub Secrets Architecture
+The CI/CD pipeline uses GitHub Secrets to securely inject sensitive credentials without hardcoding them in the repository.
+### For APK/AAB Signing:
 ```bash
-KEYSTORE_FILE          # Base64 del archivo .jks (ver instrucciones abajo)
-KEYSTORE_PASSWORD      # Contraseña del keystore
-KEY_ALIAS              # Alias de la key de firma
-KEY_PASSWORD           # Contraseña de la key
+KEYSTORE_FILE          # Base64 of .jks file (see instructions below)
+KEYSTORE_PASSWORD      # Keystore password
+KEY_ALIAS              # Signing key alias
+KEY_PASSWORD           # Key password
+GOOGLE_SERVICES_JSON   # Firebase configuration file
+NVD_API_KEY            # NVD API Key for OWASP Dependency Check
 ```
-
-### Para Deploy a Play Store:
+### For AdMob Configuration:
 ```bash
-PLAY_STORE_JSON        # JSON del Service Account (ver instrucciones abajo)
+ADMOB_APP_ID_RELEASE                 # AdMob application ID (production)
+ADMOB_INTERSTITIAL_ID_RELEASE        # Interstitial ad ID
+ADMOB_NATIVE_ADULTOS_ID_RELEASE      # Native ad ID for adults
+ADMOB_NATIVE_MENORES_ID_RELEASE      # Native ad ID for children
 ```
-
+### For Play Store Deploy:
+```bash
+PLAY_STORE_JSON        # Service Account JSON (see instructions below)
+```
 ---
-
-## 📝 Instrucciones de Configuración
-
-### 1. Convertir Keystore a Base64
-
+## 📝 Configuration Instructions
+### 1. Convert Keystore to Base64
 ```bash
-# En Linux/Mac
-base64 -w 0 tu-keystore.jks > keystore-base64.txt
-
-# En Windows PowerShell
-[Convert]::ToBase64String([IO.File]::ReadAllBytes("tu-keystore.jks")) > keystore-base64.txt
+# On Linux/Mac
+base64 -w 0 your-keystore.jks > keystore-base64.txt
+# On Windows PowerShell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("your-keystore.jks")) > keystore-base64.txt
 ```
-
-Copia el contenido de `keystore-base64.txt` → GitHub Secret `KEYSTORE_FILE`
-
-### 2. Crear Service Account de Google Play
-
-1. Ve a [Google Play Console](https://play.google.com/console)
-2. **Configuración → Acceso a la API → Crear nuevo proyecto de servicio**
-3. Sigue el enlace a Google Cloud Console
-4. Crea una cuenta de servicio con permisos de **Service Account User**
-5. Descarga el JSON de la cuenta de servicio
-6. En Play Console, otorga permisos a la cuenta de servicio:
-   - **Admin (para lanzamientos a internal testing)**
-7. Copia el contenido del JSON → GitHub Secret `PLAY_STORE_JSON`
-
+Copy the content of `keystore-base64.txt` → GitHub Secret `KEYSTORE_FILE`
+### 2. Create Google Play Service Account
+1. Go to [Google Play Console](https://play.google.com/console)
+2. **Settings → API Access → Create new service project**
+3. Follow the link to Google Cloud Console
+4. Create a service account with **Service Account User** permissions
+5. Download the service account JSON
+6. In Play Console, grant permissions to the service account:
+   - **Admin (for releases to internal testing)**
+7. Copy the JSON content → GitHub Secret `PLAY_STORE_JSON`
 ---
-
-## 🛡️ Configuración de Seguridad del Repositorio
-
-### 1. Proteger la rama main
-
+## 🛡️ Repository Security Configuration
+### 1. Protect main branch
 **Settings → Branches → Add branch protection rule:**
-
 ```
 Branch name pattern: main
-
 ☑ Require a pull request before merging
 ☑ Require status checks to pass before merging
   - python-security-scan
   - android-security-scan
   - unit-tests
 ☑ Require conversation resolution before merging
-☑ Do not allow bypassing the above settings (ni siquiera tú)
+☑ Do not allow bypassing the above settings (not even you)
 ☑ Restrict who can push to matching branches
-  - Añade solo tu usuario
+  - Add only your user
 ```
-
-### 2. Desactivar contribuciones externas
-
+### 2. Disable external contributions
 **Settings → General → Features:**
 ```
 ☐ Issues
@@ -207,16 +183,13 @@ Branch name pattern: main
 ☐ Wiki
 ☐ Discussions
 ```
-
 **Settings → General → Pull Requests:**
 ```
 ☐ Allow merge commits
 ☐ Allow squash merging
-☑ Allow rebase merging (solo para ti)
+☑ Allow rebase merging (only for you)
 ```
-
-### 3. Activar Dependabot Alerts
-
+### 3. Activate Dependabot Alerts
 **Settings → Security → Code security and analysis:**
 ```
 ☑ Dependency graph
@@ -224,153 +197,112 @@ Branch name pattern: main
 ☑ Dependabot security updates
 ☑ Grouped security updates
 ```
-
-### 4. Activar CodeQL (si tienes GitHub Advanced Security)
-
+### 4. Activate CodeQL (if you have GitHub Advanced Security)
 **Settings → Security → Code security and analysis:**
 ```
 ☑ Code scanning
 ☑ CodeQL analysis
 ```
-
 ---
-
-## 🧪 Ejecutar Checks Localmente
-
+## 🧪 Run Checks Locally
 ### Python Security Check
 ```bash
-# Instalar herramientas
+# Install tools
 pip install -r requirements-dev.txt
-
-# Ejecutar todos los checks
+# Run all checks
 bandit -r app/src/main/python/
 black --check app/src/main/python/
 ruff check app/src/main/python/
 flake8 app/src/main/python/ --max-line-length=120
 pip freeze | safety check --stdin
 ```
-
 ### Android Security Check
 ```bash
 # Lint
 ./gradlew lintDebug
-
 # Dependency Check
 ./gradlew dependencyCheckAnalyze
-
-# Ver reportes
+# View reports
 open app/build/reports/lint-results-debug.html
 open build/reports/dependency-check-report.html
 ```
-
 ---
-
-## 🎯 Niveles de Seguridad
-
-### 🟢 **Nivel 1: Pre-commit (Local)**
+## 🎯 Security Levels
+### 🟢 **Level 1: Pre-commit (Local)**
 - Black auto-format
 - Ruff quick check
-- Tests unitarios básicos
-
-### 🟡 **Nivel 2: CI Pipeline (cada push)**
-- Todos los scanners de seguridad
-- Lint completo
-- Tests completos
-- Reportes detallados
-
-### 🔴 **Nivel 3: Release (solo releases)**
-- Build firmado
-- Verificación de firma
-- Upload a Play Store (internal testing)
-- **Promoción a Producción: MANUAL desde Play Console**
-
+- Basic unit tests
+### 🟡 **Level 2: CI Pipeline (every push)**
+- All security scanners
+- Complete lint
+- Complete tests
+- Detailed reports
+### 🔴 **Level 3: Release (only releases)**
+- Signed build
+- Signature verification
+- Upload to Play Store (internal testing)
+- **Promote to Production: MANUAL from Play Console**
 ---
-
-## 📊 Reportes Generados
-
-Después de cada ejecución del pipeline, puedes descargar:
-
-1. **bandit-security-report.json** - Vulnerabilidades Python
-2. **android-lint-report.html** - Problemas Android
-3. **test-reports/** - Resultados de tests
-4. **signed-aab** - AAB firmado listo para Play Store
-5. **release-notes.txt** - Notas de la versión
-
+## 📊 Generated Reports
+After each pipeline run, the following artifacts are generated and available for download:
+1. **bandit-security-report.json** - Python vulnerabilities
+2. **android-lint-report.html** - Android issues
+3. **test-reports/** - Test results
+4. **signed-aab** - Signed AAB ready for Play Store
+5. **release-notes.txt** - Version notes
 ---
-
-## 🔐 GitHub Secrets y Configuración Sensible
-
-### Gestión de Secretos
-
-Este proyecto utiliza **GitHub Secrets** para proteger datos sensibles en el pipeline CI/CD:
-- 🔑 Credenciales de firma de aplicaciones Android
-- 🔑 Claves API para servicios externos
-- 🔑 Credenciales de despliegue a Play Store
-- 🔑 API keys para herramientas de análisis de seguridad
-
-**Importante:**
-- ✅ Todos los secretos están configurados en GitHub Actions
-- ✅ GitHub **NUNCA** expone secretos en logs públicos
-- ✅ Los secretos **NO** son accesibles en PRs de forks
-- ✅ Este es un proyecto de **solo lectura** - no se aceptan contribuciones externas
-
-### Archivos Protegidos
-
-Los siguientes archivos **NO deben commitearse** y están en `.gitignore`:
+## 🔐 GitHub Secrets and Sensitive Configuration
+### Secrets Management
+This project uses **GitHub Secrets** to protect sensitive data in the CI/CD pipeline:
+- 🔑 Android app signing credentials
+- 🔑 API keys for external services
+- 🔑 Play Store deployment credentials
+- 🔑 API keys for security analysis tools
+**Important:**
+- ✅ All secrets are configured in GitHub Actions
+- ✅ GitHub **NEVER** exposes secrets in public logs
+- ✅ Secrets are **NOT** accessible in PRs from forks
+- ✅ This is a **read-only** project - external contributions not accepted
+### Protected Files
+The following files **MUST NOT be committed** and are in `.gitignore`:
 ```
 google-services.json          # Firebase configuration
 *.jks, *.keystore            # Android signing keys
-local.properties             # SDK paths y configuración local
-keystore.properties          # Credenciales de firma
-*base64*.txt                 # Keystores encoded
+local.properties             # SDK paths and local configuration
+keystore.properties          # Signing credentials
+*base64*.txt                 # Encoded keystores
 service-account*.json        # Play Store credentials
 ```
-
-### Para Desarrollo Local
-
-Si clonas este proyecto para referencia (solo lectura):
-1. **NO** tendrás acceso a los secretos (es correcto, están protegidos)
-2. Puedes ejecutar los checks de seguridad localmente sin secretos
-3. **NO** podrás hacer builds de release firmados (requiere keystores privados)
-4. Puedes usar el build `debug` que no requiere signing
-
+### For Local Development
+When cloning this project for reference (read-only):
+1. Secrets are not accessible (protected by GitHub)
+2. Security checks can be run locally without secrets
+3. Signed release builds are not possible (requires private keystores)
+4. The `debug` build variant can be used for local development without signing
 ---
-
-## ⚠️ Notas Importantes
-
-### Sobre el Repositorio Público
-- ✅ Los secretos están 100% seguros en repos públicos
-- ✅ GitHub NUNCA expone secretos en logs
-- ✅ Los secretos NO son accesibles en PRs de forks
-- ✅ Este proyecto es de **solo lectura** - no se aceptan contribuciones
-
-### Sobre el Despliegue
-- 🎮 **Control total**: TÚ decides cuándo lanzar a producción
-- 🔄 El pipeline sube a **Internal Testing** automáticamente (opcional)
-- 👤 Desde Play Console promueves manualmente a Producción
-- ⏸️ Puedes pausar el pipeline con `workflow_dispatch` (manual trigger)
-
+## ⚠️ Important Notes
+### About Public Repository
+- ✅ Secrets are 100% secure in public repos
+- ✅ GitHub NEVER exposes secrets in logs
+- ✅ Secrets are NOT accessible in PRs from forks
+- ✅ This project is **read-only** - contributions not accepted
+### About Deployment
+- 🎮 **Full control**: YOU decide when to release to production
+- 🔄 Pipeline uploads to **Internal Testing** automatically (optional)
+- 👤 From Play Console you manually promote to Production
+- ⏸️ You can pause the pipeline with `workflow_dispatch` (manual trigger)
 ---
-
-## 🚦 Estados del Pipeline
-
-| Estado | Significado |
+## 🚦 Pipeline States
+| State | Meaning |
 |--------|------------|
-| ✅ **All checks passed** | Código seguro, listo para merge/release |
-| ⚠️ **Some checks failed** | Revisar reportes, posibles vulnerabilidades |
-| ❌ **Build failed** | Error en compilación o tests |
-| 🚀 **Deployed** | Subido a Play Store (internal testing) |
-
+| ✅ **All checks passed** | Secure code, ready for merge/release |
+| ⚠️ **Some checks failed** | Review reports, possible vulnerabilities |
+| ❌ **Build failed** | Compilation or test error |
+| 🚀 **Deployed** | Uploaded to Play Store (internal testing) |
 ---
-
-## 📚 Recursos Adicionales
-
+## 📚 Additional Resources
 - [OWASP Mobile Security](https://owasp.org/www-project-mobile-security/)
 - [Android Security Best Practices](https://developer.android.com/privacy-and-security/security-tips)
 - [Python Security Best Practices](https://bandit.readthedocs.io/)
 - [Google Play Security Guidelines](https://support.google.com/googleplay/android-developer/answer/9888379)
-
 ---
-
-**¿Preguntas?** El pipeline está diseñado para ser seguro por defecto y darte control total sobre los releases. 🎯
-
