@@ -15,7 +15,7 @@ flake8==7.1.1                 # Checker de estilo tradicional
 pylint==3.3.2                 # Análisis estático avanzado
 
 # Type checking
-mypy==1.13.0                  # Verificador de tipos estático
+mypy==1.19.1                  # Verificador de tipos estático
 
 # Testing
 pytest==8.3.4                 # Framework de testing
