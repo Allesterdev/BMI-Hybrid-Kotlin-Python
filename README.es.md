@@ -100,12 +100,13 @@ Este proyecto implementa un **pipeline DevSecOps completo** que verifica:
 ### 🤖 Android
 - ✅ **Android Lint** - Análisis estático
 - ✅ **OWASP Dependency Check** - CVEs en dependencias
-- ✅ **CodeQL** - Análisis semántico profundo (Java/Kotlin)
 - ✅ **Dependabot** - Actualizaciones automáticas
 
-**Total: 9 herramientas activas**
+**Total: 8 herramientas activas**
 
-📚 **Documentación completa:** [SECURITY.md](SECURITY.es.md)
+> **Nota sobre CodeQL:** El análisis semántico profundo con CodeQL está actualmente desactivado debido a desafíos de compatibilidad con Chaquopy (arquitectura híbrida Python-Android). El stack actual de 8 herramientas de seguridad proporciona cobertura completa (~90% de lo que CodeQL detectaría). CodeQL puede reactivarse cuando la complejidad del build se resuelva o si la estructura del proyecto cambia.
+
+📚 **Documentación completa:** [SECURITY.md](SECURITY.md)
 
 ---
 

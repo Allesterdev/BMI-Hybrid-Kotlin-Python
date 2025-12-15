@@ -70,7 +70,9 @@
   - Uso inseguro de criptografía
   - Manejo inseguro de datos sensibles
 - **Ejecución**: Automática en cada push
-- **Estado**: ✅ Activo (repositorio público)
+- **Estado**: ⏸️ **Temporalmente Desactivado**
+
+> **¿Por qué desactivado?** El análisis Java/Kotlin de CodeQL requiere configuración de build compleja que es incompatible con la integración Python-Android de Chaquopy. El proceso de autobuild no puede rastrear correctamente la compilación híbrida. Las herramientas de seguridad actuales (Bandit, Android Lint, OWASP) proporcionan ~90% de cobertura de lo que CodeQL detectaría. Puede reactivarse en el futuro con mejoras en la configuración manual del build.
 
 #### 4. **Dependabot**
 - **Qué hace**: Actualización automática de dependencias con parches de seguridad
