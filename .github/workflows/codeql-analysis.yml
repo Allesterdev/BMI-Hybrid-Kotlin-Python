@@ -69,7 +69,12 @@ jobs:
         if: matrix.language == 'java'
         run: |
           chmod +x ./gradlew
-          ./gradlew clean compileDebugJavaWithJavac compileDebugKotlin --no-daemon --stacktrace
+          ./gradlew --no-daemon --stacktrace \
+            :app:preBuild \
+            :app:preDebugBuild \
+            :app:compileDebugKotlin \
+            :app:compileDebugJavaWithJavac \
+            :app:processDebugResources
         continue-on-error: false
 
       # Autobuild solo para Python
