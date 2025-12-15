@@ -133,17 +133,33 @@ jobs:
             **/build/reports/problems/
           if-no-files-found: ignore
 
+      - name: 📦 Cache NVD Database
+        uses: actions/cache@v4
+        with:
+          path: ~/.gradle/dependency-check-data
+          key: nvd-database-${{ runner.os }}-${{ hashFiles('**/build.gradle') }}
+          restore-keys: |
+            nvd-database-${{ runner.os }}-
+
       - name: 🔐 OWASP Dependency Check
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        timeout-minutes: 10
         run: |
           echo "🛡️ Verificando vulnerabilidades en dependencias Android..."
           if [ -n "$NVD_API_KEY" ]; then
             echo "📊 Usando NVD API Key para análisis rápido"
-            ./gradlew dependencyCheckAnalyze -PnvdApiKey="$NVD_API_KEY" --info || true
+            ./gradlew dependencyCheckAnalyze \
+              -PnvdApiKey="$NVD_API_KEY" \
+              --no-daemon \
+              --max-workers=2 \
+              || true
           else
             echo "⚠️ NVD API Key no encontrada - análisis será lento"
-            ./gradlew dependencyCheckAnalyze --info || true
+            ./gradlew dependencyCheckAnalyze \
+              --no-daemon \
+              --max-workers=2 \
+              || true
           fi
         continue-on-error: true
 

@@ -2,7 +2,7 @@
 
 [![CI/CD Pipeline](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions)
 [![CodeQL](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions)
-[![Security Rating](https://img.shields.io/badge/security-A+-brightgreen.svg)](SECURITY.md)
+[![Security Rating](https://img.shields.io/badge/security-A+-brightgreen.svg)](SECURITY.es.md)
 
 > Aplicación Android de cálculo de IMC con análisis completo para adultos y menores, implementando las mejores prácticas de DevSecOps.
 
@@ -22,6 +22,40 @@
 - **Google AdMob** integrado
 - **Firebase Analytics & Crashlytics**
 - **Pipeline CI/CD completo** con DevSecOps
+
+---
+
+## 📜 Evolución Técnica y Trayectoria de Ingeniería
+
+Este proyecto es el resultado de un riguroso proceso de ingeniería, evolucionando desde una simple herramienta CLI hasta una aplicación híbrida de grado de producción. El recorrido resalta un cambio estratégico del desarrollo puro hacia una mentalidad de **Seguridad Primero**.
+
+### 🔹 Fase 1: Prototipado Rápido (Python)
+El proyecto comenzó como un script de Python para validar algoritmos de IMC y clasificación de datos de la OMS.
+* **Enfoque:** Validación de lógica usando Pandas.
+* **Entorno:** CLI (VS Code).
+
+### 🔹 Fase 2: El Cuello de Botella Multiplataforma (Kivy)
+Inicialmente intenté crear una GUI multiplataforma usando **Kivy** y **Buildozer**.
+* **El Desafío:** Compilar bibliotecas científicas como **NumPy** y **Matplotlib** para arquitectura ARM de Android resultó inestable debido a dependencias complejas en C.
+* **El Pivote:** Después de enfrentar incompatibilidades constantes de ABI y darme cuenta de las limitaciones de UI para una experiencia de usuario moderna, tomé la decisión estratégica de migrar a una arquitectura nativa.
+
+### 🔹 Fase 3: La Solución Híbrida y Cambio de Herramientas
+La solución pivotó hacia una **Arquitectura Híbrida** (UI en Kotlin + Lógica Python vía Chaquopy), requiriendo un cambio completo de entorno.
+* **🛠️ La Actualización de Herramientas:** Migré de VS Code a **Android Studio** para aprovechar herramientas profesionales de depuración, emuladores nativos y estructura de proyecto estricta.
+* **🛑 El Bloqueador:** Integrar Chaquopy en el ecosistema Android moderno causó severas fallas de compilación de Gradle que los asistentes de IA no pudieron resolver.
+* **✅ La Solución:** Depuré manualmente el proceso de compilación analizando la documentación oficial, reestructurando el grafo de dependencias de `build.gradle`, y forzando el bloqueo de versiones.
+
+### 🔹 Fase 4: La Integración DevSecOps (Seguridad Primero)
+**Paralelamente al desarrollo, estaba avanzando en mi formación en Ciberseguridad.** Me di cuenta de que el código funcional no es suficiente; debe ser seguro por diseño. Esto llevó a la adopción de la **cultura DevSecOps**:
+* **Shift-Left Security:** Integré escáneres de seguridad automatizados (Bandit, OWASP, Lint) directamente en el pipeline CI para detectar vulnerabilidades *antes* del merge.
+* **Gestión de Releases:** Automaticé el despliegue a Google Play (Track Interno) para eliminar errores humanos durante el release, gestionando exitosamente el mandato de 14 días de Testing Cerrado.
+
+### 📸 Evolución Visual: Antes y Después
+
+| Multiplataforma Inicial (Kivy) | Arquitectura Nativa Final (Kotlin) |
+| :---: | :---: |
+| <img src="project_docs/kivy_capture.png" width="350"> | <img src="project_docs/final_capture.png" width="350"> |
+| *GUI Python (problemas con Buildozer)* | *App Híbrida de Producción (Android Studio)* |
 
 ---
 
@@ -66,22 +100,12 @@ Este proyecto implementa un **pipeline DevSecOps completo** que verifica:
 ### 🤖 Android
 - ✅ **Android Lint** - Análisis estático
 - ✅ **OWASP Dependency Check** - CVEs en dependencias
-- ⏸️ **CodeQL** - Análisis profundo (desactivado: requiere repo público)
+- ✅ **CodeQL** - Análisis semántico profundo (Java/Kotlin)
 - ✅ **Dependabot** - Actualizaciones automáticas
 
-**Total: 8 herramientas activas** (CodeQL se activará con repo público)
+**Total: 9 herramientas activas**
 
-📚 **Documentación completa:** [TOOLS_SUMMARY.md](TOOLS_SUMMARY.md)
-
----
-
-## 📋 Documentación
-
-| Documento | Descripción |
-|-----------|-------------|
-| [QUICKSTART.md](QUICKSTART.md) | 🚀 Guía rápida de configuración |
-| [SECURITY.md](SECURITY.md) | 🔒 Guía detallada de seguridad |
-| [TOOLS_SUMMARY.md](TOOLS_SUMMARY.md) | 🛠️ Herramientas implementadas |
+📚 **Documentación completa:** [SECURITY.md](SECURITY.es.md)
 
 ---
 
@@ -99,23 +123,6 @@ Este proyecto implementa un **pipeline DevSecOps completo** que verifica:
 
 ---
 
-## 📦 Instalación Local
-
-```bash
-# Clonar el repositorio
-git clone git@github.com:Allesterdev/BMI-Hybrid-Kotlin-Python.git
-cd BMI-Hybrid-Kotlin-Python
-
-# Instalar dependencias Python para desarrollo
-pip install -r requirements-dev.txt
-
-# Ejecutar checks de seguridad localmente
-./run-security-checks.sh
-
-# Abrir en Android Studio y sincronizar Gradle
-```
-
----
 
 ## 🧪 Ejecutar Tests
 

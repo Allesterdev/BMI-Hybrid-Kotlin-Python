@@ -1,0 +1,46 @@
+name: "CodeQL Security Analysis"
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Ejecutar análisis semanal los lunes a las 3 AM
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+jobs:
+  analyze:
+    name: Analyze Code with CodeQL
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [ 'java', 'python' ]
+        # CodeQL soporta: 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby'
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v6
+
+      - name: 🔍 Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          # Queries adicionales para análisis más profundo
+          queries: security-extended,security-and-quality
+
+      - name: ⚙️ Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: 🛡️ Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{matrix.language}}"
+
