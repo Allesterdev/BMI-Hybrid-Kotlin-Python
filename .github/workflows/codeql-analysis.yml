@@ -30,7 +30,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: 🔍 Initialize CodeQL
-        uses: github/codeql-action/init@v3
+        uses: github/codeql-action/init@v4
         with:
           languages: ${{ matrix.language }}
           # Queries adicionales para análisis más profundo
@@ -52,20 +52,26 @@ jobs:
           python-version: '3.10'
           cache: 'pip'
 
+      # Crear google-services.json para el build de Android
+      - name: 🔐 Create google-services.json
+        if: matrix.language == 'java'
+        run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/google-services.json
+
       # Build manual para Android (reemplaza autobuild)
       - name: 🔨 Build Android Project
         if: matrix.language == 'java'
         run: |
           chmod +x ./gradlew
           ./gradlew assembleDebug --no-daemon --stacktrace
+        continue-on-error: false
 
       # Autobuild solo para Python
       - name: ⚙️ Autobuild Python
         if: matrix.language == 'python'
-        uses: github/codeql-action/autobuild@v3
+        uses: github/codeql-action/autobuild@v4
 
       - name: 🛡️ Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
+        uses: github/codeql-action/analyze@v4
         with:
           category: "/language:${{matrix.language}}"
 
