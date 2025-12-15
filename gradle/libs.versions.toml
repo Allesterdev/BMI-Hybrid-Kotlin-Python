@@ -1,7 +1,7 @@
 [versions]
 agp = "8.11.1"
 coreKtxVersion = "1.10.1"
-coreSplashscreen = "1.2.0-rc01"
+coreSplashscreen = "1.2.0"
 firebaseBom = "34.7.0"
 kotlin = "2.2.0"
 coreKtx = "1.16.0"
