@@ -3,6 +3,7 @@
 # Incluye interpretación, categorías y rangos para adultos
 ###
 
+
 def interpretar_imc(imc):
     """Interpreta el IMC y devuelve una clave de recurso (string key) basada en el valor de IMC."""
     # Clasificación basada en los umbrales numéricos (evita depender de textos que pueden variar)
@@ -33,7 +34,7 @@ def obtener_rangos_imc():
             "rango_texto": "<18.5",
             "min_valor": 0.0,
             "max_valor": 18.5,
-            "color": "#2196F3"  # Azul
+            "color": "#2196F3",  # Azul
         },
         {
             "key": "peso_normal",
@@ -41,7 +42,7 @@ def obtener_rangos_imc():
             "rango_texto": "18.5-24.9",
             "min_valor": 18.5,
             "max_valor": 24.9,
-            "color": "#4CAF50"  # Verde
+            "color": "#4CAF50",  # Verde
         },
         {
             "key": "sobrepeso",
@@ -49,7 +50,7 @@ def obtener_rangos_imc():
             "rango_texto": "25-29.9",
             "min_valor": 25.0,
             "max_valor": 29.9,
-            "color": "#FF9800"  # Naranja
+            "color": "#FF9800",  # Naranja
         },
         {
             "key": "obesidad_1",
@@ -57,7 +58,7 @@ def obtener_rangos_imc():
             "rango_texto": "30-34.9",
             "min_valor": 30.0,
             "max_valor": 34.9,
-            "color": "#FF5722"  # Rojo naranja
+            "color": "#FF5722",  # Rojo naranja
         },
         {
             "key": "obesidad_2",
@@ -65,7 +66,7 @@ def obtener_rangos_imc():
             "rango_texto": "35-39.9",
             "min_valor": 35.0,
             "max_valor": 39.9,
-            "color": "#D32F2F"  # Rojo
+            "color": "#D32F2F",  # Rojo
         },
         {
             "key": "obesidad_3",
@@ -73,8 +74,8 @@ def obtener_rangos_imc():
             "rango_texto": "≥40",
             "min_valor": 40.0,
             "max_valor": 50.0,  # Valor máximo para la barra
-            "color": "#7B1FA2"  # Morado
-        }
+            "color": "#7B1FA2",  # Morado
+        },
     ]
 
 
@@ -123,8 +124,4 @@ def obtener_categoria_imc(imc):
     else:
         categoria = rangos[5]  # Obesidad III
 
-    return {
-        "categoria": categoria,
-        "posicion": calcular_posicion_en_barra(imc),
-        "imc_valor": round(imc, 1)
-    }
+    return {"categoria": categoria, "posicion": calcular_posicion_en_barra(imc), "imc_valor": round(imc, 1)}

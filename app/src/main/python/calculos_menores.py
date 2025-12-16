@@ -15,10 +15,7 @@ def cargar_percentiles(sexo):
     Carga la tabla de percentiles para el sexo dado desde un archivo CSV
     almacenado en los assets de la aplicación usando Chaquopy.
     """
-    nombre_archivo = (
-        'percentiles_imc_niños.csv' if sexo == 'Masculino' else
-        'percentiles_imc_niñas.csv'
-    )
+    nombre_archivo = "percentiles_imc_niños.csv" if sexo == "Masculino" else "percentiles_imc_niñas.csv"
     try:
         context = jclass("android.app.ActivityThread").currentApplication()
         asset_manager = context.getAssets()
@@ -38,7 +35,7 @@ def cargar_percentiles(sexo):
         reader.close()
         input_stream.close()
 
-        df = pd.read_csv(io.StringIO(contenido), sep=';', decimal=',')
+        df = pd.read_csv(io.StringIO(contenido), sep=";", decimal=",")
         return df
     except Exception as e:
         print(f"Error al cargar el archivo CSV '{nombre_archivo}': {e}")
@@ -115,23 +112,23 @@ def calcular_imc_menor(sexo: str, edad_input, peso_input, altura_input) -> dict:
             return {"error": "No se pudieron cargar las tablas de percentiles"}
 
         # Buscar la fila más cercana a la edad en meses
-        if 'Month' not in df.columns:
+        if "Month" not in df.columns:
             return {"error": "Formato de tabla de percentiles inválido"}
 
-        fila_edad = df.iloc[abs(df['Month'] - edad_meses).idxmin()]
+        fila_edad = df.iloc[abs(df["Month"] - edad_meses).idxmin()]
 
         # Verificar que las columnas necesarias existen
-        columnas_necesarias = ['L', 'M', 'S']
+        columnas_necesarias = ["L", "M", "S"]
         for col in columnas_necesarias:
             if col not in df.columns:
                 return {"error": f"Columna '{col}' no encontrada en tabla de percentiles"}
 
-        L = fila_edad['L']
-        M = fila_edad['M']
-        S = fila_edad['S']
+        L = fila_edad["L"]
+        M = fila_edad["M"]
+        S = fila_edad["S"]
 
         # Calcular Z-score y percentil
-        z_score = (((imc / M)**L) - 1) / (L * S)
+        z_score = (((imc / M) ** L) - 1) / (L * S)
         percentil = normal_cdf(z_score) * 100
         interpretacion = interpretar_percentil(percentil)
 
@@ -139,7 +136,7 @@ def calcular_imc_menor(sexo: str, edad_input, peso_input, altura_input) -> dict:
             "imc": round(imc, 2),
             "percentil": round(percentil, 1),
             "interpretacion": interpretacion,
-            "edad_meses": edad_meses  # Información adicional útil
+            "edad_meses": edad_meses,  # Información adicional útil
         }
 
     except Exception as e:
@@ -200,23 +197,23 @@ def calcular_imc_menor_por_fecha(sexo: str, fecha_nacimiento: str, peso_input, a
             return {"error": "No se pudieron cargar las tablas de percentiles"}
 
         # Buscar la fila más cercana a la edad en meses
-        if 'Month' not in df.columns:
+        if "Month" not in df.columns:
             return {"error": "Formato de tabla de percentiles inválido"}
 
-        fila_edad = df.iloc[abs(df['Month'] - edad_meses).idxmin()]
+        fila_edad = df.iloc[abs(df["Month"] - edad_meses).idxmin()]
 
         # Verificar que las columnas necesarias existen
-        columnas_necesarias = ['L', 'M', 'S']
+        columnas_necesarias = ["L", "M", "S"]
         for col in columnas_necesarias:
             if col not in df.columns:
                 return {"error": f"Columna '{col}' no encontrada en tabla de percentiles"}
 
-        L = fila_edad['L']
-        M = fila_edad['M']
-        S = fila_edad['S']
+        L = fila_edad["L"]
+        M = fila_edad["M"]
+        S = fila_edad["S"]
 
         # Calcular Z-score y percentil
-        z_score = (((imc / M)**L) - 1) / (L * S)
+        z_score = (((imc / M) ** L) - 1) / (L * S)
         percentil = normal_cdf(z_score) * 100
         interpretacion = interpretar_percentil(percentil)
 
@@ -227,7 +224,7 @@ def calcular_imc_menor_por_fecha(sexo: str, fecha_nacimiento: str, peso_input, a
             "percentil": round(percentil, 1),
             "interpretacion": interpretacion,
             "edad_meses": edad_meses,
-            "edad_años": round(edad_años, 1)
+            "edad_años": round(edad_años, 1),
         }
 
     except Exception as e:
@@ -248,7 +245,7 @@ def obtener_rangos_percentiles():
             "rango_texto": "<3",
             "min_valor": 0.0,
             "max_valor": 3.0,
-            "color": "#2196F3"  # Azul
+            "color": "#2196F3",  # Azul
         },
         {
             "key": "peso_saludable",
@@ -256,7 +253,7 @@ def obtener_rangos_percentiles():
             "rango_texto": "3-84",
             "min_valor": 3.0,
             "max_valor": 85.0,
-            "color": "#4CAF50"  # Verde
+            "color": "#4CAF50",  # Verde
         },
         {
             "key": "sobrepeso",
@@ -264,7 +261,7 @@ def obtener_rangos_percentiles():
             "rango_texto": "85-96",
             "min_valor": 85.0,
             "max_valor": 97.0,
-            "color": "#FF9800"  # Naranja
+            "color": "#FF9800",  # Naranja
         },
         {
             "key": "obesidad",
@@ -272,8 +269,8 @@ def obtener_rangos_percentiles():
             "rango_texto": "≥97",
             "min_valor": 97.0,
             "max_valor": 100.0,  # Valor máximo para la barra
-            "color": "#D32F2F"  # Rojo
-        }
+            "color": "#D32F2F",  # Rojo
+        },
     ]
 
 
@@ -316,7 +313,7 @@ def obtener_categoria_percentil(percentil):
     return {
         "categoria": categoria,
         "posicion": calcular_posicion_en_barra_percentil(percentil),
-        "percentil_valor": round(percentil, 1)
+        "percentil_valor": round(percentil, 1),
     }
 
 
@@ -333,13 +330,11 @@ def interpretar_percentil_detallado(percentil):
         )
     elif percentil < 50:
         return (
-            f"Peso saludable (percentil bajo-medio). "
-            f"Tu percentil es {percentil:.1f}, estás en un rango saludable."
+            f"Peso saludable (percentil bajo-medio). " f"Tu percentil es {percentil:.1f}, estás en un rango saludable."
         )
     elif percentil < 85:
         return (
-            f"Peso saludable (percentil medio-alto). "
-            f"Tu percentil es {percentil:.1f}, estás en un rango saludable."
+            f"Peso saludable (percentil medio-alto). " f"Tu percentil es {percentil:.1f}, estás en un rango saludable."
         )
     elif percentil < 97:
         return (
@@ -348,7 +343,4 @@ def interpretar_percentil_detallado(percentil):
             "de tu edad y sexo."
         )
     else:
-        return (
-            f"Obesidad. Tu percentil es {percentil:.1f}, "
-            "tienes un peso mayor al 97% de niños de tu edad y sexo."
-        )
+        return f"Obesidad. Tu percentil es {percentil:.1f}, " "tienes un peso mayor al 97% de niños de tu edad y sexo."

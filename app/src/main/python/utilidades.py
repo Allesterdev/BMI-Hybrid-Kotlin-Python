@@ -68,7 +68,7 @@ def calcular_imc(peso_input, altura_input):
         if altura > 3.0:  # 3 metros es irreal
             raise ValueError("Altura fuera de rango válido")
 
-        return round(peso / (altura ** 2), 2)
+        return round(peso / (altura**2), 2)
 
     except ValueError as e:
         raise ValueError(f"Error en cálculo de IMC: {str(e)}")
@@ -88,15 +88,17 @@ def inicializar_base_de_datos():
     # Obtener la ruta correcta para la base de datos en Android
     try:
         from java import jclass
+
         context = jclass("android.app.ActivityThread").currentApplication()
         db_path = str(context.getDatabasePath("historial_imc.db"))
     except Exception:
         # Fallback para desarrollo/testing
-        db_path = 'historial_imc.db'
+        db_path = "historial_imc.db"
 
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
-        cur.execute("""
+        cur.execute(
+            """
             CREATE TABLE IF NOT EXISTS perfiles(
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 peso REAL,
@@ -104,19 +106,20 @@ def inicializar_base_de_datos():
                 imc REAL,
                 fecha TEXT
             )
-        """)
+        """
+        )
 
         # Verificar y añadir columnas para el cálculo de menores si no existen
         cur.execute("PRAGMA table_info(perfiles)")
         columnas = [info[1] for info in cur.fetchall()]
 
-        if 'sexo' not in columnas:
+        if "sexo" not in columnas:
             cur.execute("ALTER TABLE perfiles ADD COLUMN sexo TEXT")
 
-        if 'edad_meses' not in columnas:
+        if "edad_meses" not in columnas:
             cur.execute("ALTER TABLE perfiles ADD COLUMN edad_meses INTEGER")
 
-        if 'percentil' not in columnas:
+        if "percentil" not in columnas:
             cur.execute("ALTER TABLE perfiles ADD COLUMN percentil REAL")
 
         conexion.commit()
@@ -128,11 +131,12 @@ def obtener_ruta_base_datos():
     """
     try:
         from java import jclass
+
         context = jclass("android.app.ActivityThread").currentApplication()
         return str(context.getDatabasePath("historial_imc.db"))
     except Exception:
         # Fallback para desarrollo/testing
-        return 'historial_imc.db'
+        return "historial_imc.db"
 
 
 def guardar_medicion(peso, altura, imc, sexo=None, edad_meses=None, percentil=None):
@@ -146,10 +150,13 @@ def guardar_medicion(peso, altura, imc, sexo=None, edad_meses=None, percentil=No
 
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
-        cur.execute("""
+        cur.execute(
+            """
                 INSERT INTO perfiles (peso, altura, imc, fecha, sexo, edad_meses, percentil)
                 VALUES (?, ?, ?, ?, ?, ?, ?)
-                """, (peso, altura, imc, fecha, sexo, edad_meses, percentil))
+                """,
+            (peso, altura, imc, fecha, sexo, edad_meses, percentil),
+        )
 
         conexion.commit()
 
@@ -166,27 +173,19 @@ def mostrar_historial(tipo_historial: str) -> list[dict]:
     db_path = obtener_ruta_base_datos()
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
-        if tipo_historial == 'adultos':
-            cur.execute(
-                'SELECT peso, altura, imc, fecha FROM perfiles '
-                'WHERE sexo IS NULL ORDER BY fecha DESC'
-            )
+        if tipo_historial == "adultos":
+            cur.execute("SELECT peso, altura, imc, fecha FROM perfiles " "WHERE sexo IS NULL ORDER BY fecha DESC")
         else:
             cur.execute(
-                'SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil '
-                'FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha DESC'
+                "SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil "
+                "FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha DESC"
             )
         datos = cur.fetchall()
 
     historial_list = []
     for d in datos:
-        record = {
-            "peso": d[0],
-            "altura": d[1],
-            "imc": d[2],
-            "fecha": d[3]
-        }
-        if tipo_historial == 'menores':
+        record = {"peso": d[0], "altura": d[1], "imc": d[2], "fecha": d[3]}
+        if tipo_historial == "menores":
             record["sexo"] = d[4]
             record["edad_meses"] = d[5]
             record["percentil"] = d[6]
@@ -244,7 +243,7 @@ def obtener_datos_para_grafico(tipo_historial):
     db_path = obtener_ruta_base_datos()
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
-        if tipo_historial == 'adultos':
+        if tipo_historial == "adultos":
             query = "SELECT fecha, imc FROM perfiles WHERE sexo IS NULL ORDER BY fecha ASC"
         else:  # 'menores'
             query = "SELECT fecha, percentil FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha ASC"
@@ -294,18 +293,16 @@ def calcular_edad_exacta_en_meses(fecha_nacimiento_str):
         fecha_str = fecha_nacimiento_str.strip()
 
         # Formato ISO: YYYY-MM-DD
-        if re.match(r'^\d{4}-\d{2}-\d{2}$', fecha_str):
+        if re.match(r"^\d{4}-\d{2}-\d{2}$", fecha_str):
             fecha_nacimiento = datetime.strptime(fecha_str, "%Y-%m-%d")
         # Formato DD/MM/YYYY
-        elif re.match(r'^\d{1,2}/\d{1,2}/\d{4}$', fecha_str):
+        elif re.match(r"^\d{1,2}/\d{1,2}/\d{4}$", fecha_str):
             fecha_nacimiento = datetime.strptime(fecha_str, "%d/%m/%Y")
         # Formato DD-MM-YYYY
-        elif re.match(r'^\d{1,2}-\d{1,2}-\d{4}$', fecha_str):
+        elif re.match(r"^\d{1,2}-\d{1,2}-\d{4}$", fecha_str):
             fecha_nacimiento = datetime.strptime(fecha_str, "%d-%m-%Y")
         else:
-            raise ValueError(
-                "Formato de fecha no válido. Use DD/MM/YYYY o YYYY-MM-DD"
-            )
+            raise ValueError("Formato de fecha no válido. Use DD/MM/YYYY o YYYY-MM-DD")
 
         # Calcular edad exacta
         fecha_actual = datetime.now()
@@ -315,9 +312,8 @@ def calcular_edad_exacta_en_meses(fecha_nacimiento_str):
             raise ValueError("La fecha de nacimiento no puede ser en el futuro")
 
         # Calcular diferencia en meses
-        meses_diferencia = (
-            (fecha_actual.year - fecha_nacimiento.year) * 12 +
-            (fecha_actual.month - fecha_nacimiento.month)
+        meses_diferencia = (fecha_actual.year - fecha_nacimiento.year) * 12 + (
+            fecha_actual.month - fecha_nacimiento.month
         )
 
         # Si aún no ha cumplido el mes, restar 1
@@ -339,19 +335,11 @@ def obtener_historial_adultos():
     db_path = obtener_ruta_base_datos()
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
-        cur.execute(
-            'SELECT peso, altura, imc, fecha FROM perfiles '
-            'WHERE sexo IS NULL ORDER BY fecha DESC'
-        )
+        cur.execute("SELECT peso, altura, imc, fecha FROM perfiles " "WHERE sexo IS NULL ORDER BY fecha DESC")
         datos = cur.fetchall()
     historial = []
     for d in datos:
-        historial.append({
-            "peso": d[0],
-            "altura": d[1],
-            "imc": d[2],
-            "fecha": d[3]
-        })
+        historial.append({"peso": d[0], "altura": d[1], "imc": d[2], "fecha": d[3]})
     return historial
 
 
@@ -366,20 +354,22 @@ def obtener_historial_menores():
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
         cur.execute(
-            'SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil '
-            'FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha ASC'
+            "SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil "
+            "FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha ASC"
         )
         datos = cur.fetchall()
     historial = []
     for d in datos:
-        historial.append({
-            "peso": d[0],
-            "altura": d[1],
-            "imc": d[2],
-            "fecha": d[3],
-            "sexo": d[4],
-            "edad_meses": d[5],
-            "percentil": d[6]
-        })
+        historial.append(
+            {
+                "peso": d[0],
+                "altura": d[1],
+                "imc": d[2],
+                "fecha": d[3],
+                "sexo": d[4],
+                "edad_meses": d[5],
+                "percentil": d[6],
+            }
+        )
     # Invertir la lista para que los registros más recientes aparezcan primero
     return list(reversed(historial))
