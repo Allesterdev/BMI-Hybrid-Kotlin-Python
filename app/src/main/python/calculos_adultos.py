@@ -3,9 +3,6 @@
 # Incluye interpretación, categorías y rangos para adultos
 ###
 
-from utilidades import calcular_imc
-
-
 def interpretar_imc(imc):
     """Interpreta el IMC y devuelve una clave de recurso (string key) basada en el valor de IMC."""
     # Clasificación basada en los umbrales numéricos (evita depender de textos que pueden variar)

@@ -62,7 +62,7 @@ def interpretar_percentil(percentil):
         return "interpretacion_obesidad"
 
 
-def calcular_imc_menor(sexo: str, edad_input, peso_input, altura_input) -> dict:
+def calcular_imc_menor(sexo: str, edad_input, peso_input, altura_input) -> dict:  # noqa: C901
     """
     Calcula el percentil de IMC para un menor usando las tablas de la OMS.
     Acepta múltiples formatos para peso y altura, y convierte edad a meses automáticamente.
@@ -146,7 +146,7 @@ def calcular_imc_menor(sexo: str, edad_input, peso_input, altura_input) -> dict:
         return {"error": f"Error inesperado en cálculo: {str(e)}"}
 
 
-def calcular_imc_menor_por_fecha(sexo: str, fecha_nacimiento: str, peso_input, altura_input) -> dict:
+def calcular_imc_menor_por_fecha(sexo: str, fecha_nacimiento: str, peso_input, altura_input) -> dict:  # noqa: C901
     """
     Calcula el percentil de IMC para un menor usando fecha de nacimiento.
 
@@ -157,7 +157,10 @@ def calcular_imc_menor_por_fecha(sexo: str, fecha_nacimiento: str, peso_input, a
         altura_input: Altura en m o cm (acepta formatos variados)
 
     Returns:
-        dict: {"imc": float, "percentil": float, "interpretacion": str, "edad_meses": int, "edad_años": float} o {"error": str}
+        dict: {
+            "imc": float, "percentil": float, "interpretacion": str,
+            "edad_meses": int, "edad_años": float
+        } or {"error": str}
     """
     try:
         # Validar sexo
@@ -323,12 +326,29 @@ def interpretar_percentil_detallado(percentil):
     Incluye información específica sobre la posición en el percentil.
     """
     if percentil < 3:
-        return f"Bajo peso. Tu percentil es {percentil:.1f}, lo que significa que tienes un peso menor al 97% de niños de tu edad y sexo."
+        return (
+            f"Bajo peso. Tu percentil es {percentil:.1f}, "
+            "lo que significa que tienes un peso menor al 97% de "
+            "niños de tu edad y sexo."
+        )
     elif percentil < 50:
-        return f"Peso saludable (percentil bajo-medio). Tu percentil es {percentil:.1f}, estás en un rango saludable."
+        return (
+            f"Peso saludable (percentil bajo-medio). "
+            f"Tu percentil es {percentil:.1f}, estás en un rango saludable."
+        )
     elif percentil < 85:
-        return f"Peso saludable (percentil medio-alto). Tu percentil es {percentil:.1f}, estás en un rango saludable."
+        return (
+            f"Peso saludable (percentil medio-alto). "
+            f"Tu percentil es {percentil:.1f}, estás en un rango saludable."
+        )
     elif percentil < 97:
-        return f"Sobrepeso. Tu percentil es {percentil:.1f}, tienes un peso mayor al {percentil:.0f}% de niños de tu edad y sexo."
+        return (
+            f"Sobrepeso. Tu percentil es {percentil:.1f}, "
+            f"tienes un peso mayor al {percentil:.0f}% de niños "
+            "de tu edad y sexo."
+        )
     else:
-        return f"Obesidad. Tu percentil es {percentil:.1f}, tienes un peso mayor al 97% de niños de tu edad y sexo."
+        return (
+            f"Obesidad. Tu percentil es {percentil:.1f}, "
+            "tienes un peso mayor al 97% de niños de tu edad y sexo."
+        )

@@ -90,7 +90,7 @@ def inicializar_base_de_datos():
         from java import jclass
         context = jclass("android.app.ActivityThread").currentApplication()
         db_path = str(context.getDatabasePath("historial_imc.db"))
-    except:
+    except Exception:
         # Fallback para desarrollo/testing
         db_path = 'historial_imc.db'
 
@@ -123,13 +123,6 @@ def inicializar_base_de_datos():
 
 
 def obtener_ruta_base_datos():
-    # Normalizar fechas existentes en la base de datos a formato ISO para asegurar orden correcto
-    try:
-        normalizar_fechas_bd(db_path)
-    except Exception:
-        # No fallamos la inicialización si la normalización da problemas
-        pass
-
     """
     Obtiene la ruta correcta para la base de datos en Android.
     """
@@ -137,7 +130,7 @@ def obtener_ruta_base_datos():
         from java import jclass
         context = jclass("android.app.ActivityThread").currentApplication()
         return str(context.getDatabasePath("historial_imc.db"))
-    except:
+    except Exception:
         # Fallback para desarrollo/testing
         return 'historial_imc.db'
 
@@ -175,10 +168,14 @@ def mostrar_historial(tipo_historial: str) -> list[dict]:
         cur = conexion.cursor()
         if tipo_historial == 'adultos':
             cur.execute(
-                'SELECT peso, altura, imc, fecha FROM perfiles WHERE sexo IS NULL ORDER BY fecha DESC')
+                'SELECT peso, altura, imc, fecha FROM perfiles '
+                'WHERE sexo IS NULL ORDER BY fecha DESC'
+            )
         else:
             cur.execute(
-                'SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha DESC')
+                'SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil '
+                'FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha DESC'
+            )
         datos = cur.fetchall()
 
     historial_list = []
@@ -306,7 +303,9 @@ def calcular_edad_exacta_en_meses(fecha_nacimiento_str):
         elif re.match(r'^\d{1,2}-\d{1,2}-\d{4}$', fecha_str):
             fecha_nacimiento = datetime.strptime(fecha_str, "%d-%m-%Y")
         else:
-            raise ValueError(f"Formato de fecha no válido. Use DD/MM/YYYY o YYYY-MM-DD")
+            raise ValueError(
+                "Formato de fecha no válido. Use DD/MM/YYYY o YYYY-MM-DD"
+            )
 
         # Calcular edad exacta
         fecha_actual = datetime.now()
@@ -316,7 +315,10 @@ def calcular_edad_exacta_en_meses(fecha_nacimiento_str):
             raise ValueError("La fecha de nacimiento no puede ser en el futuro")
 
         # Calcular diferencia en meses
-        meses_diferencia = (fecha_actual.year - fecha_nacimiento.year) * 12 + (fecha_actual.month - fecha_nacimiento.month)
+        meses_diferencia = (
+            (fecha_actual.year - fecha_nacimiento.year) * 12 +
+            (fecha_actual.month - fecha_nacimiento.month)
+        )
 
         # Si aún no ha cumplido el mes, restar 1
         if fecha_actual.day < fecha_nacimiento.day:
@@ -337,7 +339,10 @@ def obtener_historial_adultos():
     db_path = obtener_ruta_base_datos()
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
-        cur.execute('SELECT peso, altura, imc, fecha FROM perfiles WHERE sexo IS NULL ORDER BY fecha DESC')
+        cur.execute(
+            'SELECT peso, altura, imc, fecha FROM perfiles '
+            'WHERE sexo IS NULL ORDER BY fecha DESC'
+        )
         datos = cur.fetchall()
     historial = []
     for d in datos:
@@ -360,7 +365,10 @@ def obtener_historial_menores():
     db_path = obtener_ruta_base_datos()
     with sqlite3.connect(db_path) as conexion:
         cur = conexion.cursor()
-        cur.execute('SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha ASC')
+        cur.execute(
+            'SELECT peso, altura, imc, fecha, sexo, edad_meses, percentil '
+            'FROM perfiles WHERE sexo IS NOT NULL ORDER BY fecha ASC'
+        )
         datos = cur.fetchall()
     historial = []
     for d in datos:
@@ -375,4 +383,3 @@ def obtener_historial_menores():
         })
     # Invertir la lista para que los registros más recientes aparezcan primero
     return list(reversed(historial))
-
