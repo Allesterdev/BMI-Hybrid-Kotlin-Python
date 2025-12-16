@@ -199,7 +199,7 @@ This project is open source as a professional portfolio. The repository is **rea
 
 ## 👤 Author
 
-**Oscar** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](https://linkedin.com/in/oscar-herrero-diaz)
+**Oscar** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](www.linkedin.com/in/oscar-campoy-ballester-sec)
 
 ---
 
