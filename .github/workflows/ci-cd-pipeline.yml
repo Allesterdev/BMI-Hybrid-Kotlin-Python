@@ -163,15 +163,26 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: 🔍 List generated OWASP reports
+        if: always()
+        run: |
+          echo "📂 Buscando reportes generados por OWASP Dependency Check..."
+          find . -type f -name "dependency-check-report*" 2>/dev/null || echo "No se encontraron reportes"
+          echo ""
+          echo "📂 Contenido de build/reports si existe..."
+          ls -la build/reports/ 2>/dev/null || echo "Directorio build/reports no existe"
+          echo ""
+          echo "📂 Buscando todos los reportes HTML/JSON..."
+          find . -type f \( -name "*.html" -o -name "*.json" \) -path "*/build/reports/*" 2>/dev/null || echo "No se encontraron archivos"
+
       - name: 📊 Upload OWASP Report
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: owasp-dependency-check-report
           path: |
-            **/build/reports/dependency-check-report.*
-            build/reports/*.html
-            build/reports/*.json
+            build/reports/
+            app/build/reports/
           if-no-files-found: warn
           retention-days: 30
 
