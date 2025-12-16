@@ -199,7 +199,7 @@ Este proyecto es de código abierto como portfolio profesional. El repositorio e
 
 ## 👤 Autor
 
-**Oscar** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](https://linkedin.com/in/oscar-herrero-diaz)
+**Oscar** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](https://www.linkedin.com/in/oscar-campoy-ballester-sec)
 
 ---
 
