@@ -1,7 +1,6 @@
 # 🛡️ BMI Calculator - With Complete DevSecOps Pipeline
 
 [![CI/CD Pipeline](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions)
-[![CodeQL](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions)
 [![Security Rating](https://img.shields.io/badge/security-A+-brightgreen.svg)](SECURITY.es.md)
 
 > Android BMI calculator app with comprehensive analysis for adults and children, implementing DevSecOps best practices.

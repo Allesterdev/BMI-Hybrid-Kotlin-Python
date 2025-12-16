@@ -1,7 +1,6 @@
 # 🛡️ Calculadora IMC - Con Pipeline DevSecOps Completo
 
 [![CI/CD Pipeline](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions/workflows/ci-cd-pipeline.yml/badge.svg)](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions)
-[![CodeQL](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/Allesterdev/BMI-Hybrid-Kotlin-Python/actions)
 [![Security Rating](https://img.shields.io/badge/security-A+-brightgreen.svg)](SECURITY.es.md)
 
 > Aplicación Android de cálculo de IMC con análisis completo para adultos y menores, implementando las mejores prácticas de DevSecOps.
@@ -199,7 +198,7 @@ Este proyecto es de código abierto como portfolio profesional. El repositorio e
 
 ## 👤 Autor
 
-**Oscar** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](https://www.linkedin.com/in/oscar-campoy-ballester-sec)
+**Oscar** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](https://linkedin.com/in/oscar-herrero-diaz)
 
 ---
 
