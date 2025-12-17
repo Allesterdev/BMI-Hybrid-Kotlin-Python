@@ -293,7 +293,7 @@ jobs:
         run: ./gradlew bundleRelease
 
       - name: 🔑 Sign AAB
-        uses: r0adkll/sign-android-release@v1
+        uses: r0adkll/sign-android-release@v1.0.4
         id: sign_aab
         with:
           releaseDirectory: app/build/outputs/bundle/release
