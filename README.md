@@ -206,7 +206,7 @@ Please note that commercial redistribution, selling, or publishing this app as y
 
 ## 👤 Author
 
-**Oscar Campoy** - [GitHub](https://github.com/Allesterdev/Allestersec-portfolio) | [LinkedIn](https://www.linkedin.com/in/oscar-campoy-ballester-sec)
+**Oscar Campoy** - [GitHub Portfolio](https://github.com/Allesterdev/Allestersec-portfolio) | [LinkedIn](https://www.linkedin.com/in/oscar-campoy-ballester-sec)
 
 ---
 
