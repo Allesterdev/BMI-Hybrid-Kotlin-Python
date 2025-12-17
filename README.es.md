@@ -206,7 +206,7 @@ Ten en cuenta que la redistribución comercial, venta o publicación de esta apl
 
 ## 👤 Autor
 
-**Oscar Campoy** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](https://linkedin.com/in/oscar-herrero-diaz)
+**Oscar Campoy** - [GitHub Portfolio](https://github.com/Allesterdev/Allestersec-portfolio) | [LinkedIn](https://linkedin.com/in/oscar-herrero-diaz)
 
 ---
 
