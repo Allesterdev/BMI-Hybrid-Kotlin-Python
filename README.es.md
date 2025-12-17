@@ -176,7 +176,7 @@ Los siguientes secretos están seguros en GitHub Actions:
 - `ADMOB_INTERSTITIAL_ID_RELEASE` - ID de anuncio intersticial
 - `ADMOB_NATIVE_ADULTOS_ID_RELEASE` - ID de anuncio nativo adultos
 - `ADMOB_NATIVE_MENORES_ID_RELEASE` - ID de anuncio nativo menores
-- `PLAY_STORE_JSON` - Service Account de Google Play (opcional)
+- `PLAY_STORE_JSON` - Service Account de Google Play para deployment automático
 
 **Todos los datos sensibles están protegidos con GitHub Secrets** 🔒
 
@@ -190,15 +190,23 @@ Los siguientes secretos están seguros en GitHub Actions:
 
 ---
 
-## 📄 Licencia
+## ⚖️ Licencia y Copyright
 
-Este proyecto es de código abierto como portfolio profesional. El repositorio es de **solo lectura** - no se aceptan contribuciones externas.
+**© 2025 Oscar Campoy. Todos los derechos reservados.**
+
+Este proyecto es una **Aplicación Comercial de Grado de Producción** y una **Demostración de Portafolio DevSecOps**.
+
+👋 **Para Reclutadores y Responsables de Selección:**
+Estás explícitamente invitado a visualizar, hacer fork y analizar este repositorio para evaluar mis habilidades técnicas, la arquitectura híbrida y el pipeline de seguridad. ¡La transparencia es clave!
+
+🚫 **Restricciones:**
+Ten en cuenta que la redistribución comercial, venta o publicación de esta aplicación como propia está estrictamente prohibida.
 
 ---
 
 ## 👤 Autor
 
-**Oscar** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](https://linkedin.com/in/oscar-herrero-diaz)
+**Oscar Campoy** - [GitHub](https://github.com/Allesterdev) | [LinkedIn](https://linkedin.com/in/oscar-herrero-diaz)
 
 ---
 
