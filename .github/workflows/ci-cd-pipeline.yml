@@ -106,15 +106,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: 🔐 Create google-services.json from secret
-        run: |
-          cat > app/google-services.json << 'EOF'
-          ${{ secrets.GOOGLE_SERVICES_JSON }}
-          EOF
-          echo "✅ google-services.json creado correctamente"
-          echo "📊 Validando JSON..."
-          python3 -m json.tool app/google-services.json > /dev/null && echo "✅ JSON válido" || echo "❌ JSON inválido"
-          echo "📝 Primeras líneas del archivo:"
-          head -3 app/google-services.json
+        run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/google-services.json
 
       - name: 🧹 Android Lint
         run: |
@@ -229,12 +221,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: 🔐 Create google-services.json from secret
-        run: |
-          cat > app/google-services.json << 'EOF'
-          ${{ secrets.GOOGLE_SERVICES_JSON }}
-          EOF
-          echo "✅ google-services.json creado correctamente"
-          python3 -m json.tool app/google-services.json > /dev/null && echo "✅ JSON válido" || echo "❌ JSON inválido"
+        run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/google-services.json
 
       - name: 🧪 Run Unit Tests
         run: ./gradlew testDebugUnitTest --stacktrace --warning-mode all
@@ -295,12 +282,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: 🔐 Create google-services.json from secret
-        run: |
-          cat > app/google-services.json << 'EOF'
-          ${{ secrets.GOOGLE_SERVICES_JSON }}
-          EOF
-          echo "✅ google-services.json creado correctamente"
-          python3 -m json.tool app/google-services.json > /dev/null && echo "✅ JSON válido" || echo "❌ JSON inválido"
+        run: echo '${{ secrets.GOOGLE_SERVICES_JSON }}' > app/google-services.json
 
       - name: 🔨 Build Release AAB
         env:
