@@ -134,7 +134,7 @@ jobs:
           if-no-files-found: ignore
 
       - name: 📦 Cache NVD Database
-        uses: actions/cache@v4
+        uses: actions/cache@v5
         with:
           path: ~/.gradle/dependency-check-data
           key: nvd-database-${{ runner.os }}-${{ hashFiles('**/build.gradle') }}
